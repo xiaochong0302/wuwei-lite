@@ -2,8 +2,6 @@
 
 WuWei Lite is the **community edition of WuWei LMS** — a streamlined learning management system designed for online education.
 
----
-
 ## 📦 Installation Guide
 
 ### ✅ Requirements
@@ -58,23 +56,17 @@ Replace `{your_domain}` with your actual domain name or server ip address.
 - **Home Page:** http://{your_domain}
 - **Admin Panel:** http://{your_domain}/admin
 
----
-
 ## 🐳 WuWei Lite Docker
 
 Pre-configured Docker environment:
 
 👉 [WuWei Lite Docker](https://github.com/xiaochong0302/wuwei-lite-docker)
 
----
-
 ## 📖 Documentation
 
 For full usage guides, configuration, and advanced setup:
 
 👉 [WuWei Documentation](https://www.koogua.net/wuwei/docs)
-
----
 
 ## 📜 License
 
