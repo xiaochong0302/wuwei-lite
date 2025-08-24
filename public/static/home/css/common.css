@@ -1,0 +1,1613 @@
+body {
+    font-family: 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+}
+
+.main {
+    background-color: #f2f2f2;
+}
+
+.layer {
+    padding: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.width-400 {
+    width: 400px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.gray {
+    color: #999;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.colon:after {
+    content: ':';
+    margin-left: 3px;
+}
+
+.vip img {
+    border: 3px solid orange;
+}
+
+.img-viewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.img-viewer img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease-in-out;
+    padding: 5px;
+    cursor: zoom-out;
+}
+
+.kg-zoom img {
+    max-width: 100%;
+    cursor: zoom-in;
+}
+
+.kg-form .layui-form-label {
+    width: 110px;
+}
+
+.kg-form .layui-input-block {
+    margin-left: 140px;
+}
+
+.layui-input-wrap .layui-icon {
+    color: #d2d2d2;
+}
+
+.breadcrumb {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.breadcrumb .share {
+    position: absolute;
+    top: 2px;
+    right: -5px;
+}
+
+.wrap {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.bg-wrap {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.no-records {
+    padding: 20px;
+    color: #999;
+    text-align: center;
+}
+
+.no-records .icon {
+    margin-bottom: 10px;
+}
+
+.no-records .icon .layui-icon {
+    font-size: 100px;
+}
+
+.pager {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.layer .kg-tab-title {
+    margin-top: -20px;
+}
+
+.loading {
+    padding: 30px;
+    text-align: center;
+}
+
+.layout-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.layout-content {
+    width: 800px;
+}
+
+.layout-sidebar {
+    width: 340px;
+}
+
+#header {
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    background-color: #393D49;
+}
+
+#main {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    min-height: 760px;
+}
+
+#footer {
+    width: 100%;
+    padding: 30px 0;
+    background: #474443;
+    text-align: center;
+    font-size: 12px;
+}
+
+#header .logo {
+    top: 0;
+    left: 0;
+    position: absolute;
+    line-height: 60px;
+}
+
+.logo img {
+    max-width: 185px;
+    max-height: 60px;
+}
+
+.top-nav {
+    margin-left: 185px;
+}
+
+#header .user {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.layer-search input {
+    height: 75px;
+    line-height: 75px;
+    width: 500px;
+    padding: 0 15px;
+    font-size: 18px;
+    border: none 0;
+    background: none;
+}
+
+#header .layui-nav {
+    background: none;
+}
+
+#footer .row {
+    line-height: 18px;
+    margin-bottom: 15px;
+}
+
+#footer .row:last-child {
+    margin-bottom: 0;
+}
+
+#footer .contact {
+    line-height: 24px;
+}
+
+#footer span, #footer a {
+    color: #999;
+}
+
+#footer a:hover,
+#footer .iconfont:hover {
+    color: #fff;
+}
+
+#footer .nav a,
+#footer .copyright span,
+#footer .copyright a,
+#footer .contact a {
+    margin-right: 10px;
+}
+
+#footer .iconfont {
+    font-size: 20px;
+}
+
+.layout-sidebar .loading {
+    padding: 15px;
+    text-align: center;
+}
+
+.layout-sidebar .sidebar {
+    margin-bottom: 15px;
+}
+
+.page-info {
+    min-height: 500px;
+}
+
+.index-wrap .header {
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.index-wrap .course-card {
+    margin-bottom: 5px;
+}
+
+.index-course-list .course-card {
+    box-shadow: none;
+}
+
+.index-course-list .course-card .info {
+    border: 1px solid #eee;
+    padding-bottom: 18px;
+}
+
+.index-carousel {
+    width: 1120px;
+    height: 336px;
+    text-align: center;
+}
+
+.index-carousel .carousel {
+    width: 100%;
+    height: 100%;
+}
+
+.search-form .query-input {
+    width: 676px;
+}
+
+.search-form .search-btn {
+    min-width: 110px;
+}
+
+.search-tab {
+    margin: 0;
+}
+
+.search-tab .layui-tab-title {
+    margin-bottom: 10px;
+}
+
+.search-tab .layui-tab-content {
+    padding: 10px 0;
+}
+
+.search-empty {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.search-empty .icon {
+    margin-bottom: 30px;
+}
+
+.search-empty .icon .layui-icon {
+    font-size: 150px;
+    color: #393D49;
+}
+
+.search-empty .text {
+    color: #666;
+    font-size: 18px;
+}
+
+.search-empty .text .query {
+    color: red;
+    padding: 0 5px;
+}
+
+.search-course-card {
+    display: flex;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.search-course-card:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border: none;
+}
+
+.search-course-card .left {
+    position: relative;
+    margin-right: 15px;
+}
+
+.search-course-card .cover {
+    width: 210px;
+    height: 118px;
+}
+
+.search-course-card .level,
+.search-course-card .model {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.search-course-card .rating {
+    position: absolute;
+    top: 90px;
+    right: 15px;
+}
+
+.search-course-card .rating .layui-icon {
+    color: #ffb800;
+    font-size: 14px;
+}
+
+.search-course-card .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.search-course-card .info {
+    width: 500px;
+}
+
+.search-course-card .title {
+    margin-bottom: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.search-course-card .summary {
+    margin-bottom: 10px;
+    line-height: 1.5em;
+    max-height: 4.5em;
+    color: #666;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+.search-course-card .meta {
+    color: #999;
+}
+
+.search-course-card .meta span {
+    margin-right: 10px;
+}
+
+.search-course-card em {
+    color: red;
+    font-style: normal;
+    padding: 0 3px;
+}
+
+.query-badge {
+    padding: 2px 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.widget-card {
+    position: relative;
+}
+
+.widget-card .more {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 2;
+}
+
+.widget-card .more a {
+    color: #666;
+}
+
+.sidebar-rank-card {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.sidebar .rank {
+    margin-right: 10px;
+}
+
+#comment-form {
+    margin-bottom: 30px;
+}
+
+.comment-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.comment-form .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.comment-form .layui-textarea {
+    min-height: 40px;
+}
+
+.comment-card {
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.comment-card:last-child {
+    border-bottom: none;
+}
+
+.comment-card .avatar {
+    margin-right: 10px;
+}
+
+.comment-card .avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.comment-card .info {
+    width: 100%;
+}
+
+.comment-card .user {
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.comment-card .user .separator {
+    margin: 0 5px;
+}
+
+.comment-card .content {
+    margin-bottom: 15px;
+    overflow-wrap: break-word;
+    line-height: 1.4em;
+    color: #666;
+}
+
+.comment-card .footer {
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+}
+
+.comment-card .footer .left,
+.comment-card .footer .right {
+    display: flex;
+}
+
+.comment-card .footer .left .column {
+    margin-right: 15px;
+}
+
+.comment-card .footer .right .column {
+    margin-left: 15px;
+}
+
+.comment-card .footer .action {
+    cursor: pointer;
+}
+
+.comment-card .like-column {
+    position: relative;
+    padding-left: 20px;
+}
+
+.like-column .layui-icon-praise {
+    cursor: pointer;
+    position: absolute;
+    top: 1px;
+    left: 0;
+}
+
+.like-column .liked {
+    color: orange;
+}
+
+.reply-list {
+    margin-left: 42px;
+}
+
+.toolbar-sticky {
+    position: fixed;
+    top: 150px;
+    margin-left: -85px;
+}
+
+.toolbar-sticky .item {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.toolbar-sticky .item .icon {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+    background-color: #fff;
+}
+
+.toolbar-sticky .layui-icon {
+    color: #999;
+    cursor: pointer;
+}
+
+.toolbar-sticky .item .text {
+    color: #999;
+}
+
+.toolbar-sticky .liked,
+.toolbar-sticky .layui-icon-star-fill {
+    color: orange;
+}
+
+.cart-item-card {
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.cart-item-card:last-child {
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+}
+
+.cart-item-card .cover {
+    margin-right: 10px;
+}
+
+.cart-item-card .cover img {
+    width: 175px;
+    height: 95px;
+}
+
+.cart-item-card p {
+    line-height: 30px;
+}
+
+.cart-item-card .key {
+    margin-right: 5px;
+}
+
+.cart-item-card .value {
+    margin-right: 10px;
+    color: #666;
+}
+
+.cart-item-card .price {
+    color: red;
+    font-weight: 600;
+}
+
+.cart-stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-stats .item-list {
+    display: flex;
+    align-items: center;
+}
+
+.cart-stats .item {
+    margin-right: 20px;
+}
+
+.cart-stats .key {
+    margin-right: 5px;
+}
+
+.cart-stats .amount {
+    color: red;
+    font-weight: 600;
+}
+
+.cart-stats .pay-amount {
+    font-size: 16px;
+}
+
+.cart-stats .value,
+.cart-stats .currency {
+    color: #666;
+}
+
+.payment .meta-list {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f6f6f6;
+    line-height: 30px;
+}
+
+.payment .meta {
+    margin-right: 20px;
+}
+
+.payment .meta .key {
+    margin-right: 5px;
+}
+
+.payment .meta .value,
+.payment .meta .currency {
+    color: #666;
+}
+
+.payment .meta .amount {
+    color: red;
+}
+
+.payment .countdown {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.payment .countdown .icon {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.payment .countdown .layui-icon {
+    font-size: 80px;
+}
+
+.payment .countdown .timer {
+    margin-bottom: 30px;
+}
+
+.payment .countdown .tips {
+    margin-bottom: 40px;
+    color: #999;
+}
+
+.payment .channel {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.payment .channel .btn-pay {
+    margin-right: 30px;
+}
+
+.payment .expired-tips {
+    margin-bottom: 40px;
+    text-align: center;
+    color: #999;
+}
+
+.vip-header {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.vip-priv-list {
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.vip-priv-list button {
+    margin-right: 15px;
+}
+
+.vip-plan-list {
+    margin-bottom: 30px;
+}
+
+.vip-plan-card {
+    float: left;
+    width: 100%;
+    height: 170px;
+    background-color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.vip-plan-card .title {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.vip-plan-card .price {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: red;
+}
+
+.course-list {
+    margin-bottom: 20px;
+}
+
+.course-card {
+    float: left;
+    width: 100%;
+    height: 250px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.course-card .level {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.course-card .rating {
+    position: absolute;
+    top: 130px;
+    right: 15px;
+}
+
+.course-card .rating .layui-icon {
+    color: #ffb800;
+    font-size: 14px;
+}
+
+.course-card .cover {
+    overflow: hidden;
+}
+
+.course-card .cover img {
+    width: 275px;
+    height: 155px;
+    transition: all 0.6s;
+}
+
+.course-card .cover img:hover {
+    transform: scale(1.2);
+}
+
+.course-card .info {
+    padding: 10px;
+}
+
+.course-card .title {
+    margin-bottom: 10px;
+    line-height: 1.6em;
+    font-weight: 600;
+    height: 45px;
+    overflow: hidden;
+}
+
+.course-card .meta {
+    color: #666;
+    font-size: 12px;
+}
+
+.course-card .meta span {
+    margin-right: 10px;
+}
+
+.course-card .meta span:last-child {
+    margin-right: 0;
+}
+
+.course-card .price {
+    color: red;
+    font-weight: 600;
+}
+
+.course-card .free {
+    color: green;
+    font-weight: 600;
+}
+
+.course-card .order,
+.course-card .share {
+    cursor: pointer;
+}
+
+.filter-toggle {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.filter-wrap {
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    padding-bottom: 5px;
+}
+
+.filter-group .title {
+    min-width: 70px;
+    margin-right: 15px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.filter-group .content a {
+    margin-right: 15px;
+}
+
+.filter-sort {
+    padding: 10px 20px;
+}
+
+.filter-sort a {
+    margin-right: 20px;
+}
+
+.course-meta {
+    display: flex;
+}
+
+.course-meta .cover {
+    position: relative;
+    width: 270px;
+    height: 150px;
+    margin-right: 10px;
+}
+
+.course-meta .info {
+    width: 540px;
+    padding-top: 5px;
+}
+
+.course-meta .info .item {
+    line-height: 35px;
+}
+
+.course-meta .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.course-meta .info .key {
+    margin-right: 5px;
+}
+
+.course-meta .info .value {
+    margin-right: 10px;
+    color: #666;
+}
+
+.course-meta .info .price {
+    color: red;
+    font-weight: 600;
+}
+
+.course-meta .info .free {
+    color: green;
+    font-weight: 600;
+}
+
+.course-meta .rating {
+    width: 60px;
+    height: 60px;
+    color: #ffb800;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50%;
+    border: 6px inset;
+    margin-top: 40px;
+}
+
+.course-meta .rating-stats {
+    margin-right: 50px;
+    font-size: 12px;
+}
+
+.rating-stats .item {
+    line-height: 30px;
+}
+
+.rating-stats .layui-rate {
+    padding: 0;
+    margin-top: -10px;
+}
+
+.rating-stats .item .layui-icon {
+    font-size: 14px;
+}
+
+.rating-stats .score {
+    color: #666;
+}
+
+.layui-tab-title li {
+    position: relative;
+}
+
+.layui-tab-title .tab-count {
+    position: absolute;
+    top: -10px;
+    left: 70px;
+    font-size: 12px;
+    color: #666;
+}
+
+.course-tab {
+    margin: 0;
+}
+
+.course-tab .layui-tab-content {
+    padding: 20px 0;
+}
+
+.course-tab .loading {
+    text-align: center;
+    padding: 15px;
+}
+
+.course-tab .loading .layui-icon {
+    font-size: 30px;
+}
+
+.lesson-list .allow {
+    cursor: pointer;
+}
+
+.lesson-list .deny {
+    cursor: default;
+}
+
+.lesson-item {
+    display: flex;
+    justify-content: space-between;
+    line-height: 35px;
+    padding: 0 10px;
+}
+
+.lesson-item:hover {
+    background-color: #f2f2f2;
+}
+
+.lesson-item .title {
+    margin-right: 5px;
+}
+
+.lesson-item .model {
+    margin-right: 5px;
+}
+
+.lesson-item .study-time {
+    margin-right: 5px;
+    color: green;
+}
+
+.lesson-item .flag {
+    padding: 2px 3px;
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.lesson-item .flag-free {
+    text-transform: lowercase;
+    border: 1px solid red;
+    color: red;
+}
+
+.lesson-item .flag-playback {
+    text-transform: lowercase;
+    border: 1px solid orange;
+    color: orange;
+}
+
+.package-item {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.package-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border: none;
+}
+
+.package-info {
+    width: 180px;
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.package-info span {
+    margin-right: 5px;
+}
+
+.package-info .title {
+    padding: 0 10px;
+    margin-bottom: 10px;
+    max-height: 48px;
+    overflow: hidden;
+}
+
+.package-info .origin-price {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.package-info .origin-price i {
+    font-style: normal;
+    text-decoration: line-through;
+}
+
+.package-info .price {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.package-info .price i {
+    color: red;
+    font-style: normal;
+}
+
+.package-course-list {
+    width: 580px;
+    height: 180px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.package-course-list .separator {
+    color: #666;
+    display: inline-block;
+    padding-top: 35px;
+    margin-left: -5px;
+    margin-right: 4px;
+}
+
+.package-course-card {
+    width: 175px;
+    height: 160px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: top;
+    box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.1);
+}
+
+.package-course-card .cover {
+    width: 175px;
+    height: 95px;
+    margin-bottom: 10px;
+}
+
+.package-course-card .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.package-course-card .title {
+    font-size: 12px;
+    padding: 0 5px;
+    text-align: center;
+    white-space: normal;
+    max-height: 36px;
+    overflow: hidden;
+}
+
+.review-card .avatar img {
+    width: 48px;
+    height: 48px;
+}
+
+.review-card .info {
+    position: relative;
+}
+
+.review-card .rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-bottom: 10px;
+}
+
+.review-card .rating .layui-icon {
+    color: orange;
+    font-size: 12px;
+}
+
+.sidebar-card .layui-card-header {
+    text-align: center;
+}
+
+.sidebar-user-card {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.sidebar-user-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sidebar-user-card .avatar {
+    margin-right: 10px;
+}
+
+.sidebar-user-card .avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+}
+
+.sidebar-user-card .info {
+    line-height: 24px;
+}
+
+.sidebar-user-card .info .title {
+    color: #666;
+    font-size: 12px;
+}
+
+.sidebar-course-card {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.sidebar-course-card:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sidebar-course-card .cover {
+    width: 90px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.sidebar-course-card .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-course-card .info {
+    width: 200px;
+    color: #666;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.sidebar-course-card .title {
+    white-space: nowrap;
+}
+
+.sidebar-course-card .meta span {
+    margin-right: 10px;
+}
+
+.sidebar-course-card .meta .price {
+    color: red;
+}
+
+.sidebar-course-card .meta .free {
+    color: green;
+}
+
+.sidebar-chapter-list {
+    height: 405px;
+    overflow-y: auto;
+}
+
+.sidebar-lesson-list .active {
+    color: red;
+}
+
+.sidebar-lesson-list .allow {
+    cursor: pointer;
+}
+
+.sidebar-lesson-list .deny {
+    cursor: default;
+    color: gray;
+}
+
+.sidebar-chapter {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+.sidebar-lesson {
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar-lesson:hover {
+    background-color: #f2f2f2;
+}
+
+.countdown .timer .label {
+    font-size: 32px;
+}
+
+.countdown .timer .value {
+    color: green;
+    font-size: 36px;
+    padding: 10px;
+}
+
+.player-wrap {
+    width: 760px;
+    height: 428px;
+    margin-bottom: 20px;
+    background: black;
+    position: relative;
+}
+
+.dplayer {
+    width: 760px;
+    height: 428px;
+}
+
+.play-mask {
+    top: 50%;
+    left: 50%;
+    z-index: 8;
+    position: absolute;
+    margin-top: -32px;
+    margin-left: -32px;
+}
+
+.play-mask .layui-icon-play {
+    color: white;
+    cursor: pointer;
+    font-size: 64px;
+}
+
+.play-mask .layui-icon-play:hover {
+    color: #00a4ff;
+}
+
+.account-wrap {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.account-form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.account-form .layui-input-block {
+    margin-left: 0;
+}
+
+.account-form .verify-input-inline {
+    width: 280px;
+    margin-right: 10px;
+}
+
+.account-form .verify-btn-inline {
+    width: 110px;
+    margin-right: 0;
+}
+
+.verify-btn-inline button {
+    min-width: 100px;
+    width: 100%;
+}
+
+.login-wrap {
+    padding-top: 40px;
+}
+
+.login-wrap .link {
+    margin: 20px 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+.login-wrap .link a {
+    color: #999;
+}
+
+.login-wrap .link .separator {
+    margin: 0 15px;
+    color: #999;
+}
+
+.register-disabled-tips {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #999;
+}
+
+.register-disabled-tips .icon {
+    margin-bottom: 20px;
+}
+
+.register-disabled-tips .layui-icon-lock {
+    font-size: 60px;
+}
+
+.user-card {
+    float: left;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.user-card .avatar {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.user-card .avatar img {
+    width: 96px;
+    height: 96px;
+    border-radius: 100px;
+    transition: 0.5s;
+}
+
+.user-card .avatar img:hover {
+    transform: rotateY(180deg);
+}
+
+.user-card .name {
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.user-card .title {
+    color: #666;
+}
+
+.user-page .layui-card-header {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.user-profile {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px;
+}
+
+.user-profile .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.user-profile .right {
+    flex: 1;
+}
+
+.user-profile .avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.user-profile .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.user-profile .title {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.user-profile .about {
+    color: #666;
+    min-height: 100px;
+}
+
+.my-sidebar {
+    width: 240px;
+}
+
+.my-content {
+    width: 900px;
+}
+
+.my-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 100px;
+}
+
+.my-profile-card {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.my-profile-card .vip {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.my-profile-card .avatar {
+    margin-bottom: 10px;
+}
+
+.my-menu li {
+    line-height: 30px;
+    padding-left: 30px;
+}
+
+.my-menu .line {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.my-nav {
+    position: relative;
+    line-height: 30px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.my-nav .title {
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.my-nav .sub-nav {
+    margin-right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.my-nav a {
+    margin-right: 20px;
+}
+
+.kg-table {
+    margin: 0;
+}
+
+.kg-table p {
+    line-height: 1.8em;
+}
+
+.kg-table .key {
+    margin-right: 5px;
+}
+
+.kg-table .value {
+    margin-right: 10px;
+}
+
+.kg-table .price {
+    color: red;
+}
+
+.order-item {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.btn-group .layui-btn {
+    min-width: 120px;
+}
+
+.layui-table .layui-icon {
+    font-size: 18px;
+}
+
+.layui-table .center {
+    text-align: center;
+}
+
+.review-form .layui-rate {
+    padding-top: 6px;
+}
+
+.security-form {
+    width: 640px;
+}
+
+.security-form .layui-form-label {
+    width: 120px;
+}
+
+.security-form .layui-input-block {
+    margin-left: 150px;
+}
+
+.security-form .verify-input-inline {
+    width: 360px;
+}
+
+.security-form .verify-btn-inline {
+    width: 120px;
+    margin-right: 0;
+}
+
+.security-item-list {
+    margin-top: -20px;
+}
+
+.security-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #ccc;
+    line-height: 80px;
+}
+
+.security-item:last-child {
+    border-bottom: none;
+}
+
+.security-item .icon {
+    margin-right: 15px;
+}
+
+.security-item .title {
+    margin-right: 15px;
+    display: inline-block;
+    min-width: 100px;
+}
+
+.security-item .summary {
+    color: #666;
+}

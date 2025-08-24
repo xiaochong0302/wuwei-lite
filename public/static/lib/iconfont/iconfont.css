@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4875112 */
+  src: url('iconfont.woff2?t=1749342833638') format('woff2'),
+       url('iconfont.woff?t=1749342833638') format('woff'),
+       url('iconfont.ttf?t=1749342833638') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-microsoft:before {
+  content: "\e7f9";
+}
+
+.icon-github:before {
+  content: "\e6f6";
+}
+
+.icon-google:before {
+  content: "\e6f7";
+}
+
+.icon-facebook:before {
+  content: "\e64f";
+}
+
+.icon-video:before {
+  content: "\e630";
+}
+
+.icon-live:before {
+  content: "\e64e";
+}
+
+.icon-lock:before {
+  content: "\e7c9";
+}
+
+.icon-article:before {
+  content: "\e7fd";
+}
+
+.icon-email:before {
+  content: "\e7a2";
+}
+
+.icon-location:before {
+  content: "\e646";
+}
+
+.icon-reddit:before {
+  content: "\ebbd";
+}
+
+.icon-phone:before {
+  content: "\e7ff";
+}
+
+.icon-twitter:before {
+  content: "\e61d";
+}
+
+.icon-linkedin:before {
+  content: "\e8ca";
+}
+
+.icon-youtube:before {
+  content: "\e8db";
+}
+

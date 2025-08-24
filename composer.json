@@ -1,0 +1,40 @@
+{
+  "require": {
+    "ext-phalcon": "~5.0",
+    "ext-redis": "~6.0",
+    "ext-apcu": "*",
+    "ext-gd": "*",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "ext-iconv": "*",
+    "ext-openssl": "*",
+    "ext-fileinfo": "*",
+    "ext-xlswriter": "*",
+    "ext-zend-opcache": "*",
+    "guzzlehttp/guzzle": "^7.9",
+    "peppeocchi/php-cron-scheduler": "^4.0",
+    "hightman/xunsearch": "^1.4",
+    "robmorgan/phinx": "^0.12",
+    "league/commonmark": "^2.7",
+    "intervention/image": "^3.11",
+    "stripe/stripe-php": "^17.0",
+    "paypal/paypal-server-sdk": "^1.0",
+    "phpmailer/phpmailer": "^6.10",
+    "whichbrowser/parser": "^2.1"
+  },
+  "require-dev": {
+    "odan/phinx-migrations-generator": "^6.0",
+    "phalcon/ide-stubs": "^5.9"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://repo.packagist.org"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
+  }
+}
