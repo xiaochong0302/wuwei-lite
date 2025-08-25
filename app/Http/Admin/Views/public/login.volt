@@ -30,7 +30,7 @@
     </div>
 
     <div class="kg-login-copyright">
-        Powered by <a href="{{ app_info.link }}" title="{{ app_info.name }}">{{ app_info.name }} {{ app_info.version }}</a>
+        Powered by <a href="{{ app_info.link }}" title="{{ app_info.name }}">{{ app_info.alias }} {{ app_info.version }}</a>
     </div>
 
 {% endblock %}

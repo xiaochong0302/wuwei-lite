@@ -97,6 +97,9 @@ class CleanDemoDataTask extends Task
     {
         $courseIndexTask = new CourseIndexTask();
         $courseIndexTask->cleanAction();
+
+        $chapterIndexTask = new ChapterIndexTask();
+        $chapterIndexTask->cleanAction();
     }
 
     protected function isDemoEnv(): bool
