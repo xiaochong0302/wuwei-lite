@@ -9,7 +9,6 @@
     "ext-iconv": "*",
     "ext-openssl": "*",
     "ext-fileinfo": "*",
-    "ext-xlswriter": "*",
     "ext-zend-opcache": "*",
     "guzzlehttp/guzzle": "^7.9",
     "peppeocchi/php-cron-scheduler": "^4.0",
