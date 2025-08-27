@@ -15,11 +15,8 @@ use App\Library\Utils\Password as PasswordUtil;
 use App\Models\Account as AccountModel;
 use App\Models\User as UserModel;
 use App\Repos\Account as AccountRepo;
-use App\Repos\Online as OnlineRepo;
 use App\Repos\Role as RoleRepo;
 use App\Repos\User as UserRepo;
-use App\Services\Auth\Api as ApiAuth;
-use App\Services\Auth\Home as HomeAuth;
 use App\Validators\Account as AccountValidator;
 use App\Validators\User as UserValidator;
 use Phalcon\Paginator\RepositoryInterface;
@@ -207,10 +204,6 @@ class User extends Service
 
         $user->update();
 
-        if ($user->locked == 1) {
-            $this->destroyUserLogin($user);
-        }
-
         if ($oldAdminRole > 0) {
             $this->recountRoleUsers($oldAdminRole);
         }
@@ -268,17 +261,6 @@ class User extends Service
         $cache = new UserCache();
 
         $cache->rebuild($user->id);
-    }
-
-    protected function destroyUserLogin(UserModel $user): void
-    {
-        $homeAuth = new HomeAuth();
-
-        $homeAuth->logoutClients($user->id);
-
-        $apiAuth = new ApiAuth();
-
-        $apiAuth->logoutClients($user->id);
     }
 
     protected function recountRoleUsers(int $roleId): void

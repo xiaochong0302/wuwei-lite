@@ -236,7 +236,7 @@ class V20250517020616 extends Migration
             [
                 'section' => 'site',
                 'item_key' => 'title',
-                'item_value' => 'WUWEI',
+                'item_value' => 'WUWEI LMS',
             ],
             [
                 'section' => 'site',
@@ -282,7 +282,7 @@ class V20250517020616 extends Migration
             [
                 'section' => 'site',
                 'item_key' => 'copyright',
-                'item_value' => '2025 WUWEI',
+                'item_value' => '2025 WUWEI LMS',
             ],
             [
                 'section' => 'site',
