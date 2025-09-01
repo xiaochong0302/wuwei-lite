@@ -1,3 +1,5 @@
+English | [简体中文](./README.zh-CN.md)
+
 # WuWei Lite
 
 WuWei Lite is the **community edition of WuWei LMS** — a streamlined learning management system designed for online education.
@@ -15,13 +17,13 @@ WuWei Lite is the **community edition of WuWei LMS** — a streamlined learning 
 
 #### 1. Log in as Root
 Make sure you have root privileges:
-```bash
+```
 sudo -i
 ```
 
 #### 2. Download the Installation Script
 
-```bash
+```
 cd ~ && curl -O https://download.koogua.com/wuwei-lite/install.sh
 ```
 
