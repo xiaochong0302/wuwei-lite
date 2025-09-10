@@ -55,7 +55,6 @@
                     <span class="price">{{ course.regular_price|human_price }}</span>
                 {% endif %}
                 <span class="lesson">{{ locale._('course_lessons_x',{'x':course.lesson_count|human_number}) }}</span>
-                <span class="user">{{ locale._('course_users_x',{'x':course.user_count|human_number}) }}</span>
             </div>
         </div>
     </div>

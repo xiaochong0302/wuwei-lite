@@ -1,4 +1,4 @@
-<input type="hidden" id="js-locale" value='{{ js_locale|json_encode }}'></input>
+<div id="js-locale" class="layui-hide">{{ js_locale|json_encode }}</div>
 
 <script>
 
@@ -22,6 +22,6 @@
         address: '{{ contact_info.address }}',
     };
 
-    window.locale = JSON.parse(document.querySelector('#js-locale').value);
+    window.locale = JSON.parse(document.querySelector('#js-locale').textContent);
 
 </script>

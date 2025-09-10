@@ -75,18 +75,15 @@
         <div class="item-list">
             <div class="item">
                 <label class="key colon">{{ locale._('cart_total') }}</label>
-                <span id="total-amount" class="amount">{{ '%0.2f'|format(confirm.total_amount) }}</span>
-                <span class="currency">{{ site_info.currency }}</span>
+                <span id="total-amount" class="amount">{{ confirm.total_amount }}</span>
             </div>
             <div class="item">
                 <label class="key colon">{{ locale._('cart_discount') }}</label>
-                <span id="discount-amount" class="amount">{{ '%0.2f'|format(confirm.total_discount_amount) }}</span>
-                <span class="currency">{{ site_info.currency }}</span>
+                <span id="discount-amount" class="amount">{{ confirm.total_discount_amount }}</span>
             </div>
             <div class="item">
                 <label class="key colon">{{ locale._('cart_pay') }}</label>
-                <span id="pay-amount" class="amount pay-amount">{{ '%0.2f'|format(confirm.pay_amount) }}</span>
-                <span class="currency">{{ site_info.currency }}</span>
+                <span id="pay-amount" class="amount pay-amount">{{ confirm.pay_amount }}</span>
             </div>
         </div>
         <form class="layui-form cart-form" method="POST" action="{{ url({'for':'home.order.create'}) }}">

@@ -14,10 +14,6 @@
                 <span class="value">{{ order.subject }}</span>
             </div>
             <div class="meta">
-                <label class="key colon">{{ locale._('sn') }}</label>
-                <span class="value">{{ order.sn }}</span>
-            </div>
-            <div class="meta">
                 <label class="key colon">{{ locale._('amount') }}</label>
                 <span class="amount">{{ '%0.2f'|format(order.amount) }}</span>
                 <span class="currency">{{ site_info.currency }}</span>

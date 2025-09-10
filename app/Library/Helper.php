@@ -7,6 +7,7 @@
 
 use App\Caches\Setting as SettingCache;
 use App\Library\Utils\FileInfo;
+use App\Models\KgSale as KgSaleModel;
 use App\Services\Logic\Url\FullH5Url as FullH5UrlService;
 use App\Services\Storage as StorageService;
 use League\CommonMark\Exception\CommonMarkException;
@@ -272,7 +273,8 @@ function kg_config(string $path, $defaultValue = null): mixed
     return $config->path($path, $defaultValue);
 }
 
-/** 获取时长
+/**
+ * 获取时长
  *
  * @param int $time
  * @return string
@@ -309,6 +311,91 @@ function kg_duration(int $time): string
     }
 
     return implode(':', $result);
+}
+
+
+/**
+ * 匿名字符串
+ *
+ * @param string $str
+ * @return string
+ */
+function kg_anonymous(string $str): string
+{
+    $length = mb_strlen($str);
+
+    if (str_contains($str, '@')) {
+        $start = 3;
+        $end = mb_stripos($str, '@');
+    } else {
+        $start = ceil($length / 4);
+        $end = $length - $start - 1;
+    }
+
+    $list = [];
+
+    for ($i = 0; $i < $length; $i++) {
+        $list[] = ($i < $start || $i > $end) ? mb_substr($str, $i, 1) : '*';
+    }
+
+    return join('', $list);
+}
+
+/**
+ * 友好数字格式化
+ *
+ * @param int $number
+ * @return string
+ */
+function kg_human_number(int $number): string
+{
+    if ($number > 1000000) {
+        $result = round($number / 1000000, 1) . 'm';
+    } elseif ($number > 1000) {
+        $result = round($number / 1000, 1) . 'k';
+    } else {
+        $result = $number;
+    }
+
+    return $result;
+}
+
+/**
+ * 友好尺寸格式化
+ *
+ * @param int $bytes
+ * @return string
+ */
+function kg_human_size(int $bytes): string
+{
+    if (!$bytes) return '0 KB';
+
+    $symbols = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+
+    $exp = floor(log($bytes) / log(1024));
+
+    return sprintf('%.2f ' . $symbols[$exp], ($bytes / pow(1024, floor($exp))));
+}
+
+/**
+ * 友好价格格式化
+ *
+ * @param float $price
+ * @return string
+ */
+function kg_human_price(float $price): string
+{
+    static $currency, $currencies;
+
+    if (!$currency) {
+        $currency = kg_setting('site', 'currency', 'USD');
+    }
+
+    if (!$currencies) {
+        $currencies = KgSaleModel::currencies();
+    }
+
+    return sprintf('%s%0.2f', $currencies[$currency]['symbol'], $price);
 }
 
 /**

@@ -79,6 +79,12 @@ class OrderConfirm extends LogicService
             $result['other_discount_amount'] = $calculator->getOtherDiscountAmount();
         }
 
+        foreach ($result as $key => $value) {
+            if (str_ends_with($key, '_amount')) {
+                $result[$key] = kg_human_price($value);
+            }
+        }
+
         return $result;
     }
 
