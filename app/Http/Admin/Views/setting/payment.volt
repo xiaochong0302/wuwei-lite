@@ -4,16 +4,16 @@
 
     {% set action_url = url({'for':'admin.setting.payment'}) %}
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('paypal') }}</li>
             <li>{{ locale._('stripe') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('setting/payment_paypal') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('setting/payment_stripe') }}
             </div>
         </div>

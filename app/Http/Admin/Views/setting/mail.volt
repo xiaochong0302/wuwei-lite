@@ -2,16 +2,16 @@
 
 {% block content %}
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('smtp_configuration') }}</li>
             <li>{{ locale._('notification_preferences') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('setting/mail_configuration') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('setting/mail_notification') }}
             </div>
         </div>

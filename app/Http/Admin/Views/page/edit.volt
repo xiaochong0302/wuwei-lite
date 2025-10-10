@@ -8,20 +8,20 @@
         <legend>{{ locale._('edit_page') }}</legend>
     </fieldset>
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('page_tab_basic') }}</li>
             <li>{{ locale._('page_tab_seo') }}</li>
             <li>{{ locale._('page_tab_content') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('page/edit_basic') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('page/edit_seo') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('page/edit_desc') }}
             </div>
         </div>

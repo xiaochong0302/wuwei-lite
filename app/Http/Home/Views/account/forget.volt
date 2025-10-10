@@ -14,7 +14,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-wrap">
                     <div class="layui-input-prefix"><i class="layui-icon layui-icon-email"></i></div>
-                    <input id="cv-email" class="layui-input" type="text" name="email" autocomplete="off" placeholder="{{ locale._('email') }}" lay-verify="email">
+                    <input id="cv-email" class="layui-input" type="text" name="email" autocomplete="off" placeholder="{{ locale._('email') }}" lay-verify="email|required">
                 </div>
             </div>
             <div class="layui-form-item">

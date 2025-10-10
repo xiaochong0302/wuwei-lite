@@ -8,20 +8,20 @@
         <legend>{{ locale._('edit_package') }}</legend>
     </fieldset>
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('package_basic_info') }}</li>
             <li>{{ locale._('package_sales_info') }}</li>
             <li>{{ locale._('package_related_courses') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('package/edit_basic') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('package/edit_sale') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('package/edit_course') }}
             </div>
         </div>

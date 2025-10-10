@@ -19,7 +19,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">{{ locale._('new_email') }}</label>
                         <div class="layui-input-block">
-                            <input id="cv-email" class="layui-input" type="text" name="email" autocomplete="off" placeholder="{{ locale._('new_email_tips') }}" lay-verify="email">
+                            <input id="cv-email" class="layui-input" type="text" name="email" autocomplete="off" placeholder="{{ locale._('new_email_tips') }}" lay-verify="email|required">
                         </div>
                     </div>
                     <div class="layui-form-item">

@@ -35,6 +35,7 @@
 </div>
 
 {{ partial('partials/js_vars') }}
+{{ partial('partials/layui_i18n') }}
 {{ js_include('lib/layui/layui.js') }}
 {{ js_include('home/js/common.js') }}
 {{ js_include('home/js/fixbar.js') }}

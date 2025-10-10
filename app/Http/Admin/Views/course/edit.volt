@@ -8,24 +8,24 @@
         <legend>{{ locale._('edit_course') }}</legend>
     </fieldset>
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('course_basic_info') }}</li>
             <li>{{ locale._('course_sales_info') }}</li>
             <li>{{ locale._('course_overview') }}</li>
             <li>{{ locale._('course_related') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('course/edit_basic') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('course/edit_sale') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('course/edit_overview') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('course/edit_related') }}
             </div>
         </div>

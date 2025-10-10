@@ -14,16 +14,16 @@
         <legend>{{ locale._('edit_lesson') }}</legend>
     </fieldset>
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('chapter_basic_info') }}</li>
             <li>{{ content_title(chapter.model) }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('chapter/edit_lesson_basic') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {% if chapter.model == 1 %}
                     {{ partial('chapter/edit_lesson_video') }}
                 {% elseif chapter.model == 3 %}

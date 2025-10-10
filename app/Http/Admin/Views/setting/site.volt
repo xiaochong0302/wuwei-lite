@@ -6,16 +6,16 @@
     {% set offline_tips_display = site.status == 'offline' ? 'display:block' : 'display:none' %}
     {% set analytics_script_display = site.analytics_enabled == 1 ? 'display:block' : 'display:none' %}
 
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title kg-tab-title">
+    <div class="layui-tabs">
+        <ul class="layui-tabs-header">
             <li class="layui-this">{{ locale._('site_basic_info') }}</li>
             <li>{{ locale._('site_configuration') }}</li>
         </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+        <div class="layui-tabs-body">
+            <div class="layui-tabs-item layui-show">
                 {{ partial('setting/site_basic_info') }}
             </div>
-            <div class="layui-tab-item">
+            <div class="layui-tabs-item">
                 {{ partial('setting/site_configuration') }}
             </div>
         </div>
