@@ -11,8 +11,6 @@ layui.use(['jquery', 'layer', 'helper'], function () {
         var sn = $(this).data('sn');
         var url = $(this).data('url');
         layer.confirm(helper.locale('cancel_order_tips'), {
-            title: helper.locale('confirm'),
-            btn: [helper.locale('yes'), helper.locale('no')],
             area: ['320px', '160px'],
         }, function () {
             $.ajax({

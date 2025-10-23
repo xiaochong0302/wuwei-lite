@@ -130,7 +130,6 @@ layui.use(['jquery', 'form', 'element', 'layer', 'helper'], function () {
         tips = tips || helper.locale('confirm_delete_tips');
         layer.confirm(tips, {
             title: false,
-            btn: [helper.locale('confirm'), helper.locale('cancel')],
         }, function () {
             $.ajax({
                 type: 'POST',

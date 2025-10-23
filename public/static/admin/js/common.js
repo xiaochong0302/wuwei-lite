@@ -94,8 +94,6 @@ layui.use(['jquery', 'form', 'element', 'layer', 'helper', 'kgDropdown'], functi
         }
         postData[name] = value;
         layer.confirm(tips, {
-            title: helper.locale('confirm'),
-            btn: [helper.locale('yes'), helper.locale('no')],
             area: ['320px', '160px'],
             cancel: function (index) {
                 layer.close(index);
@@ -163,8 +161,6 @@ layui.use(['jquery', 'form', 'element', 'layer', 'helper', 'kgDropdown'], functi
         }
         tips = tips || defaultTips;
         layer.confirm(tips, {
-            title: helper.locale('confirm'),
-            btn: [helper.locale('yes'), helper.locale('no')],
             area: ['320px', '160px'],
         }, function () {
             $.ajax({
@@ -191,8 +187,6 @@ layui.use(['jquery', 'form', 'element', 'layer', 'helper', 'kgDropdown'], functi
         var defaultTips = $(this).hasClass('kg-delete') ? helper.locale('confirm_delete_tips') : helper.locale('confirm_restore_tips');
         tips = tips || defaultTips;
         layer.confirm(tips, {
-            title: helper.locale('confirm'),
-            btn: [helper.locale('yes'), helper.locale('no')],
             area: ['320px', '160px'],
         }, function () {
             $.ajax({

@@ -154,8 +154,6 @@ layui.use(['jquery', 'form', 'layer', 'helper'], function () {
         var $tbCommentCount = $('#toolbar-comment > .text');
         var tbCommentCount = $tbCommentCount.data('count');
         layer.confirm(helper.locale('confirm_delete_tips'), {
-            title: helper.locale('confirm'),
-            btn: [helper.locale('yes'), helper.locale('no')],
             area: ['320px', '160px'],
         }, function () {
             $.ajax({
