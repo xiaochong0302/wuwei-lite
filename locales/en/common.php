@@ -81,10 +81,6 @@ $lang['ago_hour_x'] = '%x% hours ago';
 $lang['ago_minute_x'] = '%x% minutes ago';
 $lang['ago_second_x'] = '%x% seconds ago';
 
-$lang['js.confirm'] = 'Confirm';
-$lang['js.cancel'] = 'Cancel';
-$lang['js.yes'] = 'Yes';
-$lang['js.no'] = 'No';
 $lang['js.copy'] = 'Copy';
 $lang['js.copied'] = 'Copied to clipboard successfully';
 $lang['js.upload_failed'] = 'Upload failed';

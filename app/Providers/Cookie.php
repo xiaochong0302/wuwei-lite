@@ -7,6 +7,7 @@
 
 namespace App\Providers;
 
+use Phalcon\Config\Config;
 use Phalcon\Http\Response\Cookies as PhCookies;
 
 class Cookie extends Provider
@@ -16,11 +17,17 @@ class Cookie extends Provider
 
     public function register(): void
     {
-        $this->di->setShared($this->serviceName, function () {
+        /**
+         * @var Config $config
+         */
+        $config = $this->di->getShared('config');
+
+        $this->di->setShared($this->serviceName, function () use ($config) {
 
             $cookies = new PhCookies();
 
             $cookies->useEncryption(true);
+            $cookies->setSignKey($config->get('key'));
 
             return $cookies;
         });

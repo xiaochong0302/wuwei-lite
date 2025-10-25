@@ -705,8 +705,12 @@
     margin-bottom: 0;
 }
 
-.markdown-body li {
+.markdown-body ul > li {
     list-style: initial;
+}
+
+.markdown-body ol > li {
+    list-style: decimal;
 }
 
 .markdown-body li > p {
