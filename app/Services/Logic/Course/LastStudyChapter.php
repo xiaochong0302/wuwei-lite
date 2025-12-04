@@ -51,7 +51,11 @@ class LastStudyChapter extends LogicService
 
         $lessonId = $this->getNextLessonId($chapterUser->chapter_id);
 
-        return $this->getFinalLesson($lessonId);
+        if ($lessonId) {
+            return $this->getFinalLesson($lessonId);
+        }
+
+        return $this->getFirstLesson();
     }
 
     protected function getFirstLesson(): ?ChapterModel
