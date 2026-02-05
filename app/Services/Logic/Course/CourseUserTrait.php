@@ -10,8 +10,8 @@ namespace App\Services\Logic\Course;
 use App\Models\Course as CourseModel;
 use App\Models\CourseUser as CourseUserModel;
 use App\Models\User as UserModel;
-use App\Repos\Course as CourseRepo;
 use App\Repos\CourseUser as CourseUserRepo;
+use App\Services\CourseStat as CourseStatService;
 
 trait CourseUserTrait
 {
@@ -140,16 +140,12 @@ trait CourseUserTrait
 
     protected function recountCourseUsers(CourseModel $course): void
     {
-        $courseRepo = new CourseRepo();
+        $statService = new CourseStatService();
 
-        $userCount = $courseRepo->countUsers($course->id);
-
-        $course->user_count = $userCount;
-
-        $course->update();
+        $statService->updateUserCount($course->id);
     }
 
-    protected function allowFreeAccess(CourseModel $course, UserModel $user)
+    protected function allowFreeAccess(CourseModel $course, UserModel $user): bool
     {
         $result = false;
 
@@ -164,7 +160,7 @@ trait CourseUserTrait
         return $result;
     }
 
-    protected function getFreeJoinType(CourseModel $course, UserModel $user)
+    protected function getFreeJoinType(CourseModel $course, UserModel $user): int
     {
         if ($course->teacher_id == $user->id) {
             return CourseUserModel::JOIN_TYPE_TEACHER;

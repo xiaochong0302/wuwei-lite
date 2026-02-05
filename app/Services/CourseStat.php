@@ -38,19 +38,6 @@ class CourseStat extends Service
         $course->update();
     }
 
-    public function updateFavoriteCount(int $courseId): void
-    {
-        $courseRepo = new CourseRepo();
-
-        $course = $courseRepo->findById($courseId);
-
-        $favoriteCount = $courseRepo->countFavorites($courseId);
-
-        $course->favorite_count = $favoriteCount;
-
-        $course->update();
-    }
-
     public function updateRating(int $courseId): void
     {
         $courseRepo = new CourseRepo();

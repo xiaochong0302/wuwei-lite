@@ -1,3 +1,13 @@
+{%- macro level_badge(level) %}
+    {% if level == 1 %}
+        <span class="layui-badge layui-bg-green">{{ course_level(level) }}</span>
+    {% elseif level == 2 %}
+        <span class="layui-badge layui-bg-blue">{{ course_level(level) }}</span>
+    {% elseif level == 3 %}
+        <span class="layui-badge layui-bg-red">{{ course_level(level) }}</span>
+    {% endif %}
+{%- endmacro %}
+
 {%- macro star_info(rating) %}
     {% set stars = [1,2,3,4,5] %}
     {% for val in stars if val <= rating %}
@@ -8,9 +18,7 @@
 {%- macro course_card(course) %}
     {% set course_url = url({'for':'home.course.show','id':course.id,'slug':course.slug}) %}
     <div class="course-card">
-        <div class="level">
-            <span class="layui-badge layui-bg-green">{{ course_level(course.level) }}</span>
-        </div>
+        <div class="level">{{ level_badge(course.level) }}</div>
         <div class="rating">{{ star_info(course.rating) }}</div>
         <div class="cover">
             <a href="{{ course_url }}" target="_blank">
