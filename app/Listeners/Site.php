@@ -13,7 +13,7 @@ use Phalcon\Events\Event as PhEvent;
 class Site extends Listener
 {
 
-    public function afterView(PhEvent $event, $source, ?UserModel $user): void
+    public function afterView(PhEvent $event, object $source, ?UserModel $user): void
     {
 
     }

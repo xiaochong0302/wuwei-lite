@@ -24,37 +24,37 @@ class UserDailyCounter extends Listener
         $this->counter = new CacheUserDailyCounter();
     }
 
-    public function incrFavoriteCount(PhEvent $event, $source, UserModel $user)
+    public function incrFavoriteCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'favorite_count');
     }
 
-    public function incrCommentCount(PhEvent $event, $source, UserModel $user)
+    public function incrCommentCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'comment_count');
     }
 
-    public function incrReviewCount(PhEvent $event, $source, UserModel $user)
+    public function incrReviewCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'review_count');
     }
 
-    public function incrOrderCount(PhEvent $event, $source, UserModel $user)
+    public function incrOrderCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'order_count');
     }
 
-    public function incrChapterLikeCount(PhEvent $event, $source, UserModel $user)
+    public function incrChapterLikeCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'chapter_like_count');
     }
 
-    public function incrReviewLikeCount(PhEvent $event, $source, UserModel $user)
+    public function incrReviewLikeCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'review_like_count');
     }
 
-    public function incrCommentLikeCount(PhEvent $event, $source, UserModel $user)
+    public function incrCommentLikeCount(PhEvent $event, object $source, UserModel $user): void
     {
         $this->counter->hIncrBy($user->id, 'comment_like_count');
     }

@@ -14,7 +14,7 @@ abstract class Auth extends Service
 
     abstract function saveAuthInfo(UserModel $user): array;
 
-    abstract function getAuthInfo(): array;
+    abstract function getAuthInfo(): ?array;
 
     abstract function clearAuthInfo(): void;
 

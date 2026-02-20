@@ -32,12 +32,12 @@ class Db extends Listener
         $this->profiler = new DbProfiler();
     }
 
-    public function beforeQuery(PhEvent $event, DbAdapterInterface $connection)
+    public function beforeQuery(PhEvent $event, DbAdapterInterface $connection): void
     {
         $this->profiler->startProfile($connection->getSqlStatement(), $connection->getSqlVariables());
     }
 
-    public function afterQuery(PhEvent $event, DbAdapterInterface $connection)
+    public function afterQuery(PhEvent $event, DbAdapterInterface $connection): void
     {
         $this->profiler->stopProfile();
 

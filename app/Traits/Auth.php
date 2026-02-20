@@ -17,7 +17,7 @@ use Phalcon\Di\Di;
 trait Auth
 {
 
-    public function getCurrentUser(bool $cache = false): ?UserModel
+    public function getCurrentUser(bool $cache = false): UserModel
     {
         $authUser = $this->getAuthUser();
 
@@ -61,12 +61,12 @@ trait Auth
 
         $user->id = 0;
         $user->name = 'guest';
-        $user->avatar = kg_cos_user_avatar_url();
+        $user->avatar = kg_cos_user_avatar_url('');
 
         return $user;
     }
 
-    protected function getAuthUser(): array
+    protected function getAuthUser(): ?array
     {
         /**
          * @var AuthService $auth

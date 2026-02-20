@@ -13,37 +13,37 @@ use Phalcon\Events\Event as PhEvent;
 class Chapter extends Listener
 {
 
-    public function afterCreate(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterCreate(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterUpdate(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterUpdate(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterDelete(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterDelete(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterRestore(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterRestore(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterView(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterView(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterLike(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterLike(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }
 
-    public function afterUndoLike(PhEvent $event, $source, ChapterModel $chapter): void
+    public function afterUndoLike(PhEvent $event, object $source, ChapterModel $chapter): void
     {
 
     }

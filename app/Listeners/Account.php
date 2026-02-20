@@ -14,17 +14,17 @@ use Phalcon\Events\Event as PhEvent;
 class Account extends Listener
 {
 
-    public function afterRegister(PhEvent $event, $source, UserModel $user): void
+    public function afterRegister(PhEvent $event, object $source, UserModel $user): void
     {
 
     }
 
-    public function afterLogin(PhEvent $event, $source, UserModel $user): void
+    public function afterLogin(PhEvent $event, object $source, UserModel $user): void
     {
         $this->handleLoginNotice($user);
     }
 
-    public function afterLogout(PhEvent $event, $source, UserModel $user): void
+    public function afterLogout(PhEvent $event, object $source, UserModel $user): void
     {
 
     }

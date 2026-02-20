@@ -13,37 +13,37 @@ use Phalcon\Events\Event as PhEvent;
 class Comment extends Listener
 {
 
-    public function afterCreate(PhEvent $event, $source, CommentModel $comment): void
+    public function afterCreate(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }
 
-    public function afterUpdate(PhEvent $event, $source, CommentModel $comment): void
+    public function afterUpdate(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }
 
-    public function afterDelete(PhEvent $event, $source, CommentModel $comment): void
+    public function afterDelete(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }
 
-    public function afterRestore(PhEvent $event, $source, CommentModel $comment): void
+    public function afterRestore(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }
 
-    public function afterReply(PhEvent $event, $source, CommentModel $reply): void
+    public function afterReply(PhEvent $event, object $source, CommentModel $reply): void
     {
 
     }
 
-    public function afterLike(PhEvent $event, $source, CommentModel $comment): void
+    public function afterLike(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }
 
-    public function afterUndoLike(PhEvent $event, $source, CommentModel $comment): void
+    public function afterUndoLike(PhEvent $event, object $source, CommentModel $comment): void
     {
 
     }

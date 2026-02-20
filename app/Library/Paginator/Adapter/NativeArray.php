@@ -54,7 +54,7 @@ class NativeArray extends PhNativeArray
         return $pager;
     }
 
-    protected function buildPageUrl($page)
+    protected function buildPageUrl(int $page): string
     {
         $this->params['page'] = $page;
 

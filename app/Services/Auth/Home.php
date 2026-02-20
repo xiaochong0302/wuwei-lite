@@ -37,13 +37,13 @@ class Home extends AuthService
         $this->session->remove($authKey);
     }
 
-    public function getAuthInfo(): array
+    public function getAuthInfo(): ?array
     {
         $authKey = $this->getAuthKey();
 
         $authInfo = $this->session->get($authKey);
 
-        return $authInfo ?: [];
+        return $authInfo ?: null;
     }
 
     public function getAuthKey(): string

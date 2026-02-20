@@ -28,18 +28,6 @@ class Account extends Repository
     }
 
     /**
-     * @param string $name
-     * @return AccountModel|Row|null
-     */
-    public function findByName($name)
-    {
-        return AccountModel::findFirst([
-            'conditions' => 'name = :name:',
-            'bind' => ['name' => $name],
-        ]);
-    }
-
-    /**
      * @param string $email
      * @return AccountModel|Row|null
      */

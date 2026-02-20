@@ -40,7 +40,7 @@ class Request extends \Phalcon\Http\Request
         return false;
     }
 
-    public function getPost($name = null, $filters = null, $defaultValue = null, $notAllowEmpty = false, $noRecursive = false): mixed
+    public function getPost(?string $name = null, mixed $filters = null, mixed $defaultValue = null, bool $notAllowEmpty = false, bool $noRecursive = false): mixed
     {
         $contentType = $this->getContentType();
 

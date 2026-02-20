@@ -189,9 +189,9 @@ function kg_array_unique_multi(array $array, string $key): array
  * 数组转对象
  *
  * @param array $array
- * @return mixed
+ * @return array|object
  */
-function kg_array_object(array $array): mixed
+function kg_array_object(array $array): array|object
 {
     return json_decode(json_encode($array));
 }
@@ -477,13 +477,11 @@ function kg_cos_url(): string
  * @param string|null $style
  * @return string
  */
-function kg_cos_img_url(string $path, string $style = null): string
+function kg_cos_img_url(string $path, ?string $style = null): string
 {
-    if (empty($path)) return '';
-
     if (empty($style)) $style = '';
 
-    if (str_contains($path, 'http')) return $path;
+    if (str_starts_with($path, 'http')) return $path;
 
     return sprintf('%s%s%s', kg_cos_url(), $path, $style);
 }
@@ -491,11 +489,11 @@ function kg_cos_img_url(string $path, string $style = null): string
 /**
  * 获取用户头像URL
  *
- * @param string|null $path
+ * @param string $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_user_avatar_url(string $path = null, string $style = null): string
+function kg_cos_user_avatar_url(string $path, ?string $style = null): string
 {
     $path = $path ?: kg_default_user_avatar_path();
 
@@ -505,11 +503,11 @@ function kg_cos_user_avatar_url(string $path = null, string $style = null): stri
 /**
  * 获取课程封面URL
  *
- * @param string|null $path
+ * @param string $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_course_cover_url(string $path = null, string $style = null): string
+function kg_cos_course_cover_url(string $path, ?string $style = null): string
 {
     $path = $path ?: kg_default_course_cover_path();
 
@@ -520,10 +518,10 @@ function kg_cos_course_cover_url(string $path = null, string $style = null): str
  * 获取套餐封面URL
  *
  * @param string $path
- * @param string $style
+ * @param string|null $style
  * @return string
  */
-function kg_cos_package_cover_url($path, $style = null)
+function kg_cos_package_cover_url(string $path, ?string $style = null)
 {
     $path = $path ?: kg_default_package_cover_path();
 
@@ -533,11 +531,11 @@ function kg_cos_package_cover_url($path, $style = null)
 /**
  * 获取轮播封面URL
  *
- * @param string|null $path
+ * @param string $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_slide_cover_url(string $path = null, string $style = null): string
+function kg_cos_slide_cover_url(string $path, ?string $style = null): string
 {
     $path = $path ?: kg_default_course_cover_path();
 
@@ -548,10 +546,10 @@ function kg_cos_slide_cover_url(string $path = null, string $style = null): stri
  * 获取会员封面URL
  *
  * @param string $path
- * @param string $style
+ * @param string|null $style
  * @return string
  */
-function kg_cos_vip_cover_url($path, $style = null)
+function kg_cos_vip_cover_url(string $path, ?string $style = null)
 {
     $path = $path ?: kg_default_vip_cover_path();
 
@@ -624,7 +622,7 @@ function kg_parse_summary(string $content, int $length = 100): string
  * @param string $content
  * @return string
  */
-function kg_parse_keywords($content)
+function kg_parse_keywords(string $content): string
 {
     $search = ['|', ';', '；', '、', ','];
 
@@ -666,11 +664,11 @@ function kg_parse_markdown(string $content, string $htmlInput = 'escape', bool $
 /**
  * 构造全路径url
  *
- * @param mixed $uri
+ * @param array|string $uri
  * @param mixed $args
  * @return string
  */
-function kg_full_url($uri, $args = null): string
+function kg_full_url(mixed $uri, mixed $args = null): string
 {
     /**
      * @var $url Phalcon\Mvc\Url

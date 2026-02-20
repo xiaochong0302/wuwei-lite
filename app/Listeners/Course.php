@@ -13,37 +13,37 @@ use Phalcon\Events\Event as PhEvent;
 class Course extends Listener
 {
 
-    public function afterCreate(PhEvent $event, $source, CourseModel $course): void
+    public function afterCreate(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterUpdate(PhEvent $event, $source, CourseModel $course): void
+    public function afterUpdate(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterDelete(PhEvent $event, $source, CourseModel $course): void
+    public function afterDelete(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterRestore(PhEvent $event, $source, CourseModel $course): void
+    public function afterRestore(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterView(PhEvent $event, $source, CourseModel $course): void
+    public function afterView(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterFavorite(PhEvent $event, $source, CourseModel $course): void
+    public function afterFavorite(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }
 
-    public function afterUndoFavorite(PhEvent $event, $source, CourseModel $course): void
+    public function afterUndoFavorite(PhEvent $event, object $source, CourseModel $course): void
     {
 
     }

@@ -16,7 +16,7 @@ use Phalcon\Mvc\ModuleDefinitionInterface;
 class Module implements ModuleDefinitionInterface
 {
 
-    public function registerAutoLoaders(DiInterface $container = null)
+    public function registerAutoLoaders(?DiInterface $container = null)
     {
 
     }

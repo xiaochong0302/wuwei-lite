@@ -12,7 +12,7 @@ use Phalcon\Mvc\View as PhView;
 class View extends PhView
 {
 
-    public function setVars(array $params, $merge = true): PhView
+    public function setVars(array $params, bool $merge = true): PhView
     {
         foreach ($params as $key => $param) {
             $params[$key] = $this->handleVar($param);
@@ -21,14 +21,14 @@ class View extends PhView
         return parent::setVars($params, $merge);
     }
 
-    public function setVar($key, $value): PhView
+    public function setVar(string $key, mixed $value): PhView
     {
         $value = $this->handleVar($value);
 
         return parent::setVar($key, $value);
     }
 
-    protected function handleVar($var)
+    protected function handleVar(mixed $var): mixed
     {
         /**
          * 分页数据

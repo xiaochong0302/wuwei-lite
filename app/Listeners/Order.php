@@ -14,7 +14,7 @@ use Phalcon\Events\Event as PhEvent;
 class Order extends Listener
 {
 
-    public function afterPay(PhEvent $event, $source, OrderModel $order)
+    public function afterPay(PhEvent $event, object $source, OrderModel $order): void
     {
         try {
 

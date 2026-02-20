@@ -17,7 +17,7 @@ class Listener extends Injectable
 
     use ServiceTrait;
 
-    public function getLogger($channel = 'listen'): Logger
+    public function getLogger(string $channel = 'listen'): Logger
     {
         $logger = new AppLogger();
 

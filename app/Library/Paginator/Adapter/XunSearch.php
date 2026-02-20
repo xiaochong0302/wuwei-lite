@@ -131,7 +131,7 @@ class XunSearch extends AbstractAdapter
         return $this->getRepository($properties);
     }
 
-    protected function buildPageUrl($page)
+    protected function buildPageUrl(int $page): string
     {
         $this->params['page'] = $page;
 

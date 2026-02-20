@@ -9,11 +9,11 @@ namespace App\Traits;
 
 use App\Exceptions\Forbidden as ForbiddenException;
 use App\Exceptions\NotFound as NotFoundException;
+use App\Library\Http\Request as HttpRequest;
+use App\Library\Http\Response as HttpResponse;
 use App\Plugins\LocaleError as LocaleErrorPlugin;
 use Phalcon\Config\Config;
 use Phalcon\Di\Di;
-use Phalcon\Http\Request as HttpRequest;
-use Phalcon\Http\Response as HttpResponse;
 use Phalcon\Paginator\RepositoryInterface;
 
 trait Response

@@ -13,27 +13,27 @@ use Phalcon\Events\Event as PhEvent;
 class Page extends Listener
 {
 
-    public function afterCreate(PhEvent $event, $source, PageModel $page): void
+    public function afterCreate(PhEvent $event, object $source, PageModel $page): void
     {
 
     }
 
-    public function afterUpdate(PhEvent $event, $source, PageModel $page): void
+    public function afterUpdate(PhEvent $event, object $source, PageModel $page): void
     {
 
     }
 
-    public function afterDelete(PhEvent $event, $source, PageModel $page): void
+    public function afterDelete(PhEvent $event, object $source, PageModel $page): void
     {
 
     }
 
-    public function afterRestore(PhEvent $event, $source, PageModel $page): void
+    public function afterRestore(PhEvent $event, object $source, PageModel $page): void
     {
 
     }
 
-    public function afterView(PhEvent $event, $source, PageModel $page): void
+    public function afterView(PhEvent $event, object $source, PageModel $page): void
     {
 
     }
