@@ -186,14 +186,14 @@ function kg_array_unique_multi(array $array, string $key): array
 }
 
 /**
- * 数组转对象
+ * 转对象类型
  *
- * @param array $array
- * @return array|object
+ * @param mixed $value
+ * @return mixed
  */
-function kg_array_object(array $array): array|object
+function kg_objectify(mixed $value): mixed
 {
-    return json_decode(json_encode($array));
+    return json_decode(json_encode($value));
 }
 
 /**

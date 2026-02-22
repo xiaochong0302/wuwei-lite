@@ -30,13 +30,26 @@ class ReviewLike extends Repository
 
     /**
      * @param int $userId
-     * @return ResultsetInterface|Resultset|ReviewLikeModel[]
+     * @return array
      */
-    public function findByUserId($userId)
+    public function findUserLikedReviewIds($userId)
     {
-        return ReviewLikeModel::query()
+        $result = [];
+
+        /**
+         * @var Resultset $rows
+         */
+        $rows =  ReviewLikeModel::query()
+            ->columns(['review_id'])
             ->where('user_id = :user_id:', ['user_id' => $userId])
+            ->andWhere('deleted = 0')
             ->execute();
+
+        if ($rows->count() > 0) {
+            $result = kg_array_column($rows->toArray(), 'review_id');
+        }
+
+        return $result;
     }
 
 }

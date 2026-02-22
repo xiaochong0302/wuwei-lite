@@ -15,7 +15,7 @@ class Builder extends Injectable
 
     public function objects(array $items): mixed
     {
-        return kg_array_object($items);
+        return kg_objectify($items);
     }
 
     protected function getShallowUserByIds(array $ids): array

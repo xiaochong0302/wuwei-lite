@@ -35,12 +35,10 @@ class View extends PhView
          */
         if (is_object($var) && method_exists($var, 'getTotalItems')) {
             $items = $var->getItems();
-            if (is_array($items)) {
-                $items = kg_array_object($items);
-                $var->setItems($items);
-            }
+            $items = kg_objectify($items);
+            $var->setItems($items);
         } elseif (is_array($var)) {
-            $var = kg_array_object($var);
+            $var = kg_objectify($var);
         }
 
         return $var;

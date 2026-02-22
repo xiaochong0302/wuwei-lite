@@ -43,7 +43,7 @@ class Volt
 
     public static function arrayObject(array $array): mixed
     {
-        return kg_array_object($array);
+        return kg_objectify($array);
     }
 
     public static function fullUrl($uri, $args = null): string

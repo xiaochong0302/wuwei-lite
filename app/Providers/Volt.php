@@ -66,7 +66,7 @@ class Volt extends Provider
                 return 'App\Services\Volt::jsInclude(' . $resolvedArgs . ')';
             });
 
-            $compiler->addFunction('array_object', function ($resolvedArgs) {
+            $compiler->addFunction('objectify', function ($resolvedArgs) {
                 return 'App\Services\Volt::arrayObject(' . $resolvedArgs . ')';
             });
 
