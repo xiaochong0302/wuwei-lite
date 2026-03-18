@@ -14,7 +14,7 @@ use App\Models\Refund as RefundModel;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Order extends Repository
 {
@@ -24,9 +24,9 @@ class Order extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -108,7 +108,7 @@ class Order extends Repository
      * @param int $id
      * @return OrderModel|Model|bool
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return OrderModel::findFirst([
             'conditions' => 'id = :id:',
@@ -120,7 +120,7 @@ class Order extends Repository
      * @param string $sn
      * @return OrderModel|Model|bool
      */
-    public function findBySn($sn)
+    public function findBySn(string $sn)
     {
         return OrderModel::findFirst([
             'conditions' => 'sn = :sn:',
@@ -130,24 +130,11 @@ class Order extends Repository
 
     /**
      * @param int $userId
-     * @param string $itemId
-     * @param string $itemType
+     * @param int $itemId
+     * @param int $itemType
      * @return OrderModel|Model|bool
      */
-    public function findUserLastPendingOrder($userId, $itemId, $itemType)
-    {
-        $status = OrderModel::STATUS_PENDING;
-
-        return $this->findUserLastStatusOrder($userId, $itemId, $itemType, $status);
-    }
-
-    /**
-     * @param int $userId
-     * @param string $itemId
-     * @param string $itemType
-     * @return OrderModel|Model|bool
-     */
-    public function findUserLastDeliveringOrder($userId, $itemId, $itemType)
+    public function findUserLastDeliveringOrder(int $userId, int $itemId, int $itemType)
     {
         $status = OrderModel::STATUS_DELIVERING;
 
@@ -156,11 +143,11 @@ class Order extends Repository
 
     /**
      * @param int $userId
-     * @param string $itemId
-     * @param string $itemType
+     * @param int $itemId
+     * @param int $itemType
      * @return OrderModel|Model|bool
      */
-    public function findUserLastFinishedOrder($userId, $itemId, $itemType)
+    public function findUserLastFinishedOrder(int $userId, int $itemId, int $itemType)
     {
         $status = OrderModel::STATUS_FINISHED;
 
@@ -169,12 +156,12 @@ class Order extends Repository
 
     /**
      * @param int $userId
-     * @param string $itemId
-     * @param string $itemType
+     * @param int $itemId
+     * @param int $itemType
      * @param int $status
      * @return OrderModel|Model|bool
      */
-    public function findUserLastStatusOrder($userId, $itemId, $itemType, $status)
+    public function findUserLastStatusOrder(int $userId, int $itemId, int $itemType, int $status)
     {
         return OrderModel::findFirst([
             'conditions' => 'owner_id = ?1 AND item_id = ?2 AND item_type = ?3 AND status = ?4',
@@ -188,7 +175,7 @@ class Order extends Repository
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|OrderModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return OrderModel::query()
             ->columns($columns)
@@ -200,7 +187,7 @@ class Order extends Repository
      * @param int $limit
      * @return ResultsetInterface|Resultset|OrderModel[]
      */
-    public function findLatestOrders($limit = 10)
+    public function findLatestOrders(int $limit = 10)
     {
         return OrderModel::query()
             ->where('deleted = 0')
@@ -213,7 +200,7 @@ class Order extends Repository
      * @param int $orderId
      * @return ResultsetInterface|Resultset|RefundModel[]
      */
-    public function findRefunds($orderId)
+    public function findRefunds(int $orderId)
     {
         return RefundModel::query()
             ->where('order_id = :order_id:', ['order_id' => $orderId])
@@ -225,7 +212,7 @@ class Order extends Repository
      * @param int $orderId
      * @return ResultsetInterface|Resultset|OrderStatusModel[]
      */
-    public function findStatusHistory($orderId)
+    public function findStatusHistory(int $orderId)
     {
         return OrderStatusModel::query()
             ->where('order_id = :order_id:', ['order_id' => $orderId])
@@ -236,7 +223,7 @@ class Order extends Repository
      * @param int $orderId
      * @return RefundModel|Model|bool
      */
-    public function findLastRefund($orderId)
+    public function findLastRefund(int $orderId)
     {
         return RefundModel::findFirst([
             'conditions' => 'order_id = :order_id:',
@@ -245,7 +232,7 @@ class Order extends Repository
         ]);
     }
 
-    public function countOrders()
+    public function countOrders(): int
     {
         return (int)OrderModel::count(['conditions' => 'deleted = 0']);
     }

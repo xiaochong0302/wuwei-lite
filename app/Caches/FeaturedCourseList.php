@@ -24,11 +24,6 @@ class FeaturedCourseList extends Cache
      */
     protected int $limit = 5;
 
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
-
     public function getKey($id = null): string
     {
         return 'featured-course-list';

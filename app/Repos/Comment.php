@@ -12,7 +12,7 @@ use App\Models\Comment as CommentModel;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Comment extends Repository
 {
@@ -22,9 +22,9 @@ class Comment extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -87,7 +87,7 @@ class Comment extends Repository
      * @param int $id
      * @return CommentModel|Row|bool
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return CommentModel::findFirst([
             'conditions' => 'id = :id:',
@@ -100,7 +100,7 @@ class Comment extends Repository
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|CommentModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return CommentModel::query()
             ->columns($columns)
@@ -109,20 +109,21 @@ class Comment extends Repository
     }
 
     /**
+     * @param int $commentId
      * @return int
      */
-    public function countReplies($id)
+    public function countReplies(int $commentId): int
     {
         return (int)CommentModel::count([
-            'conditions' => 'parent_id = :id: AND published = :published: AND deleted = 0',
-            'bind' => ['id' => $id, 'published' => CommentModel::PUBLISH_APPROVED],
+            'conditions' => 'parent_id = :parent_id: AND published = :published: AND deleted = 0',
+            'bind' => ['parent_id' => $commentId, 'published' => CommentModel::PUBLISH_APPROVED],
         ]);
     }
 
     /**
      * @return int
      */
-    public function countComments()
+    public function countComments(): int
     {
         return (int)CommentModel::count([
             'conditions' => 'published = :published: AND deleted = 0',

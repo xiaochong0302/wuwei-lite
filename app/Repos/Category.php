@@ -19,7 +19,7 @@ class Category extends Repository
      * @param array $where
      * @return ResultsetInterface|Resultset|CategoryModel[]
      */
-    public function findAll($where = [])
+    public function findAll(array $where = [])
     {
         $query = CategoryModel::query();
 
@@ -62,25 +62,12 @@ class Category extends Repository
      * @param int $id
      * @return CategoryModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return CategoryModel::findFirst([
             'conditions' => 'id = :id:',
             'bind' => ['id' => $id],
         ]);
-    }
-
-    /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|CategoryModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return CategoryModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
     }
 
     /**
@@ -100,7 +87,7 @@ class Category extends Repository
      * @param int $categoryId
      * @return ResultsetInterface|Resultset|CategoryModel[]
      */
-    public function findChildCategories($categoryId)
+    public function findChildCategories(int $categoryId)
     {
         return CategoryModel::query()
             ->where('parent_id = :parent_id:', ['parent_id' => $categoryId])
@@ -111,10 +98,10 @@ class Category extends Repository
     }
 
     /**
-     * @param $categoryId
+     * @param int $categoryId
      * @return int
      */
-    public function countChildCategories($categoryId)
+    public function countChildCategories(int $categoryId): int
     {
         return (int)CategoryModel::count([
             'conditions' => 'parent_id = :parent_id: AND published = 1 AND deleted = 0',

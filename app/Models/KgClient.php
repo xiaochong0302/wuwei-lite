@@ -15,9 +15,9 @@ class KgClient
     /**
      * 客户端类型
      */
-    const TYPE_PC = 1;
-    const TYPE_H5 = 2;
-    const TYPE_APP = 3;
+    const int TYPE_PC = 1;
+    const int TYPE_H5 = 2;
+    const int TYPE_APP = 3;
 
     public static function types(): array
     {

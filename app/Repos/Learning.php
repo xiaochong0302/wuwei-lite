@@ -10,7 +10,7 @@ namespace App\Repos;
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Learning as LearningModel;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Learning extends Repository
 {
@@ -20,9 +20,9 @@ class Learning extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -65,22 +65,10 @@ class Learning extends Repository
     }
 
     /**
-     * @param int $id
-     * @return LearningModel|Row|null
-     */
-    public function findById($id)
-    {
-        return LearningModel::findFirst([
-            'conditions' => 'id = :id:',
-            'bind' => ['id' => $id],
-        ]);
-    }
-
-    /**
      * @param string $requestId
      * @return LearningModel|Row|null
      */
-    public function findByRequestId($requestId)
+    public function findByRequestId(string $requestId)
     {
         return LearningModel::findFirst([
             'conditions' => 'request_id = :request_id:',

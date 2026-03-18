@@ -24,7 +24,7 @@ class CourseQuery extends Service
         $this->baseUrl = $this->url->get(['for' => 'home.course.list']);
     }
 
-    public function handleTopCategories()
+    public function handleTopCategories(): array
     {
         $params = $this->getParams();
 
@@ -62,7 +62,7 @@ class CourseQuery extends Service
         return $result;
     }
 
-    public function handleSubCategories()
+    public function handleSubCategories(): array
     {
         $params = $this->getParams();
 
@@ -104,7 +104,7 @@ class CourseQuery extends Service
         return $result;
     }
 
-    public function handleLevels()
+    public function handleLevels(): array
     {
         $params = $this->getParams();
 
@@ -136,7 +136,7 @@ class CourseQuery extends Service
         return $result;
     }
 
-    public function handleSorts()
+    public function handleSorts(): array
     {
         $params = $this->getParams();
 
@@ -156,7 +156,7 @@ class CourseQuery extends Service
         return $result;
     }
 
-    public function getParams()
+    public function getParams(): array
     {
         $query = $this->request->getQuery();
 
@@ -185,7 +185,7 @@ class CourseQuery extends Service
         return $params;
     }
 
-    protected function buildParams($params)
+    protected function buildParams(array $params = []): string
     {
         return $params ? '?' . http_build_query($params) : '';
     }

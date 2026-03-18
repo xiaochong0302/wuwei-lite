@@ -16,12 +16,12 @@ class Refund extends Model
     /**
      * 状态类型
      */
-    const STATUS_PENDING = 1; // 待处理
-    const STATUS_CANCELED = 2; // 已取消
-    const STATUS_APPROVED = 3; // 已审核
-    const STATUS_REJECTED = 4; // 已拒绝
-    const STATUS_FINISHED = 5; // 已完成
-    const STATUS_FAILED = 6; // 已失败
+    const int STATUS_PENDING = 1; // 待处理
+    const int STATUS_CANCELED = 2; // 已取消
+    const int STATUS_APPROVED = 3; // 已审核
+    const int STATUS_REJECTED = 4; // 已拒绝
+    const int STATUS_FINISHED = 5; // 已完成
+    const int STATUS_FAILED = 6; // 已失败
 
     /**
      * 主键编号

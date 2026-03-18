@@ -12,12 +12,12 @@ use App\Repos\Course as CourseRepo;
 use App\Services\Category as CategoryService;
 use App\Services\Logic\Service as LogicService;
 use App\Validators\CourseQuery as CourseQueryValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseList extends LogicService
 {
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -60,7 +60,7 @@ class CourseList extends LogicService
         return $this->handleCourses($pager);
     }
 
-    public function handleCourses(RepositoryInterface $pager): RepositoryInterface
+    public function handleCourses(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

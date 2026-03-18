@@ -44,14 +44,14 @@ class Query
         return min($limit, 100);
     }
 
-    public function getSort(): ?string
+    public function getSort(): string
     {
-        return $this->request->getQuery('sort', ['trim', 'string']);
+        return $this->request->getQuery('sort', ['trim', 'string'], 'latest');
     }
 
-    public function getBaseUrl(): ?string
+    public function getBaseUrl(): string
     {
-        return $this->request->getQuery('_url', ['trim', 'string']);
+        return $this->request->getQuery('_url', ['trim', 'string'], '/');
     }
 
     public function getParams(array $whitelist = []): array

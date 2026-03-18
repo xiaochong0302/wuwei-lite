@@ -15,12 +15,12 @@ class CourseUser extends Model
     /**
      * 来源类型
      */
-    const JOIN_TYPE_FREE = 1; // 免费
-    const JOIN_TYPE_TRIAL = 2; // 试听
-    const JOIN_TYPE_PURCHASE = 3; // 付费
-    const JOIN_TYPE_VIP = 4; // 畅学
-    const JOIN_TYPE_MANUAL = 5; // 分配
-    const JOIN_TYPE_TEACHER = 6; // 教师
+    const int JOIN_TYPE_FREE = 1; // 免费
+    const int JOIN_TYPE_TRIAL = 2; // 试听
+    const int JOIN_TYPE_PURCHASE = 3; // 付费
+    const int JOIN_TYPE_VIP = 4; // 畅学
+    const int JOIN_TYPE_MANUAL = 5; // 分配
+    const int JOIN_TYPE_TEACHER = 6; // 教师
 
     /**
      * 主键编号

@@ -11,12 +11,12 @@ use App\Builders\ReviewList as ReviewListBuilder;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\Review as ReviewRepo;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class ReviewList extends LogicService
 {
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $user = $this->getLoginUser();
 
@@ -38,7 +38,7 @@ class ReviewList extends LogicService
         return $this->handleReviews($pager);
     }
 
-    protected function handleReviews(RepositoryInterface $pager): RepositoryInterface
+    protected function handleReviews(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

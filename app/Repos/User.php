@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -12,7 +12,7 @@ use App\Models\User as UserModel;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class User extends Repository
 {
@@ -22,9 +22,9 @@ class User extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -100,7 +100,7 @@ class User extends Repository
      * @param int $id
      * @return UserModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return UserModel::findFirst([
             'conditions' => 'id = :id:',
@@ -112,7 +112,7 @@ class User extends Repository
      * @param string $name
      * @return UserModel|Row|null
      */
-    public function findByName($name)
+    public function findByName(string $name)
     {
         return UserModel::findFirst([
             'conditions' => 'name = :name:',
@@ -121,24 +121,11 @@ class User extends Repository
     }
 
     /**
-     * @param int $id
-     * @return UserModel|Row|null
-     */
-    public function findShallowUserById($id)
-    {
-        return UserModel::findFirst([
-            'conditions' => 'id = :id:',
-            'columns' => ['id', 'name', 'avatar', 'vip', 'title', 'about'],
-            'bind' => ['id' => $id],
-        ]);
-    }
-
-    /**
      * @param array $ids
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|UserModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return UserModel::query()
             ->columns($columns)
@@ -150,7 +137,7 @@ class User extends Repository
      * @param array $ids
      * @return ResultsetInterface|Resultset|UserModel[]
      */
-    public function findShallowUserByIds($ids)
+    public function findShallowUserByIds(array $ids)
     {
         return UserModel::query()
             ->columns(['id', 'name', 'avatar', 'vip', 'title', 'about'])
@@ -161,7 +148,7 @@ class User extends Repository
     /**
      * @return ResultsetInterface|Resultset|UserModel[]
      */
-    public function findLatestUsers($limit = 10)
+    public function findLatestUsers(int $limit = 10)
     {
         return UserModel::query()
             ->where('deleted = 0')
@@ -186,7 +173,7 @@ class User extends Repository
     /**
      * @return int
      */
-    public function countUsers()
+    public function countUsers(): int
     {
         return (int)UserModel::count([
             'conditions' => 'deleted = 0',
@@ -196,7 +183,7 @@ class User extends Repository
     /**
      * @return int
      */
-    public function countVipUsers()
+    public function countVipUsers(): int
     {
         return (int)UserModel::count([
             'conditions' => 'vip = 1 AND deleted = 0',

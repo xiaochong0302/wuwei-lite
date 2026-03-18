@@ -19,7 +19,7 @@ class Nav extends Repository
      * @param array $where
      * @return ResultsetInterface|Resultset|NavModel[]
      */
-    public function findAll($where = [])
+    public function findAll(array $where = [])
     {
         $query = NavModel::query();
 
@@ -62,7 +62,7 @@ class Nav extends Repository
      * @param int $id
      * @return NavModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return NavModel::findFirst([
             'conditions' => 'id = :id:',
@@ -71,23 +71,10 @@ class Nav extends Repository
     }
 
     /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|NavModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return NavModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
-    }
-
-    /**
      * @param int $navId
      * @return int
      */
-    public function countChildNavs($navId)
+    public function countChildNavs(int $navId): int
     {
         return (int)NavModel::count([
             'conditions' => 'parent_id = :parent_id: AND published = 1 AND deleted = 0',

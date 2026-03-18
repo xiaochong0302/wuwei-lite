@@ -6,8 +6,9 @@
  */
 
 use Phinx\Db\Adapter\MysqlAdapter;
+use Phinx\Migration\AbstractMigration;
 
-class V20250517020616 extends Phinx\Migration\AbstractMigration
+class V20250517020616 extends AbstractMigration
 {
 
     public function up()
@@ -69,17 +70,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('email', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '邮箱',
                 'after' => 'id',
             ])
@@ -87,8 +86,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 32,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '密码',
                 'after' => 'email',
             ])
@@ -96,15 +93,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 32,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '密盐',
                 'after' => 'password',
             ])
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'salt',
@@ -112,7 +107,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -120,7 +115,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -151,15 +146,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'id',
@@ -168,8 +163,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '用户名称',
                 'after' => 'user_id',
             ])
@@ -177,8 +170,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '用户IP',
                 'after' => 'user_name',
             ])
@@ -186,8 +177,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '请求路由',
                 'after' => 'user_ip',
             ])
@@ -195,23 +184,19 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '请求路径',
                 'after' => 'req_route',
             ])
             ->addColumn('req_data', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '请求数据',
                 'after' => 'req_path',
             ])
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'req_data',
@@ -242,15 +227,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '父级编号',
                 'after' => 'id',
@@ -258,7 +243,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('level', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '层级',
                 'after' => 'parent_id',
@@ -267,8 +252,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '名称',
                 'after' => 'level',
             ])
@@ -276,8 +259,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'slug',
                 'after' => 'name',
             ])
@@ -285,8 +266,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '路径',
                 'after' => 'slug',
             ])
@@ -294,15 +273,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '图标',
                 'after' => 'path',
             ])
             ->addColumn('priority', 'integer', [
                 'null' => false,
                 'default' => '30',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '优先级',
                 'after' => 'icon',
@@ -310,7 +287,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'priority',
@@ -318,7 +295,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -326,7 +303,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('child_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '节点数',
                 'after' => 'deleted',
@@ -334,7 +311,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'child_count',
@@ -342,7 +319,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -369,15 +346,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '父级编号',
                 'after' => 'id',
@@ -385,7 +362,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'parent_id',
@@ -394,8 +371,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '标题',
                 'after' => 'course_id',
             ])
@@ -403,8 +378,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'slug',
                 'after' => 'title',
             ])
@@ -412,8 +385,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 500,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'slug',
             ])
@@ -421,15 +392,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '关键字',
                 'after' => 'summary',
             ])
             ->addColumn('priority', 'integer', [
                 'null' => false,
                 'default' => '30',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '优先级',
                 'after' => 'keywords',
@@ -437,7 +406,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('model', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '模式类型',
                 'after' => 'priority',
@@ -446,15 +415,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '扩展属性',
                 'after' => 'model',
             ])
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'attrs',
@@ -462,7 +429,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -470,7 +437,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('comment_enabled', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '开启评论',
                 'after' => 'deleted',
@@ -478,7 +445,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('lesson_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课时数',
                 'after' => 'comment_enabled',
@@ -486,7 +453,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学员数',
                 'after' => 'lesson_count',
@@ -494,7 +461,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('comment_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '评论数',
                 'after' => 'user_count',
@@ -502,7 +469,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('like_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '点赞数',
                 'after' => 'comment_count',
@@ -510,7 +477,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'like_count',
@@ -518,7 +485,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -553,15 +520,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -569,7 +536,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '标签编号',
                 'after' => 'chapter_id',
@@ -577,7 +544,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'user_id',
@@ -585,7 +552,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -593,7 +560,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -628,15 +595,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -644,7 +611,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '章节编号',
                 'after' => 'course_id',
@@ -652,8 +619,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('content', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '内容',
                 'after' => 'chapter_id',
             ])
@@ -661,15 +626,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '点播设置',
                 'after' => 'content',
             ])
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'settings',
@@ -677,7 +640,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -712,15 +675,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -728,7 +691,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '章节编号',
                 'after' => 'course_id',
@@ -736,7 +699,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'chapter_id',
@@ -744,7 +707,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('duration', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习时长',
                 'after' => 'chapter_id',
@@ -752,7 +715,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('position', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '播放位置',
                 'after' => 'duration',
@@ -760,7 +723,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('progress', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习进度',
                 'after' => 'position',
@@ -768,7 +731,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('consumed', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '消费标识',
                 'after' => 'progress',
@@ -792,7 +755,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'active_time',
@@ -800,7 +763,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -839,15 +802,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -855,7 +818,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '章节编号',
                 'after' => 'course_id',
@@ -863,7 +826,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('media_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '媒体编号',
                 'after' => 'chapter_id',
@@ -872,15 +835,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '点播设置',
                 'after' => 'media_id',
             ])
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'settings',
@@ -888,7 +849,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -927,24 +888,22 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('content', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '内容',
                 'after' => 'id',
             ])
             ->addColumn('parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '父级编号',
                 'after' => 'content',
@@ -952,7 +911,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('owner_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'parent_id',
@@ -960,7 +919,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('to_user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '回复用户',
                 'after' => 'owner_id',
@@ -968,7 +927,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '章节编号',
                 'after' => 'to_user_id',
@@ -976,7 +935,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('client_type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '终端类型',
                 'after' => 'chapter_id',
@@ -985,15 +944,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 64,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '终端IP',
                 'after' => 'client_type',
             ])
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'client_ip',
@@ -1001,7 +958,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -1009,7 +966,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('reply_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '回复数',
                 'after' => 'deleted',
@@ -1017,7 +974,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('like_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '点赞数',
                 'after' => 'reply_count',
@@ -1025,7 +982,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'like_count',
@@ -1033,7 +990,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1072,15 +1029,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('comment_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '评论编号',
                 'after' => 'id',
@@ -1088,7 +1045,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'comment_id',
@@ -1096,7 +1053,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'user_id',
@@ -1104,7 +1061,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -1112,7 +1069,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1147,17 +1104,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('title', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '标题',
                 'after' => 'id',
             ])
@@ -1165,8 +1120,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'slug',
                 'after' => 'title',
             ])
@@ -1174,8 +1127,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '封面',
                 'after' => 'slug',
             ])
@@ -1183,8 +1134,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 500,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'cover',
             ])
@@ -1192,23 +1141,19 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '关键字',
                 'after' => 'summary',
             ])
             ->addColumn('details', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '详情',
                 'after' => 'keywords',
             ])
             ->addColumn('category_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '分类编号',
                 'after' => 'details',
@@ -1216,7 +1161,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('teacher_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '讲师编号',
                 'after' => 'category_id',
@@ -1240,7 +1185,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('study_expiry', 'integer', [
                 'null' => false,
                 'default' => '12',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习期限（月）',
                 'after' => 'vip_price',
@@ -1248,7 +1193,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('refund_expiry', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '退款期限（月）',
                 'after' => 'study_expiry',
@@ -1268,7 +1213,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('level', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '难度级别',
                 'after' => 'score',
@@ -1276,7 +1221,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('featured', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '推荐标识',
                 'after' => 'level',
@@ -1284,7 +1229,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'featured',
@@ -1292,7 +1237,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -1300,7 +1245,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('human_verify_enabled', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '开启真人验证',
                 'after' => 'deleted',
@@ -1308,7 +1253,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('review_enabled', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '开启评价',
                 'after' => 'human_verify_enabled',
@@ -1316,7 +1261,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('comment_enabled', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '开启评论',
                 'after' => 'review_enabled',
@@ -1324,7 +1269,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('package_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '套餐数',
                 'after' => 'comment_enabled',
@@ -1332,7 +1277,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('resource_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '资料数',
                 'after' => 'package_count',
@@ -1340,7 +1285,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学员数',
                 'after' => 'resource_count',
@@ -1348,7 +1293,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('lesson_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课时数',
                 'after' => 'user_count',
@@ -1356,7 +1301,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('review_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '评价数',
                 'after' => 'lesson_count',
@@ -1364,7 +1309,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('favorite_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '收藏数',
                 'after' => 'review_count',
@@ -1372,7 +1317,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'favorite_count',
@@ -1380,7 +1325,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1415,15 +1360,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -1431,7 +1376,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'course_id',
@@ -1439,7 +1384,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'user_id',
@@ -1447,7 +1392,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -1455,7 +1400,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1490,15 +1435,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -1506,7 +1451,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('package_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '套餐编号',
                 'after' => 'course_id',
@@ -1514,7 +1459,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'package_id',
@@ -1549,15 +1494,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -1565,7 +1510,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('related_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '相关编号',
                 'after' => 'course_id',
@@ -1573,7 +1518,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'related_id',
@@ -1604,15 +1549,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -1620,7 +1565,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'course_id',
@@ -1628,7 +1573,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('join_type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '加入类型',
                 'after' => 'user_id',
@@ -1636,7 +1581,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('duration', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习时长',
                 'after' => 'join_type',
@@ -1644,7 +1589,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('progress', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习进度',
                 'after' => 'duration',
@@ -1652,7 +1597,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('reviewed', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '评价标识',
                 'after' => 'progress',
@@ -1660,7 +1605,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'reviewed',
@@ -1676,7 +1621,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('expiry_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '过期时间',
                 'after' => 'active_time',
@@ -1684,7 +1629,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'expiry_time',
@@ -1692,7 +1637,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1727,24 +1672,22 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('request_id', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 64,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '请求编号',
                 'after' => 'id',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'request_id',
@@ -1752,7 +1695,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('chapter_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课时编号',
                 'after' => 'course_id',
@@ -1760,7 +1703,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'chapter_id',
@@ -1768,7 +1711,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('duration', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '学习时长',
                 'after' => 'user_id',
@@ -1776,7 +1719,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('position', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '播放位置',
                 'after' => 'duration',
@@ -1784,7 +1727,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('client_type', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '终端类型',
                 'after' => 'position',
@@ -1793,15 +1736,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 64,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '终端IP',
                 'after' => 'client_type',
             ])
             ->addColumn('active_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '活跃时间',
                 'after' => 'client_ip',
@@ -1809,7 +1750,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'active_time',
@@ -1817,7 +1758,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1860,15 +1801,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('upload_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '上传编号',
                 'after' => 'id',
@@ -1877,8 +1818,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '原始文件',
                 'after' => 'upload_id',
             ])
@@ -1886,8 +1825,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '常规转码',
                 'after' => 'file_origin',
             ])
@@ -1895,15 +1832,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '加密转码',
                 'after' => 'file_standard',
             ])
             ->addColumn('standard_status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '常码状态',
                 'after' => 'file_encrypt',
@@ -1911,7 +1846,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('encrypt_status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '加码状态',
                 'after' => 'standard_status',
@@ -1919,7 +1854,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'encrypt_status',
@@ -1927,7 +1862,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -1960,15 +1895,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('version', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '版本',
                 'after' => 'id',
             ])
@@ -2014,15 +1947,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '父级编号',
                 'after' => 'id',
@@ -2030,7 +1963,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('level', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '层级',
                 'after' => 'parent_id',
@@ -2039,8 +1972,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '名称',
                 'after' => 'level',
             ])
@@ -2048,8 +1979,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '路径',
                 'after' => 'name',
             ])
@@ -2057,8 +1986,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '_blank',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '打开方式',
                 'after' => 'path',
             ])
@@ -2066,15 +1993,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '链接地址',
                 'after' => 'target',
             ])
             ->addColumn('position', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '位置',
                 'after' => 'url',
@@ -2082,7 +2007,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('priority', 'integer', [
                 'null' => false,
                 'default' => '30',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '优先级',
                 'after' => 'position',
@@ -2090,7 +2015,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'priority',
@@ -2098,7 +2023,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -2106,7 +2031,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('child_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '子类数量',
                 'after' => 'deleted',
@@ -2114,7 +2039,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'child_count',
@@ -2122,7 +2047,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2149,17 +2074,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('sn', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 32,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '订单编号',
                 'after' => 'id',
             ])
@@ -2167,8 +2090,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '订单标题',
                 'after' => 'sn',
             ])
@@ -2184,15 +2105,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => 'USD',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '货币类型',
                 'after' => 'amount',
             ])
             ->addColumn('owner_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'currency',
@@ -2200,7 +2119,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('item_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '条目编号',
                 'after' => 'owner_id',
@@ -2208,7 +2127,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('item_type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '条目类型',
                 'after' => 'item_id',
@@ -2217,8 +2136,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 3000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '条目内容',
                 'after' => 'item_type',
             ])
@@ -2234,8 +2151,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '优惠券信息',
                 'after' => 'coupon_id',
             ])
@@ -2250,8 +2165,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '[]',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '支付信息',
                 'after' => 'payment_type',
             ])
@@ -2267,8 +2180,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 64,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '终端IP',
                 'after' => 'client_type',
             ])
@@ -2276,15 +2187,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '终端国家',
                 'after' => 'client_ip',
             ])
             ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '状态标识',
                 'after' => 'client_country',
@@ -2292,7 +2201,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'status',
@@ -2300,7 +2209,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -2308,7 +2217,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2352,13 +2261,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('order_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '订单编号',
                 'after' => 'id',
@@ -2366,7 +2275,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '订单状态',
                 'after' => 'order_id',
@@ -2374,7 +2283,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'status',
@@ -2405,17 +2314,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('title', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '标题',
                 'after' => 'id',
             ])
@@ -2423,16 +2330,12 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'after' => 'title',
             ])
             ->addColumn('summary', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 500,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'cover',
             ])
@@ -2455,7 +2358,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('course_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程数量',
                 'after' => 'vip_price',
@@ -2463,7 +2366,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'course_count',
@@ -2471,7 +2374,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -2479,7 +2382,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -2487,7 +2390,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2514,17 +2417,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('title', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '标题',
                 'after' => 'id',
             ])
@@ -2532,8 +2433,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'slug',
                 'after' => 'title',
             ])
@@ -2541,8 +2440,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 500,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'slug',
             ])
@@ -2550,23 +2447,19 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '关键字',
                 'after' => 'summary',
             ])
             ->addColumn('content', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '内容',
                 'after' => 'keywords',
             ])
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'content',
@@ -2574,7 +2467,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -2590,7 +2483,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'view_count',
@@ -2598,7 +2491,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2625,15 +2518,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('owner_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'id',
@@ -2641,7 +2534,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('order_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '订单编号',
                 'after' => 'owner_id',
@@ -2650,8 +2543,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 32,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '退款序号',
                 'after' => 'order_id',
             ])
@@ -2659,8 +2550,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '退款主题',
                 'after' => 'sn',
             ])
@@ -2676,15 +2565,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => 'USD',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '货币类型',
                 'after' => 'amount',
             ])
             ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '状态类型',
                 'after' => 'currency',
@@ -2692,7 +2579,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'status',
@@ -2701,8 +2588,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '申请备注',
                 'after' => 'deleted',
             ])
@@ -2710,15 +2595,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '审核备注',
                 'after' => 'apply_note',
             ])
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'review_note',
@@ -2726,7 +2609,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2766,13 +2649,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('refund_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '订单编号',
                 'after' => 'id',
@@ -2780,7 +2663,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '订单状态',
                 'after' => 'refund_id',
@@ -2788,7 +2671,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'status',
@@ -2819,15 +2702,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('type', 'integer', [
                 'null' => false,
                 'default' => '2',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '类型',
                 'after' => 'id',
@@ -2836,8 +2719,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '名称',
                 'after' => 'type',
             ])
@@ -2845,23 +2726,19 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'name',
             ])
             ->addColumn('routes', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '权限路由',
                 'after' => 'summary',
             ])
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'routes',
@@ -2869,7 +2746,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '成员数量',
                 'after' => 'deleted',
@@ -2877,7 +2754,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'user_count',
@@ -2885,7 +2762,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2912,15 +2789,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -2928,7 +2805,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('upload_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '上传编号',
                 'after' => 'course_id',
@@ -2936,7 +2813,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'upload_id',
@@ -2944,7 +2821,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -2975,15 +2852,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('course_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '课程编号',
                 'after' => 'id',
@@ -2991,7 +2868,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('owner_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'course_id',
@@ -2999,7 +2876,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('client_type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '终端类型',
                 'after' => 'owner_id',
@@ -3008,8 +2885,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 64,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '终端IP',
                 'after' => 'client_type',
             ])
@@ -3017,15 +2892,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '内容',
                 'after' => 'client_ip',
             ])
             ->addColumn('rating', 'integer', [
                 'null' => false,
                 'default' => '5',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '综合评分',
                 'after' => 'content',
@@ -3033,7 +2906,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'rating',
@@ -3041,7 +2914,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -3049,7 +2922,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('like_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '点赞数',
                 'after' => 'deleted',
@@ -3057,7 +2930,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'like_count',
@@ -3065,7 +2938,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3100,15 +2973,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('review_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '评价编号',
                 'after' => 'id',
@@ -3116,7 +2989,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('user_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '用户编号',
                 'after' => 'review_id',
@@ -3124,7 +2997,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'user_id',
@@ -3132,7 +3005,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -3175,17 +3048,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('section', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '配置组',
                 'after' => 'id',
             ])
@@ -3193,16 +3064,12 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '配置项',
                 'after' => 'section',
             ])
             ->addColumn('item_value', 'text', [
                 'null' => false,
                 'limit' => 65535,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '配置值',
                 'after' => 'item_key',
             ])
@@ -3232,17 +3099,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('title', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '标题',
                 'after' => 'id',
             ])
@@ -3250,8 +3115,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '封面',
                 'after' => 'title',
             ])
@@ -3259,8 +3122,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'cover',
             ])
@@ -3268,15 +3129,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '内容',
                 'after' => 'summary',
             ])
             ->addColumn('target', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '目标类型',
                 'after' => 'content',
@@ -3285,15 +3144,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 255,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '目标属性',
                 'after' => 'target',
             ])
             ->addColumn('priority', 'integer', [
                 'null' => false,
                 'default' => '10',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '优先级',
                 'after' => 'target_attrs',
@@ -3301,7 +3158,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布状态',
                 'after' => 'priority',
@@ -3309,7 +3166,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -3317,7 +3174,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -3325,7 +3182,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3352,14 +3209,14 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
             ])
             ->addColumn('item_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '条目编号',
                 'after' => 'id',
@@ -3367,7 +3224,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('item_type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '条目类型',
                 'after' => 'item_id',
@@ -3376,8 +3233,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 3000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '条目内容',
                 'after' => 'item_type',
             ])
@@ -3391,7 +3246,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('locked', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '锁定标识',
                 'after' => 'status',
@@ -3399,7 +3254,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('priority', 'integer', [
                 'null' => false,
                 'default' => '30',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '优先级',
                 'after' => 'locked',
@@ -3407,7 +3262,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('try_count', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '重试数',
                 'after' => 'priority',
@@ -3415,7 +3270,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('max_try_count', 'integer', [
                 'null' => false,
                 'default' => '3',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '最大重试数',
                 'after' => 'try_count',
@@ -3423,7 +3278,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'max_try_count',
@@ -3431,7 +3286,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3462,15 +3317,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('source_crc32', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '源路crc32',
                 'after' => 'id',
@@ -3478,7 +3333,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('target_crc32', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '标路crc32',
                 'after' => 'source_crc32',
@@ -3487,8 +3342,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '源头路径',
                 'after' => 'target_crc32',
             ])
@@ -3496,15 +3349,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '目标路径',
                 'after' => 'source_path',
             ])
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'target_path',
@@ -3512,7 +3363,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3547,15 +3398,15 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('type', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '条目类型',
                 'after' => 'id',
@@ -3564,8 +3415,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '文件名',
                 'after' => 'type',
             ])
@@ -3573,8 +3422,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '路径',
                 'after' => 'name',
             ])
@@ -3582,8 +3429,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 100,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'mime',
                 'after' => 'path',
             ])
@@ -3591,15 +3436,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 32,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => 'md5',
                 'after' => 'mime',
             ])
             ->addColumn('size', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '大小',
                 'after' => 'md5',
@@ -3607,7 +3450,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'size',
@@ -3615,7 +3458,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -3623,7 +3466,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3659,7 +3502,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '主键编号',
             ])
@@ -3667,8 +3510,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 30,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '名称',
                 'after' => 'id',
             ])
@@ -3676,8 +3517,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '头像',
                 'after' => 'name',
             ])
@@ -3685,8 +3524,6 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 50,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '头衔',
                 'after' => 'avatar',
             ])
@@ -3694,15 +3531,13 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
                 'null' => false,
                 'default' => '',
                 'limit' => 1000,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '简介',
                 'after' => 'title',
             ])
             ->addColumn('vip', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '会员标识',
                 'after' => 'about',
@@ -3710,7 +3545,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('locked', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '锁定标识',
                 'after' => 'vip',
@@ -3718,7 +3553,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'locked',
@@ -3726,7 +3561,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('edu_role', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '教学角色',
                 'after' => 'deleted',
@@ -3734,7 +3569,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('admin_role', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '后台角色',
                 'after' => 'edu_role',
@@ -3742,7 +3577,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('vip_expiry_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '会员期限',
                 'after' => 'admin_role',
@@ -3750,7 +3585,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('lock_expiry_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '锁定期限',
                 'after' => 'vip_expiry_time',
@@ -3758,7 +3593,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('active_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '活跃时间',
                 'after' => 'lock_expiry_time',
@@ -3766,7 +3601,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'active_time',
@@ -3774,7 +3609,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',
@@ -3805,24 +3640,22 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
         ])
             ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
-                'identity' => 'enable',
+                'identity' =>true,
                 'comment' => '主键编号',
             ])
             ->addColumn('cover', 'string', [
                 'null' => false,
                 'default' => '',
                 'limit' => 150,
-                'collation' => 'utf8mb4_general_ci',
-                'encoding' => 'utf8mb4',
                 'comment' => '封面',
                 'after' => 'id',
             ])
             ->addColumn('expiry', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '有效期',
                 'after' => 'cover',
@@ -3838,7 +3671,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('published', 'integer', [
                 'null' => false,
                 'default' => '1',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '发布标识',
                 'after' => 'price',
@@ -3846,7 +3679,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '删除标识',
                 'after' => 'published',
@@ -3854,7 +3687,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('create_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '创建时间',
                 'after' => 'deleted',
@@ -3862,7 +3695,7 @@ class V20250517020616 extends Phinx\Migration\AbstractMigration
             ->addColumn('update_time', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => '10',
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'signed' => false,
                 'comment' => '更新时间',
                 'after' => 'create_time',

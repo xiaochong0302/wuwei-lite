@@ -18,11 +18,6 @@ class PackageCourseList extends Cache
      */
     protected int $lifetime = 86400;
 
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
-
     public function getKey($id = null): string
     {
         return "package-course-list-{$id}";

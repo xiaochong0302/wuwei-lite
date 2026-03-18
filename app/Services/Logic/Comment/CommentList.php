@@ -11,14 +11,14 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Comment as CommentModel;
 use App\Repos\Comment as CommentRepo;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CommentList extends LogicService
 {
 
     use ListTrait;
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

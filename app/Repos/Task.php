@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -9,10 +9,8 @@ namespace App\Repos;
 
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Task as TaskModel;
-use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Task extends Repository
 {
@@ -22,9 +20,9 @@ class Task extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -83,25 +81,12 @@ class Task extends Repository
      * @param int $id
      * @return TaskModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return TaskModel::findFirst([
             'conditions' => 'id = :id:',
             'bind' => ['id' => $id],
         ]);
-    }
-
-    /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|TaskModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return TaskModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
     }
 
 }

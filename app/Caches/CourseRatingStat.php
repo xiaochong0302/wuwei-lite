@@ -18,11 +18,6 @@ class CourseRatingStat extends Cache
      */
     protected int $lifetime = 86400;
 
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
-
     public function getKey($id = null): string
     {
         return "course-rating-stat-{$id}";

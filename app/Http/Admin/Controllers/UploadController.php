@@ -22,7 +22,7 @@ class UploadController extends Controller
 
     public function initialize()
     {
-        $authUser = $this->getAuthUser();
+        $authUser = $this->getLoginUser();
 
         $validator = new AppValidator();
 

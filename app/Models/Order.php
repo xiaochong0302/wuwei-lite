@@ -16,18 +16,18 @@ class Order extends Model
     /**
      * 支付平台
      */
-    const PAYMENT_PAYPAL = 1; // paypal
-    const PAYMENT_STRIPE = 2; // stripe
+    const int PAYMENT_PAYPAL = 1; // paypal
+    const int PAYMENT_STRIPE = 2; // stripe
 
     /**
      * 状态类型
      */
-    const STATUS_PENDING = 1; // 待支付
-    const STATUS_PAID = 2; // 已支付
-    const STATUS_DELIVERING = 3; // 发货中
-    const STATUS_FINISHED = 4; // 已完成
-    const STATUS_CLOSED = 5; // 已关闭
-    const STATUS_REFUNDED = 6; // 已退款
+    const int STATUS_PENDING = 1; // 待支付
+    const int STATUS_PAID = 2; // 已支付
+    const int STATUS_DELIVERING = 3; // 发货中
+    const int STATUS_FINISHED = 4; // 已完成
+    const int STATUS_CLOSED = 5; // 已关闭
+    const int STATUS_REFUNDED = 6; // 已退款
 
     /**
      * paypal特有属性
@@ -112,7 +112,7 @@ class Order extends Model
      *
      * @var array|string
      */
-    public string|array $item_info = [];
+    public array|string $item_info = [];
 
     /**
      * 优惠券编号
@@ -126,7 +126,7 @@ class Order extends Model
      *
      * @var array|string
      */
-    public string|array $coupon_info = [];
+    public array|string $coupon_info = [];
 
     /**
      * 支付类型
@@ -140,7 +140,7 @@ class Order extends Model
      *
      * @var array|string
      */
-    public string|array $payment_info = [];
+    public array|string $payment_info = [];
 
     /**
      * 终端类型

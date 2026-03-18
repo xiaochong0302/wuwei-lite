@@ -16,15 +16,15 @@ class Role extends Model
     /**
      * 角色类型
      */
-    const TYPE_SYSTEM = 1; // 内置
-    const TYPE_CUSTOM = 2; // 自定
+    const int TYPE_SYSTEM = 1; // 内置
+    const int TYPE_CUSTOM = 2; // 自定
 
     /**
      * 内置角色
      */
-    const ROLE_ROOT = 1; // 管理人员
-    const ROLE_OPERATOR = 2; // 运营人员
-    const ROLE_EDITOR = 3; // 编辑人员
+    const int ROLE_ROOT = 1; // 管理人员
+    const int ROLE_OPERATOR = 2; // 运营人员
+    const int ROLE_EDITOR = 3; // 编辑人员
 
     /**
      * 主键编号
@@ -59,7 +59,7 @@ class Role extends Model
      *
      * @var array|string
      */
-    public string|array $routes = [];
+    public array|string $routes = [];
 
     /**
      * 删除标识

@@ -8,6 +8,7 @@
 namespace App\Http\Admin\Services;
 
 use App\Builders\CourseList as CourseListBuilder;
+use App\Builders\ResourceList as ResourceListBuilder;
 use App\Caches\Course as CourseCache;
 use App\Caches\CourseRelatedList as CourseRelatedListCache;
 use App\Library\Paginator\Query as PagerQuery;
@@ -20,7 +21,7 @@ use App\Repos\User as UserRepo;
 use App\Services\Category as CategoryService;
 use App\Services\Sync\CourseIndex as CourseIndexSync;
 use App\Validators\Course as CourseValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Course extends Service
 {
@@ -101,6 +102,21 @@ class Course extends Service
         return $result;
     }
 
+    public function getResources(int $id): array
+    {
+        $courseRepo = new CourseRepo();
+
+        $resources = $courseRepo->findResources($id);
+
+        if ($resources->count() == 0) return [];
+
+        $builder = new ResourceListBuilder();
+
+        $items = $resources->toArray();
+
+        return $builder->handleUploads($items);
+    }
+
     public function getModules(int $id): array
     {
         $course = $this->findOrFail($id);
@@ -116,7 +132,7 @@ class Course extends Service
         ])->toArray();
     }
 
-    public function getCourses(): RepositoryInterface
+    public function getCourses(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -355,7 +371,7 @@ class Course extends Service
         $sync->addItem($course->id);
     }
 
-    protected function handleCourses(RepositoryInterface $pager): RepositoryInterface
+    protected function handleCourses(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

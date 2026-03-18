@@ -39,6 +39,17 @@ class UpgradeTask extends Task
      */
     public function migrateAction(): void
     {
+        $files = scandir(app_path('Console/Migrations'));
+
+        $migrationFiles = array_filter($files, function($file) {
+            return preg_match('/^V[0-9]+\.php$/', $file);
+        });
+
+        if (empty($migrationFiles)) {
+            $this->infoPrint('------ no phalcon migration files found ------');
+            return;
+        }
+
         $tasks = $this->findMigrationTasks();
 
         $versionList = [];
@@ -47,31 +58,48 @@ class UpgradeTask extends Task
             $versionList = kg_array_column($tasks->toArray(), 'version');
         }
 
-        $files = scandir(app_path('Console/Migrations'));
+        foreach ($migrationFiles as $file) {
 
-        foreach ($files as $file) {
+            $version = substr($file, 0, -4);
 
-            if (preg_match('/^V[0-9]+\.php$/', $file)) {
+            if (!in_array($version, $versionList)) {
 
-                $version = substr($file, 0, -4);
+                try {
 
-                if (!in_array($version, $versionList)) {
+                    $this->db->begin();
 
                     $startTime = time();
 
                     $className = "\App\Console\Migrations\\{$version}";
+
+                    if (!class_exists($className)) {
+                        throw new \Exception("Migration class {$className} not found");
+                    }
+
                     $obj = new $className();
                     $obj->run();
 
                     $endTime = time();
 
-                    $task = new MigrationPhalconModel();
-                    $task->version = $version;
-                    $task->start_time = $startTime;
-                    $task->end_time = $endTime;
-                    $task->create();
+                    $migration = new MigrationPhalconModel();
 
-                    echo "------ phalcon migration {$version} ok ------" . PHP_EOL;
+                    $migration->version = $version;
+                    $migration->start_time = $startTime;
+                    $migration->end_time = $endTime;
+
+                    $migration->create();
+
+                    $this->db->commit();
+
+                    $this->successPrint("------ phalcon migration {$version} ok ------");
+
+                } catch (\Exception $e) {
+
+                    $this->db->rollback();
+
+                    $this->errorPrint("------ phalcon migration {$version} fail ------");
+
+                    throw $e;
                 }
             }
         }

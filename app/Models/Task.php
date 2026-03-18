@@ -13,35 +13,35 @@ class Task extends Model
     /**
      * 任务类型
      */
-    const TYPE_DELIVER = 1; // 发货
-    const TYPE_REFUND = 2; // 退款
+    const int TYPE_DELIVER = 1; // 发货
+    const int TYPE_REFUND = 2; // 退款
 
-    const TYPE_CREATE_HLS_WATERMARK = 11; // 创建HLS水印
-    const TYPE_REMOVE_HLS_WATERMARK = 12; // 删除HLS水印
-    const TYPE_TRANS_STANDARD = 13; // 标准转码
-    const TYPE_TRANS_ENCRYPT = 14; // 加密转码
+    const int TYPE_CREATE_HLS_WATERMARK = 11; // 创建HLS水印
+    const int TYPE_REMOVE_HLS_WATERMARK = 12; // 删除HLS水印
+    const int TYPE_TRANS_STANDARD = 13; // 标准转码
+    const int TYPE_TRANS_ENCRYPT = 14; // 加密转码
 
-    const TYPE_NOTICE_ORDER_FINISH = 21; // 订单完成通知
-    const TYPE_NOTICE_REFUND_FINISH = 22; // 退款完成通知
-    const TYPE_NOTICE_ACCOUNT_LOGIN = 23; // 帐号登录通知
-    const TYPE_NOTICE_STUDENT_LIVE = 24; // 直播学员通知
-    const TYPE_NOTICE_TEACHER_LIVE = 25; // 直播讲师通知
-    const TYPE_NOTICE_REVIEW_REMIND = 26; // 评价提醒通知
+    const int TYPE_NOTICE_ORDER_FINISH = 21; // 订单完成通知
+    const int TYPE_NOTICE_REFUND_FINISH = 22; // 退款完成通知
+    const int TYPE_NOTICE_ACCOUNT_LOGIN = 23; // 帐号登录通知
+    const int TYPE_NOTICE_STUDENT_LIVE = 24; // 直播学员通知
+    const int TYPE_NOTICE_TEACHER_LIVE = 25; // 直播讲师通知
+    const int TYPE_NOTICE_REVIEW_REMIND = 26; // 评价提醒通知
 
     /**
      * 优先级
      */
-    const PRIORITY_HIGH = 10; // 高
-    const PRIORITY_MIDDLE = 20; // 中
-    const PRIORITY_LOW = 30; // 低
+    const int PRIORITY_HIGH = 10; // 高
+    const int PRIORITY_MIDDLE = 20; // 中
+    const int PRIORITY_LOW = 30; // 低
 
     /**
      * 状态类型
      */
-    const STATUS_PENDING = 1; // 待定
-    const STATUS_FINISHED = 2; // 完成
-    const STATUS_CANCELED = 3; // 取消
-    const STATUS_FAILED = 4; // 失败
+    const int STATUS_PENDING = 1; // 待定
+    const int STATUS_FINISHED = 2; // 完成
+    const int STATUS_CANCELED = 3; // 取消
+    const int STATUS_FAILED = 4; // 失败
 
     /**
      * 主键编号
@@ -69,7 +69,7 @@ class Task extends Model
      *
      * @var array|string
      */
-    public string|array $item_info = [];
+    public array|string $item_info = [];
 
     /**
      * 优先级

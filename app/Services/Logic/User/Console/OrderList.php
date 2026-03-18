@@ -12,12 +12,12 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\Order as OrderRepo;
 use App\Services\Logic\Service as LogicService;
 use App\Validators\Order as OrderValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class OrderList extends LogicService
 {
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $user = $this->getLoginUser();
 
@@ -45,7 +45,7 @@ class OrderList extends LogicService
         return $this->handleOrders($pager);
     }
 
-    public function handleOrders(RepositoryInterface $pager): RepositoryInterface
+    public function handleOrders(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

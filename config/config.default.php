@@ -150,12 +150,12 @@ $config['csrf_token']['lifetime'] = 86400;
 $config['cors']['enabled'] = true;
 
 /**
- * Allowed cross-origin domains (string|array)
+ * Allowed cross-origin domains (array|string)
  */
 $config['cors']['allow_origin'] = '*';
 
 /**
- * Allowed cross-origin headers (string|array)
+ * Allowed cross-origin headers (array|string)
  */
 $config['cors']['allow_headers'] = '*';
 

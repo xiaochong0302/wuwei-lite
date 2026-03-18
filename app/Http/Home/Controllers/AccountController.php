@@ -9,7 +9,6 @@ namespace App\Http\Home\Controllers;
 
 use App\Http\Home\Services\Account as AccountService;
 use App\Services\Logic\Account\EmailUpdate as EmailUpdateService;
-use App\Services\Logic\Account\OAuthProvider as OAuthProviderService;
 use App\Services\Logic\Account\PasswordReset as PasswordResetService;
 use App\Services\Logic\Account\PasswordUpdate as PasswordUpdateService;
 use App\Services\Logic\Url\FullH5Url as FullH5UrlService;
@@ -64,17 +63,12 @@ class AccountController extends Controller
             return $this->response->redirect(['for' => 'home.index']);
         }
 
-        $service = new OAuthProviderService();
-
-        $oauthProvider = $service->handle();
-
         $returnUrl = $this->request->getHTTPReferer();
 
         $title = $this->locale->query('login_account');
 
         $this->seo->prependTitle($title);
 
-        $this->view->setVar('oauth_provider', $oauthProvider);
         $this->view->setVar('return_url', $returnUrl);
     }
 

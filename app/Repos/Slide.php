@@ -9,10 +9,8 @@ namespace App\Repos;
 
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Slide as SlideModel;
-use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Slide extends Repository
 {
@@ -22,9 +20,9 @@ class Slide extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'priority', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'priority', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -79,25 +77,12 @@ class Slide extends Repository
      * @param int $id
      * @return SlideModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return SlideModel::findFirst([
             'conditions' => 'id = :id:',
             'bind' => ['id' => $id],
         ]);
-    }
-
-    /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|SlideModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return SlideModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
     }
 
 }

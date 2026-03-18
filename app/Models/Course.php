@@ -20,9 +20,9 @@ class Course extends Model
     /**
      * 级别
      */
-    const LEVEL_JUNIOR = 1; // 初级
-    const LEVEL_MEDIUM = 2; // 中级
-    const LEVEL_SENIOR = 3; // 高级
+    const int LEVEL_JUNIOR = 1; // 初级
+    const int LEVEL_MEDIUM = 2; // 中级
+    const int LEVEL_SENIOR = 3; // 高级
 
     /**
      * 主键编号

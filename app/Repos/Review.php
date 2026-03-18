@@ -9,11 +9,10 @@ namespace App\Repos;
 
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Review as ReviewModel;
-use App\Models\ReviewLike as ReviewLikeModel;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Review extends Repository
 {
@@ -23,9 +22,9 @@ class Review extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -101,7 +100,7 @@ class Review extends Repository
      * @param int $id
      * @return ReviewModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return ReviewModel::findFirst([
             'conditions' => 'id = :id:',
@@ -110,24 +109,11 @@ class Review extends Repository
     }
 
     /**
-     * @param int $courseId
-     * @param int $userId
-     * @return ReviewModel|Row|null
-     */
-    public function findReview($courseId, $userId)
-    {
-        return ReviewModel::findFirst([
-            'conditions' => 'course_id = :course_id: AND owner_id = :owner_id:',
-            'bind' => ['course_id' => $courseId, 'owner_id' => $userId],
-        ]);
-    }
-
-    /**
      * @param array $ids
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|ReviewModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return ReviewModel::query()
             ->columns($columns)
@@ -138,23 +124,11 @@ class Review extends Repository
     /**
      * @return int
      */
-    public function countReviews()
+    public function countReviews(): int
     {
         return (int)ReviewModel::count([
             'conditions' => 'published = :published: AND deleted = 0',
             'bind' => ['published' => ReviewModel::PUBLISH_APPROVED],
-        ]);
-    }
-
-    /**
-     * @param int $reviewId
-     * @return int
-     */
-    public function countLikes($reviewId)
-    {
-        return (int)ReviewLikeModel::count([
-            'conditions' => 'review_id = :review_id: AND deleted = 0',
-            'bind' => ['review_id' => $reviewId],
         ]);
     }
 

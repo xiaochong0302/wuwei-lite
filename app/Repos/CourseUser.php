@@ -12,7 +12,7 @@ use App\Models\CourseUser as CourseUserModel;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseUser extends Repository
 {
@@ -22,9 +22,9 @@ class CourseUser extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -84,7 +84,7 @@ class CourseUser extends Repository
      * @param int $id
      * @return CourseUserModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return CourseUserModel::findFirst($id);
     }
@@ -94,7 +94,7 @@ class CourseUser extends Repository
      * @param int $userId
      * @return CourseUserModel|Row|bool
      */
-    public function findCourseUser($courseId, $userId)
+    public function findCourseUser(int $courseId, int $userId)
     {
         return CourseUserModel::findFirst([
             'conditions' => 'course_id = ?1 AND user_id = ?2 AND deleted = 0',
@@ -105,34 +105,10 @@ class CourseUser extends Repository
 
     /**
      * @param int $courseId
-     * @return ResultsetInterface|Resultset|CourseUserModel[]
-     */
-    public function findByCourseId($courseId)
-    {
-        return CourseUserModel::query()
-            ->where('course_id = :course_id:', ['course_id' => $courseId])
-            ->andWhere('deleted = 0')
-            ->execute();
-    }
-
-    /**
      * @param int $userId
      * @return ResultsetInterface|Resultset|CourseUserModel[]
      */
-    public function findByUserId($userId)
-    {
-        return CourseUserModel::query()
-            ->where('user_id = :user_id:', ['user_id' => $userId])
-            ->andWhere('deleted = 0')
-            ->execute();
-    }
-
-    /**
-     * @param int $courseId
-     * @param int $userId
-     * @return ResultsetInterface|Resultset|CourseUserModel[]
-     */
-    public function findByCourseAndUserId($courseId, $userId)
+    public function findByCourseAndUserId(int $courseId, int $userId)
     {
         return CourseUserModel::query()
             ->where('course_id = :course_id:', ['course_id' => $courseId])

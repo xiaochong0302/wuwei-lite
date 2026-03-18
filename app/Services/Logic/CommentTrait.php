@@ -13,7 +13,7 @@ use App\Validators\Comment as CommentValidator;
 trait CommentTrait
 {
 
-    protected function checkComment($id): CommentModel
+    protected function checkComment(int $id): CommentModel
     {
         $validator = new CommentValidator();
 

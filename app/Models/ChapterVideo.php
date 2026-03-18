@@ -43,7 +43,7 @@ class ChapterVideo extends Model
      *
      * @var array|string
      */
-    public string|array $settings = [];
+    public array|string $settings = [];
 
     /**
      * 创建时间

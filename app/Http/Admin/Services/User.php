@@ -19,7 +19,7 @@ use App\Repos\Role as RoleRepo;
 use App\Repos\User as UserRepo;
 use App\Validators\Account as AccountValidator;
 use App\Validators\User as UserValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class User extends Service
 {
@@ -38,7 +38,7 @@ class User extends Service
         return $roleRepo->findAll(['deleted' => 0])->toArray();
     }
 
-    public function getUsers(): RepositoryInterface
+    public function getUsers(): PagerRepoInterface
     {
         $pageQuery = new PaginateQuery();
 
@@ -278,7 +278,7 @@ class User extends Service
         $role->update();
     }
 
-    protected function handleUsers(RepositoryInterface $pager): RepositoryInterface
+    protected function handleUsers(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

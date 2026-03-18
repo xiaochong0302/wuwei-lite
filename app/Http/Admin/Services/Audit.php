@@ -10,12 +10,12 @@ namespace App\Http\Admin\Services;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Audit as AuditModel;
 use App\Repos\Audit as AuditRepo;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Audit extends Service
 {
 
-    public function getAudits(): RepositoryInterface
+    public function getAudits(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

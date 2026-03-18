@@ -14,14 +14,14 @@ use App\Repos\Review as ReviewRepo;
 use App\Repos\ReviewLike as ReviewLikeRepo;
 use App\Services\Logic\CourseTrait;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class ReviewList extends LogicService
 {
 
     use CourseTrait;
 
-    public function handle(int $id): RepositoryInterface
+    public function handle(int $id): PagerRepoInterface
     {
         $course = $this->checkCourseCache($id);
 
@@ -44,7 +44,7 @@ class ReviewList extends LogicService
         return $this->handleReviews($pager);
     }
 
-    protected function handleReviews(RepositoryInterface $pager): RepositoryInterface
+    protected function handleReviews(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

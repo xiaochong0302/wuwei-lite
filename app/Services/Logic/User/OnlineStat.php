@@ -11,7 +11,7 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\Online as OnlineRepo;
 use App\Services\Logic\Service as LogicService;
 use App\Services\Logic\UserTrait;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class OnlineStat extends LogicService
 {
@@ -75,7 +75,7 @@ class OnlineStat extends LogicService
         return $content;
     }
 
-    protected function handleStats(RepositoryInterface $pager): array
+    protected function handleStats(PagerRepoInterface $pager): array
     {
         $items = [];
 

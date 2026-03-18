@@ -9,12 +9,12 @@ namespace App\Services\Logic\Comment;
 
 use App\Builders\CommentList as CommentListBuilder;
 use App\Repos\CommentLike as CommentLikeRepo;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 trait ListTrait
 {
 
-    public function handleComments(RepositoryInterface $pager): RepositoryInterface
+    public function handleComments(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

@@ -19,7 +19,7 @@ class Account extends Repository
      * @param int $id
      * @return AccountModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return AccountModel::findFirst([
             'conditions' => 'id = :id:',
@@ -31,7 +31,7 @@ class Account extends Repository
      * @param string $email
      * @return AccountModel|Row|null
      */
-    public function findByEmail($email)
+    public function findByEmail(string $email)
     {
         return AccountModel::findFirst([
             'conditions' => 'email = :email:',
@@ -44,7 +44,7 @@ class Account extends Repository
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|AccountModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return AccountModel::query()
             ->columns($columns)

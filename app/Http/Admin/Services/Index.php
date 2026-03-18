@@ -13,6 +13,7 @@ use App\Caches\AppInfo as AppInfoCache;
 use App\Caches\SiteGlobalStat as SiteGlobalStatCache;
 use App\Caches\SiteTodayStat as SiteTodayStatCache;
 use App\Library\AppInfo as AppInfo;
+use App\Library\Language;
 use App\Library\Utils\ServerInfo as ServerInfo;
 use App\Repos\Order as OrderRepo;
 use App\Repos\User as UserRepo;
@@ -36,17 +37,7 @@ class Index extends Service
 
     public function getAppInfo(): AppInfo
     {
-        $cache = new AppInfoCache();
-
-        $content = $cache->get();
-
-        $appInfo = new AppInfo();
-
-        if (empty($content) || $appInfo->get('version') != $content['version']) {
-            $cache->rebuild();
-        }
-
-        return $appInfo;
+        return new AppInfo();
     }
 
     public function getServerInfo(): array

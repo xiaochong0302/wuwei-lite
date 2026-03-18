@@ -21,7 +21,7 @@ use App\Repos\Order as OrderRepo;
 use App\Repos\Refund as RefundRepo;
 use App\Repos\User as UserRepo;
 use App\Validators\Refund as RefundValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Refund extends Service
 {
@@ -34,7 +34,7 @@ class Refund extends Service
         return RefundModel::statusTypes();
     }
 
-    public function getRefunds(): RepositoryInterface
+    public function getRefunds(): PagerRepoInterface
     {
         $pageQuery = new PaginateQuery();
 
@@ -148,7 +148,7 @@ class Refund extends Service
         return $validator->checkRefundById($id);
     }
 
-    protected function handleRefunds(RepositoryInterface $pager): RepositoryInterface
+    protected function handleRefunds(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

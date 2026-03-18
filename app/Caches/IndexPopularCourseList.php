@@ -19,11 +19,6 @@ class IndexPopularCourseList extends Cache
      */
     protected int $lifetime = 3600;
 
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
-
     public function getKey($id = null): string
     {
         return 'index-popular-course-list';

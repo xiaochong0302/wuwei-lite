@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
 namespace App\Http\Admin\Controllers;
 
+use App\Http\Admin\Services\Common as CommonService;
 use App\Models\Audit as AuditModel;
 use App\Models\User as UserModel;
-use App\Services\Auth\Admin as AdminAuth;
-use App\Services\Service as AppService;
+use App\Traits\Auth as AuthTrait;
 use App\Traits\Client as ClientTrait;
 use App\Traits\Response as ResponseTrait;
 use App\Traits\Security as SecurityTrait;
@@ -19,45 +19,20 @@ use Phalcon\Mvc\Dispatcher;
 class Controller extends \Phalcon\Mvc\Controller
 {
 
-    /**
-     * @var array
-     */
-    protected array $languages;
-
-    /**
-     * @var array
-     */
-    protected array $jsLocale;
-
-    /**
-     * @var array
-     */
-    protected array $siteInfo;
-
-    /**
-     * @var array
-     */
-    protected array $authInfo;
-
-    /**
-     * @var UserModel|null
-     */
-    protected ?UserModel $authUser;
-
     use ResponseTrait;
     use SecurityTrait;
     use ClientTrait;
+    use AuthTrait;
 
-    public function initialize()
-    {
-        $this->languages = $this->getLanguages();
-        $this->jsLocale = $this->getJsLocale();
+    /**
+     * @vr array
+     */
+    protected array $siteInfo = [];
 
-        $this->view->setVar('languages', $this->languages);
-        $this->view->setVar('js_locale', $this->jsLocale);
-        $this->view->setVar('site_info', $this->siteInfo);
-        $this->view->setVar('auth_user', $this->authUser);
-    }
+    /**
+     * @var UserModel
+     */
+    protected UserModel $authUser;
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
@@ -66,10 +41,13 @@ class Controller extends \Phalcon\Mvc\Controller
             $this->checkCsrfToken();
         }
 
-        $this->siteInfo = $this->getSiteInfo();
-        $this->authInfo = $this->getAuthInfo();
+        $commonService = new CommonService();
 
-        if (!$this->authInfo) {
+        $this->siteInfo = $commonService->getSiteInfo();
+
+        $authInfo = $commonService->getAuthInfo();
+
+        if (!$authInfo) {
             $dispatcher->forward([
                 'controller' => 'public',
                 'action' => 'auth',
@@ -77,7 +55,7 @@ class Controller extends \Phalcon\Mvc\Controller
             return false;
         }
 
-        $this->authUser = $this->getAuthUser();
+        $this->authUser = $this->getLoginUser(true);
 
         /**
          * root用户忽略权限检查
@@ -115,7 +93,7 @@ class Controller extends \Phalcon\Mvc\Controller
         /**
          * 执行路由权限检查
          */
-        if (!in_array($route->getName(), $this->authInfo['routes'])) {
+        if (!in_array($route->getName(), $authInfo['routes'])) {
             $dispatcher->forward([
                 'controller' => 'public',
                 'action' => 'forbidden',
@@ -124,6 +102,15 @@ class Controller extends \Phalcon\Mvc\Controller
         }
 
         return true;
+    }
+
+    public function initialize()
+    {
+        $jsLocale = $this->getJsLocale();
+
+        $this->view->setVar('site_info', $this->siteInfo);
+        $this->view->setVar('auth_user', $this->authUser);
+        $this->view->setVar('js_locale', $jsLocale);
     }
 
     public function afterExecuteRoute(Dispatcher $dispatcher)
@@ -141,38 +128,6 @@ class Controller extends \Phalcon\Mvc\Controller
 
             $audit->create();
         }
-    }
-
-    protected function getSiteInfo(): array
-    {
-        return $this->getSettings('site');
-    }
-
-    protected function getAuthInfo(): array
-    {
-        /**
-         * @var AdminAuth $auth
-         */
-        $auth = $this->getDI()->get('auth');
-
-        return $auth->getAuthInfo();
-    }
-
-    protected function getSettings(string $section): array
-    {
-        $appService = new AppService();
-
-        return $appService->getSettings($section);
-    }
-
-    protected function getAuthUser(): ?UserModel
-    {
-        /**
-         * @var AdminAuth $auth
-         */
-        $auth = $this->getDI()->get('auth');
-
-        return $auth->getCurrentUser();
     }
 
 }

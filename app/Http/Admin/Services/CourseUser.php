@@ -14,7 +14,7 @@ use App\Models\CourseUser as CourseUserModel;
 use App\Repos\CourseUser as CourseUserRepo;
 use App\Services\Logic\Course\CourseUserTrait;
 use App\Validators\CourseUser as CourseUserValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseUser extends Service
 {
@@ -27,7 +27,7 @@ class CourseUser extends Service
         return CourseUserModel::sourceTypes();
     }
 
-    public function getUsers(int $courseId): RepositoryInterface
+    public function getUsers(int $courseId): PagerRepoInterface
     {
         $validator = new CourseUserValidator();
 
@@ -53,7 +53,7 @@ class CourseUser extends Service
         return $this->handleUsers($pager);
     }
 
-    protected function handleUsers(RepositoryInterface $pager): RepositoryInterface
+    protected function handleUsers(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

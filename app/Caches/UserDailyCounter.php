@@ -10,12 +10,10 @@ namespace App\Caches;
 class UserDailyCounter extends Counter
 {
 
-    public function getLifetime(): int
-    {
-        $tomorrow = strtotime('tomorrow');
-
-        return $tomorrow - time();
-    }
+    /**
+     * @var int
+     */
+    protected int $lifetime = 86400;
 
     public function getKey($id = null): string
     {

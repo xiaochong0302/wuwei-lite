@@ -7,6 +7,7 @@
 
 namespace App\Http\Home\Services;
 
+use App\Models\User as UserModel;
 use App\Repos\User as UserRepo;
 use App\Services\Auth\Home as AuthService;
 use App\Services\Logic\Account\Register as RegisterService;
@@ -25,7 +26,7 @@ class Account extends Service
         $this->auth = $this->getDI()->get('auth');
     }
 
-    public function register()
+    public function register(): UserModel
     {
         $service = new RegisterService();
 
@@ -42,7 +43,7 @@ class Account extends Service
         return $user;
     }
 
-    public function login()
+    public function login(): UserModel
     {
         $post = $this->request->getPost();
 
@@ -55,6 +56,8 @@ class Account extends Service
         $this->auth->saveAuthInfo($user);
 
         $this->eventsManager->fire('Account:afterLogin', $this, $user);
+
+        return $user;
     }
 
     public function logout()

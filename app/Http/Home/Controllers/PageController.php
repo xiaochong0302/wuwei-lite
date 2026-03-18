@@ -46,8 +46,8 @@ class PageController extends Controller
         $title = $this->locale->query('page_page_x', ['x' => $page['title']]);
 
         $this->seo->prependTitle($title);
-        $this->seo->setKeywords($page['keywords']);
-        $this->seo->setDescription($page['summary']);
+        $this->seo->keywords = $page['keywords'];
+        $this->seo->description = $page['summary'];
 
         $this->view->setVar('page', $page);
     }

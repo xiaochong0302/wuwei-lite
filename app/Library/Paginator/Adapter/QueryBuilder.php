@@ -9,7 +9,7 @@ namespace App\Library\Paginator\Adapter;
 
 use App\Library\Paginator\Query as PaginatorQuery;
 use Phalcon\Paginator\Adapter\QueryBuilder as PhQueryBuilder;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class QueryBuilder extends PhQueryBuilder
 {
@@ -29,7 +29,7 @@ class QueryBuilder extends PhQueryBuilder
      */
     protected array $properties = [];
 
-    public function paginate(): RepositoryInterface
+    public function paginate(): PagerRepoInterface
     {
         $pager = parent::paginate();
 

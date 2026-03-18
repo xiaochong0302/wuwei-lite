@@ -126,10 +126,10 @@ class OrderList extends Builder
     }
 
     /**
-     * @param string|array $itemInfo
+     * @param array|string $itemInfo
      * @return array
      */
-    protected function handleCourseInfo(string|array $itemInfo): array
+    protected function handleCourseInfo(array|string $itemInfo): array
     {
         if (!empty($itemInfo) && is_string($itemInfo)) {
             $itemInfo = json_decode($itemInfo, true);
@@ -140,10 +140,10 @@ class OrderList extends Builder
     }
 
     /**
-     * @param string|array $itemInfo
+     * @param array|string $itemInfo
      * @return mixed
      */
-    protected function handlePackageInfo(string|array $itemInfo): array
+    protected function handlePackageInfo(array|string $itemInfo): array
     {
         if (!empty($itemInfo) && is_string($itemInfo)) {
             $itemInfo = json_decode($itemInfo, true);
@@ -156,10 +156,10 @@ class OrderList extends Builder
     }
 
     /**
-     * @param string|array $itemInfo
+     * @param array|string $itemInfo
      * @return mixed
      */
-    protected function handleVipInfo(string|array $itemInfo)
+    protected function handleVipInfo(array|string $itemInfo)
     {
         if (!empty($itemInfo) && is_string($itemInfo)) {
             $itemInfo = json_decode($itemInfo, true);

@@ -28,8 +28,8 @@ class IndexController extends Controller
             return $this->response->redirect($location);
         }
 
-        $this->seo->setKeywords($this->siteInfo['keywords']);
-        $this->seo->setDescription($this->siteInfo['description']);
+        $this->seo->keywords = $this->siteInfo['keywords'];
+        $this->seo->description = $this->siteInfo['description'];
 
         $service = new IndexService();
 

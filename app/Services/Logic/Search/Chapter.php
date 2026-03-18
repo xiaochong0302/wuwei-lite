@@ -10,13 +10,13 @@ namespace App\Services\Logic\Search;
 use App\Library\Paginator\Adapter\XunSearch as XunSearchPaginator;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Services\Search\ChapterSearcher as LessonSearcherService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 use Phalcon\Support\HelperFactory;
 
 class Chapter extends Handler
 {
 
-    public function search(): RepositoryInterface
+    public function search(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -53,7 +53,7 @@ class Chapter extends Handler
         return $searcher->getRelatedQuery($query, $limit);
     }
 
-    protected function handleChapters(RepositoryInterface $pager): RepositoryInterface
+    protected function handleChapters(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

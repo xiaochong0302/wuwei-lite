@@ -20,7 +20,7 @@ class Role extends Repository
      * @param array $where
      * @return ResultsetInterface|Resultset|RoleModel[]
      */
-    public function findAll($where = [])
+    public function findAll(array $where = [])
     {
         $query = RoleModel::query();
 
@@ -37,7 +37,7 @@ class Role extends Repository
      * @param int $id
      * @return RoleModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return RoleModel::findFirst([
             'conditions' => 'id = :id:',
@@ -50,7 +50,7 @@ class Role extends Repository
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|RoleModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return RoleModel::query()
             ->columns($columns)
@@ -58,7 +58,7 @@ class Role extends Repository
             ->execute();
     }
 
-    public function countUsers($roleId)
+    public function countUsers(int $roleId): int
     {
         return UserModel::count([
             'conditions' => 'admin_role = :role_id:',

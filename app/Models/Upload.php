@@ -15,12 +15,12 @@ class Upload extends Model
     /**
      * 资源类型
      */
-    const TYPE_COVER_IMG = 1; // 封面图
-    const TYPE_CONTENT_IMG = 2; // 内容图
-    const TYPE_AVATAR_IMG = 3; // 头像
-    const TYPE_ICON_IMG = 4; // 图标
-    const TYPE_RESOURCE = 5; // 课件资源
-    const TYPE_MEDIA = 6; // 媒体文件
+    const int TYPE_COVER_IMG = 1; // 封面图
+    const int TYPE_CONTENT_IMG = 2; // 内容图
+    const int TYPE_AVATAR_IMG = 3; // 头像
+    const int TYPE_ICON_IMG = 4; // 图标
+    const int TYPE_RESOURCE = 5; // 课件资源
+    const int TYPE_MEDIA = 6; // 媒体文件
 
     /**
      * 主键编号

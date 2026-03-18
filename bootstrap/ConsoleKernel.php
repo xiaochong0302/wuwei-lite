@@ -113,14 +113,14 @@ class ConsoleKernel extends Kernel
         new ConsoleErrorHandler();
     }
 
-    protected function handleTaskName($name): string
+    protected function handleTaskName(string $name): string
     {
         $helper = new HelperFactory();
 
         return $helper->uncamelize($name);
     }
 
-    protected function handleActionName($name): string
+    protected function handleActionName(string $name): string
     {
         $helper = new HelperFactory();
 

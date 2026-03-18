@@ -409,8 +409,14 @@ $lang['course_sales_info'] = 'Sales Info';
 $lang['course_overview'] = 'Overview';
 $lang['course_resources'] = 'Resources';
 $lang['course_related'] = 'Related Courses';
+$lang['resource_list'] = 'Resource List';
+$lang['resource_name'] = 'Name';
+$lang['resource_type'] = 'Type';
+$lang['resource_size'] = 'Size';
+$lang['upload_resource'] = 'Upload Resource';
 $lang['hash_progress'] = 'Hash Progress';
 $lang['upload_progress'] = 'Upload Progress';
+$lang['no_related_resources'] = 'No Related Resources';
 
 $lang['cu_add_user'] = 'Add User';
 $lang['cu_search_user'] = 'Search User';

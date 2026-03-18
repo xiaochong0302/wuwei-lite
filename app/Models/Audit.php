@@ -57,7 +57,7 @@ class Audit extends Model
      *
      * @var array|string
      */
-    public string|array $req_data = '';
+    public array|string $req_data = '';
 
     /**
      * 创建时间

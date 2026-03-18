@@ -10,12 +10,12 @@ namespace App\Services\Logic\Vip;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\Course as CourseRepo;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseList extends LogicService
 {
 
-    public function handle(string $type): RepositoryInterface
+    public function handle(string $type): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -35,7 +35,7 @@ class CourseList extends LogicService
         return $this->handleCourses($pager);
     }
 
-    protected function handleCourses(RepositoryInterface $pager): RepositoryInterface
+    protected function handleCourses(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

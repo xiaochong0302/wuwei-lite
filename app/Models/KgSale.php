@@ -15,9 +15,9 @@ class KgSale
     /**
      * 物品类型
      */
-    const ITEM_COURSE = 1; // 课程服务
-    const ITEM_PACKAGE = 2; // 课程套餐
-    const ITEM_VIP = 3; // 会员套餐
+    const int ITEM_COURSE = 1; // 课程服务
+    const int ITEM_PACKAGE = 2; // 课程套餐
+    const int ITEM_VIP = 3; // 会员套餐
 
     public static function itemTypes(): array
     {

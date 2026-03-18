@@ -10,12 +10,12 @@ namespace App\Services\Logic\Vip;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\User as UserRepo;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class UserList extends LogicService
 {
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -35,7 +35,7 @@ class UserList extends LogicService
         return $this->handleUsers($pager);
     }
 
-    protected function handleUsers(RepositoryInterface $pager): RepositoryInterface
+    protected function handleUsers(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

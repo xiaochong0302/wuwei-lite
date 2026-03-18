@@ -18,7 +18,7 @@ use App\Repos\Account as AccountRepo;
 use App\Repos\Order as OrderRepo;
 use App\Repos\User as UserRepo;
 use App\Validators\Order as OrderValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Order extends Service
 {
@@ -41,7 +41,7 @@ class Order extends Service
         return OrderModel::paymentTypes();
     }
 
-    public function getOrders(): RepositoryInterface
+    public function getOrders(): PagerRepoInterface
     {
         $pageQuery = new PaginateQuery();
 
@@ -107,7 +107,7 @@ class Order extends Service
         return $validator->checkOrderById($id);
     }
 
-    protected function handleOrders(RepositoryInterface $pager): RepositoryInterface
+    protected function handleOrders(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

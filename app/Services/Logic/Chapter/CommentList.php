@@ -13,7 +13,7 @@ use App\Repos\Comment as CommentRepo;
 use App\Services\Logic\ChapterTrait;
 use App\Services\Logic\Comment\ListTrait;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CommentList extends LogicService
 {
@@ -21,7 +21,7 @@ class CommentList extends LogicService
     use ChapterTrait;
     use ListTrait;
 
-    public function handle(int $id): RepositoryInterface
+    public function handle(int $id): PagerRepoInterface
     {
         $chapter = $this->checkChapterCache($id);
 

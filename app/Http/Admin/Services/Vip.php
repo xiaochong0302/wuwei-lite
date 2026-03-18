@@ -11,12 +11,12 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Vip as VipModel;
 use App\Repos\Vip as VipRepo;
 use App\Validators\Vip as VipValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Vip extends Service
 {
 
-    public function getVips(): RepositoryInterface
+    public function getVips(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

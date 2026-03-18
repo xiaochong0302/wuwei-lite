@@ -30,12 +30,12 @@ class AppInfo
      */
     protected string $version = '1.0.0';
 
-    public function __get($name): string|null
+    public function __get($name): ?string
     {
         return $this->get($name);
     }
 
-    public function get($name): string|null
+    public function get($name): ?string
     {
         return $this->{$name} ?? null;
     }

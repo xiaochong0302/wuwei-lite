@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -17,63 +17,63 @@ use Phalcon\Di\Di;
 trait Auth
 {
 
-    public function getCurrentUser(bool $cache = false): UserModel
-    {
-        $authUser = $this->getAuthUser();
-
-        if (!$authUser) {
-            return $this->getGuestUser();
-        }
-
-        if (!$cache) {
-            $userRepo = new UserRepo();
-            $user = $userRepo->findById($authUser['id']);
-        } else {
-            $userCache = new UserCache();
-            $user = $userCache->get($authUser['id']);
-        }
-
-        return $user;
-    }
-
-    public function getLoginUser(bool $cache = false): UserModel
-    {
-        $authUser = $this->getAuthUser();
-
-        $validator = new AppValidator();
-
-        $validator->checkAuthUser($authUser['id']);
-
-        if (!$cache) {
-            $userRepo = new UserRepo();
-            $user = $userRepo->findById($authUser['id']);
-        } else {
-            $userCache = new UserCache();
-            $user = $userCache->get($authUser['id']);
-        }
-
-        return $user;
-    }
-
-    protected function getGuestUser(): UserModel
-    {
-        $user = new UserModel();
-
-        $user->id = 0;
-        $user->name = 'guest';
-        $user->avatar = kg_cos_user_avatar_url('');
-
-        return $user;
-    }
-
-    protected function getAuthUser(): ?array
+    protected function getCurrentUser(bool $cache = false): UserModel
     {
         /**
          * @var AuthService $auth
          */
         $auth = Di::getDefault()->get('auth');
 
-        return $auth->getAuthInfo();
+        $authInfo = $auth->getAuthInfo();
+
+        if (!$authInfo) {
+            return $this->getGuestUser();
+        }
+
+        if (!$cache) {
+            $userRepo = new UserRepo();
+            $user = $userRepo->findById($authInfo['id']);
+        } else {
+            $userCache = new UserCache();
+            $user = $userCache->get($authInfo['id']);
+        }
+
+        return $user;
+    }
+
+    protected function getLoginUser(bool $cache = false): UserModel
+    {
+        /**
+         * @var AuthService $auth
+         */
+        $auth = Di::getDefault()->get('auth');
+
+        $authInfo = $auth->getAuthInfo();
+
+        $validator = new AppValidator();
+
+        $validator->checkAuthUser($authInfo['id']);
+
+        if (!$cache) {
+            $userRepo = new UserRepo();
+            $user = $userRepo->findById($authInfo['id']);
+        } else {
+            $userCache = new UserCache();
+            $user = $userCache->get($authInfo['id']);
+        }
+
+        return $user;
+    }
+
+    private function getGuestUser(): UserModel
+    {
+        $user = new UserModel();
+
+        $user->id = 0;
+        $user->name = 'guest';
+        $user->avatar = kg_cos_user_avatar_url();
+
+        return $user;
     }
 
 }

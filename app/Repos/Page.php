@@ -9,10 +9,8 @@ namespace App\Repos;
 
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Page as PageModel;
-use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Page extends Repository
 {
@@ -22,9 +20,9 @@ class Page extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -71,43 +69,15 @@ class Page extends Repository
     }
 
     /**
-     * @param array $where
-     * @param string $sort
-     * @return ResultsetInterface|Resultset|PageModel[]
-     */
-    public function findAll($where = [], $sort = 'latest')
-    {
-        /**
-         * 一个偷懒的实现，适用于中小体量数据
-         */
-        $paginate = $this->paginate($where, $sort, 1, 10000);
-
-        return $paginate->getItems();
-    }
-
-    /**
      * @param int $id
      * @return PageModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return PageModel::findFirst([
             'conditions' => 'id = :id:',
             'bind' => ['id' => $id],
         ]);
-    }
-
-    /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|PageModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return PageModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
     }
 
 }

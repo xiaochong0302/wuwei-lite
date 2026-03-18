@@ -7,19 +7,20 @@
 
 namespace App\Services\Logic;
 
+use App\Models\Refund as RefundModel;
 use App\Validators\Refund as RefundValidator;
 
 trait RefundTrait
 {
 
-    protected function checkRefundById($id)
+    protected function checkRefundById(int $id): RefundModel
     {
         $validator = new RefundValidator();
 
         return $validator->checkRefundById($id);
     }
 
-    protected function checkRefundBySn($sn)
+    protected function checkRefundBySn(string $sn): RefundModel
     {
         $validator = new RefundValidator();
 

@@ -8,10 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
-    <meta name="keywords" content="{{ seo.getKeywords() }}">
-    <meta name="description" content="{{ seo.getDescription() }}">
+    <meta name="keywords" content="{{ seo.keywords }}">
+    <meta name="description" content="{{ seo.description }}">
     <meta name="csrf-token" content="{{ csrfToken.getToken() }}">
-    <title>{{ seo.getTitle() }}</title>
+    <title>{{ seo.title }}</title>
     {% if site_info.favicon %}
         {{ icon_link(site_info.favicon,false) }}
     {% else %}

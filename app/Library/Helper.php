@@ -489,11 +489,11 @@ function kg_cos_img_url(string $path, ?string $style = null): string
 /**
  * 获取用户头像URL
  *
- * @param string $path
+ * @param string|null $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_user_avatar_url(string $path, ?string $style = null): string
+function kg_cos_user_avatar_url(?string $path = null, ?string $style = null): string
 {
     $path = $path ?: kg_default_user_avatar_path();
 
@@ -503,11 +503,11 @@ function kg_cos_user_avatar_url(string $path, ?string $style = null): string
 /**
  * 获取课程封面URL
  *
- * @param string $path
+ * @param string|null $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_course_cover_url(string $path, ?string $style = null): string
+function kg_cos_course_cover_url(?string $path = null, ?string $style = null): string
 {
     $path = $path ?: kg_default_course_cover_path();
 
@@ -517,11 +517,11 @@ function kg_cos_course_cover_url(string $path, ?string $style = null): string
 /**
  * 获取套餐封面URL
  *
- * @param string $path
+ * @param string|null $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_package_cover_url(string $path, ?string $style = null)
+function kg_cos_package_cover_url(?string $path = null, ?string $style = null)
 {
     $path = $path ?: kg_default_package_cover_path();
 
@@ -531,11 +531,11 @@ function kg_cos_package_cover_url(string $path, ?string $style = null)
 /**
  * 获取轮播封面URL
  *
- * @param string $path
+ * @param string|null $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_slide_cover_url(string $path, ?string $style = null): string
+function kg_cos_slide_cover_url(?string $path = null, ?string $style = null): string
 {
     $path = $path ?: kg_default_course_cover_path();
 
@@ -545,11 +545,11 @@ function kg_cos_slide_cover_url(string $path, ?string $style = null): string
 /**
  * 获取会员封面URL
  *
- * @param string $path
+ * @param string|null $path
  * @param string|null $style
  * @return string
  */
-function kg_cos_vip_cover_url(string $path, ?string $style = null)
+function kg_cos_vip_cover_url(?string $path = null, ?string $style = null)
 {
     $path = $path ?: kg_default_vip_cover_path();
 

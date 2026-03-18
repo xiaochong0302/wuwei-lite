@@ -13,14 +13,14 @@ use App\Repos\Refund as RefundRepo;
 use App\Services\Logic\Service as LogicService;
 use App\Services\Logic\UserTrait;
 use App\Validators\Refund as RefundValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class RefundList extends LogicService
 {
 
     use UserTrait;
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $user = $this->getLoginUser();
 
@@ -48,7 +48,7 @@ class RefundList extends LogicService
         return $this->handleRefunds($pager);
     }
 
-    protected function handleRefunds(RepositoryInterface $pager): RepositoryInterface
+    protected function handleRefunds(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

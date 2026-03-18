@@ -10,7 +10,7 @@ namespace App\Repos;
 use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\CourseFavorite as CourseFavoriteModel;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseFavorite extends Repository
 {
@@ -20,9 +20,9 @@ class CourseFavorite extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -63,7 +63,7 @@ class CourseFavorite extends Repository
      * @param int $userId
      * @return CourseFavoriteModel|Row|null
      */
-    public function findCourseFavorite($courseId, $userId)
+    public function findCourseFavorite(int $courseId, int $userId)
     {
         return CourseFavoriteModel::findFirst([
             'conditions' => 'course_id = :course_id: AND user_id = :user_id:',

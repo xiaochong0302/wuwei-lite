@@ -13,13 +13,13 @@ class Sitemap
     /**
      * 更新频率
      */
-    const FREQ_ALWAYS = 'always';
-    const FREQ_HOURLY = 'hourly';
-    const FREQ_DAILY = 'daily';
-    const FREQ_WEEKLY = 'weekly';
-    const FREQ_MONTHLY = 'monthly';
-    const FREQ_YEARLY = 'yearly';
-    const FREQ_NEVER = 'never';
+    const string FREQ_ALWAYS = 'always';
+    const string FREQ_HOURLY = 'hourly';
+    const string FREQ_DAILY = 'daily';
+    const string FREQ_WEEKLY = 'weekly';
+    const string FREQ_MONTHLY = 'monthly';
+    const string FREQ_YEARLY = 'yearly';
+    const string FREQ_NEVER = 'never';
 
     /**
      * @var array
@@ -32,7 +32,7 @@ class Sitemap
      * @param string|null $changefreq 更新频率的单位
      * @param string|null $lastmod 日期格式 YYYY-MM-DD
      */
-    public function addItem(string $loc, float $priority = null, string $changefreq = null, string $lastmod = null)
+    public function addItem(string $loc, ?float $priority = null, ?string $changefreq = null, ?string $lastmod = null)
     {
         $this->items[] = array(
             'loc' => $loc,
@@ -46,7 +46,7 @@ class Sitemap
      * @param string|null $filename
      * @return mixed
      */
-    public function build(string $filename = null)
+    public function build(?string $filename = null)
     {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";

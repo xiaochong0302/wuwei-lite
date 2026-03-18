@@ -11,12 +11,12 @@ use App\Builders\FavoriteList as FavoriteListBuilder;
 use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\CourseFavorite as CourseFavoriteRepo;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class FavoriteList extends LogicService
 {
 
-    public function handle(): RepositoryInterface
+    public function handle(): PagerRepoInterface
     {
         $user = $this->getLoginUser();
 
@@ -38,7 +38,7 @@ class FavoriteList extends LogicService
         return $this->handleCourses($pager);
     }
 
-    protected function handleCourses(RepositoryInterface $pager): RepositoryInterface
+    protected function handleCourses(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

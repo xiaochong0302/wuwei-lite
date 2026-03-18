@@ -13,6 +13,7 @@
             <li class="layui-this">{{ locale._('course_basic_info') }}</li>
             <li>{{ locale._('course_sales_info') }}</li>
             <li>{{ locale._('course_overview') }}</li>
+            <li>{{ locale._('course_resources') }}</li>
             <li>{{ locale._('course_related') }}</li>
         </ul>
         <div class="layui-tabs-body">
@@ -26,6 +27,9 @@
                 {{ partial('course/edit_overview') }}
             </div>
             <div class="layui-tabs-item">
+                {{ partial('course/edit_resource') }}
+            </div>
+            <div class="layui-tabs-item">
                 {{ partial('course/edit_related') }}
             </div>
         </div>
@@ -36,15 +40,19 @@
 {% block link_css %}
 
     {{ css_link('lib/vditor/dist/index.css') }}
+    {{ css_link('lib/webuploader/webuploader.css') }}
 
 {% endblock %}
 
 {% block include_js %}
 
+    {{ js_include('lib/jquery.min.js') }}
     {{ js_include('lib/xm-select.js') }}
     {{ js_include('lib/vditor/dist/index.min.js') }}
+    {{ js_include('lib/webuploader/webuploader.min.js') }}
     {{ js_include('admin/js/vditor.js') }}
     {{ js_include('admin/js/cover.upload.js') }}
+    {{ js_include('admin/js/course.resource.js') }}
 
 {% endblock %}
 

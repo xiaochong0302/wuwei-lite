@@ -12,12 +12,12 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Course as CourseModel;
 use App\Repos\Learning as LearningRepo;
 use App\Validators\Course as CourseValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseLearning extends Service
 {
 
-    public function getLearnings(int $courseId): RepositoryInterface
+    public function getLearnings(int $courseId): PagerRepoInterface
     {
         $course = $this->findCourseOrFail($courseId);
 
@@ -45,7 +45,7 @@ class CourseLearning extends Service
         return $validator->checkCourse($courseId);
     }
 
-    protected function handleLearnings(RepositoryInterface $pager): RepositoryInterface
+    protected function handleLearnings(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

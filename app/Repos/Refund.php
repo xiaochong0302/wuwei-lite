@@ -14,7 +14,7 @@ use App\Models\Task as TaskModel;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Refund extends Repository
 {
@@ -24,9 +24,9 @@ class Refund extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -80,7 +80,7 @@ class Refund extends Repository
      * @param int $id
      * @return RefundModel|Model|bool
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return RefundModel::findFirst([
             'conditions' => 'id = :id:',
@@ -92,7 +92,7 @@ class Refund extends Repository
      * @param string $sn
      * @return RefundModel|Model|bool
      */
-    public function findBySn($sn)
+    public function findBySn(string $sn)
     {
         return RefundModel::findFirst([
             'conditions' => 'sn = :sn:',
@@ -101,23 +101,10 @@ class Refund extends Repository
     }
 
     /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|RefundModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return RefundModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
-    }
-
-    /**
      * @param int $refundId
      * @return ResultsetInterface|Resultset|RefundStatusModel[]
      */
-    public function findStatusHistory($refundId)
+    public function findStatusHistory(int $refundId)
     {
         return RefundStatusModel::query()
             ->where('refund_id = :refund_id:', ['refund_id' => $refundId])
@@ -128,7 +115,7 @@ class Refund extends Repository
      * @param int $refundId
      * @return TaskModel|Model|bool
      */
-    public function findLastRefundTask($refundId)
+    public function findLastRefundTask(int $refundId)
     {
         return TaskModel::findFirst([
             'conditions' => 'item_id = ?1 AND item_type = ?2',

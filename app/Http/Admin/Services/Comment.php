@@ -14,7 +14,7 @@ use App\Models\Comment as CommentModel;
 use App\Repos\Comment as CommentRepo;
 use App\Services\Logic\Comment\CountTrait;
 use App\Validators\Comment as CommentValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Comment extends Service
 {
@@ -27,7 +27,7 @@ class Comment extends Service
         return CommentModel::publishTypes();
     }
 
-    public function getComments(): RepositoryInterface
+    public function getComments(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -201,7 +201,7 @@ class Comment extends Service
         return $validator->checkComment($id);
     }
 
-    protected function handleComments(RepositoryInterface $pager): RepositoryInterface
+    protected function handleComments(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

@@ -15,25 +15,31 @@ abstract class Migration
 
     abstract public function run(): void;
 
-    protected function saveSettings(array $settings): void
+    protected function saveSettings(string $section, array $settings): void
     {
-        foreach ($settings as $setting) {
-            $this->saveSetting($setting);
+        foreach ($settings as $key => $value) {
+            $this->saveSetting($section, $key, $value);
         }
     }
 
-    protected function saveSetting(array $setting): void
+    protected function saveSetting(string $section, string $itemKey, array|string $itemValue): void
     {
+        if (is_array($itemValue)) {
+            $itemValue = json_encode($itemValue);
+        }
+
         $settingRepo = new SettingRepo();
 
-        $item = $settingRepo->findItem($setting['section'], $setting['item_key']);
+        $item = $settingRepo->findItem($section, $itemKey);
 
         if (!$item) {
-            $item = new SettingModel();
-            $item->assign($setting);
-            $item->create();
+            $newItem = new SettingModel();
+            $newItem->section = $section;
+            $newItem->item_key = $itemKey;
+            $newItem->item_value = $itemValue;
+            $newItem->create();
         } else {
-            $item->assign($setting);
+            $item->item_value = $itemValue;
             $item->update();
         }
     }

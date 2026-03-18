@@ -7,33 +7,15 @@
 
 namespace App\Repos;
 
-use App\Models\Comment as CommentModel;
 use App\Models\KgSale;
 use App\Models\Order as OrderModel;
 use App\Models\OrderStatus as OrderStatusModel;
-use App\Models\Review as ReviewModel;
 use App\Models\User as UserModel;
 
 class Stat extends Repository
 {
 
-    public function countPendingReviews()
-    {
-        return (int)ReviewModel::count([
-            'conditions' => 'published = :published: AND deleted = 0',
-            'bind' => ['published' => ReviewModel::PUBLISH_PENDING],
-        ]);
-    }
-
-    public function countPendingComments()
-    {
-        return (int)CommentModel::count([
-            'conditions' => 'published = :published: AND deleted = 0',
-            'bind' => ['published' => CommentModel::PUBLISH_PENDING],
-        ]);
-    }
-
-    public function countDailyRegisteredUsers($date)
+    public function countDailyRegisteredUsers(string $date): int
     {
         $startTime = strtotime($date);
 
@@ -45,7 +27,7 @@ class Stat extends Repository
         ]);
     }
 
-    public function countDailyVipUsers($date)
+    public function countDailyVipUsers(string $date): int
     {
         $startTime = strtotime($date);
 
@@ -62,7 +44,7 @@ class Stat extends Repository
         ]);
     }
 
-    public function sumDailySales($date)
+    public function sumDailySales(string $date): float
     {
         $sql = "SELECT sum(o.amount) AS total_amount FROM %s AS os JOIN %s AS o ON os.order_id = o.id WHERE os.status = ?1 AND o.create_time BETWEEN ?2 AND ?3";
 

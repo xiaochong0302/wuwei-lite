@@ -18,9 +18,9 @@ class Chapter extends Model
     /**
      * 模型类别
      */
-    const MODEL_VIDEO = 1; // 视频
-    const MODEL_LIVE = 2; // 直播
-    const MODEL_ARTICLE = 3; // 图文
+    const int MODEL_VIDEO = 1; // 视频
+    const int MODEL_LIVE = 2; // 直播
+    const int MODEL_ARTICLE = 3; // 图文
 
     /**
      * @var array
@@ -116,7 +116,7 @@ class Chapter extends Model
      *
      * @var array|string
      */
-    public string|array $attrs = [];
+    public array|string $attrs = [];
 
     /**
      * 发布标识

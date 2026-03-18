@@ -9,7 +9,6 @@ namespace App\Repos;
 
 use App\Models\CommentLike as CommentLikeModel;
 use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
 
 class CommentLike extends Repository
@@ -20,7 +19,7 @@ class CommentLike extends Repository
      * @param int $userId
      * @return CommentLikeModel|Row|null
      */
-    public function findCommentLike($commentId, $userId)
+    public function findCommentLike(int $commentId, int $userId)
     {
         return CommentLikeModel::findFirst([
             'conditions' => 'comment_id = :comment_id: AND user_id = :user_id:',
@@ -32,14 +31,14 @@ class CommentLike extends Repository
      * @param int $userId
      * @return array
      */
-    public function findUserLikedCommentIds($userId)
+    public function findUserLikedCommentIds(int $userId)
     {
         $result = [];
 
         /**
          * @var Resultset $rows
          */
-        $rows =  CommentLikeModel::query()
+        $rows = CommentLikeModel::query()
             ->columns(['comment_id'])
             ->where('user_id = :user_id:', ['user_id' => $userId])
             ->andWhere('deleted = 0')

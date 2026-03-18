@@ -8,12 +8,12 @@
 namespace App\Services\Logic\Search;
 
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 abstract class Handler extends LogicService
 {
 
-    abstract function search(): RepositoryInterface;
+    abstract function search(): PagerRepoInterface;
 
     abstract function getHotQuery(int $limit, string $type): array;
 

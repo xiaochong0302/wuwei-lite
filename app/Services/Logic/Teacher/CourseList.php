@@ -12,14 +12,14 @@ use App\Repos\Course as CourseRepo;
 use App\Services\Logic\Course\CourseList as CourseListService;
 use App\Services\Logic\Service as LogicService;
 use App\Services\Logic\UserTrait;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class CourseList extends LogicService
 {
 
     use UserTrait;
 
-    public function handle(int $id): RepositoryInterface
+    public function handle(int $id): PagerRepoInterface
     {
         $user = $this->checkUserCache($id);
 
@@ -39,7 +39,7 @@ class CourseList extends LogicService
         return $this->handleCourses($pager);
     }
 
-    protected function handleCourses(RepositoryInterface $pager): RepositoryInterface
+    protected function handleCourses(PagerRepoInterface $pager): PagerRepoInterface
     {
         $service = new CourseListService();
 

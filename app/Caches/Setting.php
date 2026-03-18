@@ -17,11 +17,6 @@ class Setting extends Cache
      */
     protected int $lifetime = 360 * 86400;
 
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
-
     public function getKey($id = null): string
     {
         return "setting-{$id}";
@@ -31,7 +26,7 @@ class Setting extends Cache
     {
         $settingRepo = new SettingRepo();
 
-        $items = $settingRepo->findAll(['section' => $id]);
+        $items = $settingRepo->findBySection($id);
 
         if ($items->count() == 0) {
             return [];

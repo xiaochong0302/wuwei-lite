@@ -13,8 +13,6 @@ use Phalcon\Di\Injectable;
 
 class Service extends Injectable
 {
-
     use AuthTrait;
     use ServiceTrait;
-
 }

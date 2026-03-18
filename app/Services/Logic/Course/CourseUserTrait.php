@@ -79,44 +79,6 @@ trait CourseUserTrait
         }
     }
 
-    protected function assignUserCourse(CourseModel $course, UserModel $user, int $expiryTime, int $joinType): void
-    {
-        if ($this->allowFreeAccess($course, $user)) return;
-
-        $courseUserRepo = new CourseUserRepo();
-
-        $relation = $courseUserRepo->findCourseUser($course->id, $user->id);
-
-        if (!$relation) {
-
-            $this->createCourseUser($course, $user, $expiryTime, $joinType);
-
-        } else {
-
-            switch ($relation->join_type) {
-                case CourseUserModel::JOIN_TYPE_FREE:
-                case CourseUserModel::JOIN_TYPE_TRIAL:
-                case CourseUserModel::JOIN_TYPE_VIP:
-                case CourseUserModel::JOIN_TYPE_TEACHER:
-                    $this->createCourseUser($course, $user, $expiryTime, $joinType);
-                    $this->deleteCourseUser($relation);
-                    break;
-                case CourseUserModel::JOIN_TYPE_MANUAL:
-                    $relation->expiry_time = $expiryTime;
-                    $relation->update();
-                    break;
-                case CourseUserModel::JOIN_TYPE_PURCHASE:
-                    if ($relation->expiry_time < time()) {
-                        $this->createCourseUser($course, $user, $expiryTime, $joinType);
-                        $this->deleteCourseUser($relation);
-                    }
-                    break;
-            }
-        }
-
-        $this->recountCourseUsers($course);
-    }
-
     protected function createCourseUser(CourseModel $course, UserModel $user, int $expiryTime, int $joinType): CourseUserModel
     {
         $courseUser = new CourseUserModel();

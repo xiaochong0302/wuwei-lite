@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -18,6 +18,11 @@ abstract class Cache extends Injectable
      */
     protected CacheInterface $cache;
 
+    /**
+     * @var int
+     */
+    protected int $lifetime;
+
     public function __construct()
     {
         $this->cache = $this->getDI()->getShared('cache');
@@ -26,14 +31,13 @@ abstract class Cache extends Injectable
     /**
      * 获取缓存内容
      */
-    public function get(string|int $id = null): mixed
+    public function get($id = null): mixed
     {
         $key = $this->getKey($id);
 
         if (!$this->cache->has($key)) {
             $content = $this->getContent($id);
-            $lifetime = $this->getLifetime();
-            $this->cache->set($key, $content, $lifetime);
+            $this->cache->set($key, $content, $this->lifetime);
         } else {
             $content = $this->cache->get($key);
         }
@@ -44,7 +48,7 @@ abstract class Cache extends Injectable
     /**
      * 删除缓存内容
      */
-    public function delete(string|int $id = null): bool
+    public function delete($id = null): bool
     {
         $key = $this->getKey($id);
 
@@ -54,7 +58,7 @@ abstract class Cache extends Injectable
     /**
      * 重建缓存内容
      */
-    public function rebuild(string|int $id = null): mixed
+    public function rebuild($id = null): mixed
     {
         $this->delete($id);
 
@@ -62,18 +66,13 @@ abstract class Cache extends Injectable
     }
 
     /**
-     * 获取缓存有效期
-     */
-    abstract public function getLifetime(): int;
-
-    /**
      * 获取键值
      */
-    abstract public function getKey(string|int $id = null): string;
+    abstract public function getKey($id = null): string;
 
     /**
      * 获取原始内容
      */
-    abstract public function getContent(string|int $id = null): mixed;
+    abstract public function getContent($id = null): mixed;
 
 }

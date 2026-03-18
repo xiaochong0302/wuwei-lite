@@ -16,7 +16,7 @@ use App\Repos\Course as CourseRepo;
 use App\Repos\Review as ReviewRepo;
 use App\Services\CourseStat as CourseStatService;
 use App\Validators\Review as ReviewValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Review extends Service
 {
@@ -28,7 +28,7 @@ class Review extends Service
         return ReviewModel::publishTypes();
     }
 
-    public function getReviews(): RepositoryInterface
+    public function getReviews(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 
@@ -208,7 +208,7 @@ class Review extends Service
         $service->updateRating($course->id);
     }
 
-    protected function handleReviews(RepositoryInterface $pager): RepositoryInterface
+    protected function handleReviews(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() > 0) {
 

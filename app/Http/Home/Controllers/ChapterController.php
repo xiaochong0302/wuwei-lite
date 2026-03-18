@@ -71,8 +71,8 @@ class ChapterController extends Controller
         $title = $this->locale->query('page_lesson_x', ['x' => $chapter['title']]);
 
         $this->seo->prependTitle($title);
-        $this->seo->setKeywords($chapter['keywords']);
-        $this->seo->setDescription($chapter['summary']);
+        $this->seo->keywords = $chapter['keywords'];
+        $this->seo->description = $chapter['summary'];
 
         $this->view->setVar('course', $course);
         $this->view->setVar('chapter', $chapter);

@@ -7,30 +7,22 @@
 
 namespace App\Http\Home\Controllers;
 
-use App\Caches\NavTreeList as NavCache;
-use App\Library\AppInfo as AppInfo;
+use App\Http\Home\Services\Common as CommonService;
 use App\Library\Seo as Seo;
 use App\Models\User as UserModel;
-use App\Services\Auth\Home as HomeAuth;
-use App\Services\Service as AppService;
+use App\Traits\Auth as AuthTrait;
 use App\Traits\Client as ClientTrait;
 use App\Traits\Response as ResponseTrait;
 use App\Traits\Security as SecurityTrait;
-use Phalcon\Config\Config;
 use Phalcon\Mvc\Dispatcher;
 
 class Controller extends \Phalcon\Mvc\Controller
 {
 
-    /**
-     * @var array
-     */
-    protected array $navs;
-
-    /**
-     * @var array
-     */
-    protected array $languages;
+    use ResponseTrait;
+    use SecurityTrait;
+    use ClientTrait;
+    use AuthTrait;
 
     /**
      * @var array
@@ -38,61 +30,20 @@ class Controller extends \Phalcon\Mvc\Controller
     protected array $siteInfo;
 
     /**
-     * @var array
-     */
-    protected array $contactInfo;
-
-    /**
-     * @var array
-     */
-    protected array $jsLocale;
-
-    /**
      * @var Seo
      */
     protected Seo $seo;
 
     /**
-     * @var AppInfo
+     * @var UserModel
      */
-    protected AppInfo $appInfo;
-
-    /**
-     * @var UserModel|null
-     */
-    protected ?UserModel $authUser;
-
-    use ResponseTrait;
-    use SecurityTrait;
-    use ClientTrait;
-
-    public function initialize()
-    {
-        $this->eventsManager->fire('Site:afterView', $this, $this->authUser);
-
-        $this->seo = $this->getSeo();
-        $this->navs = $this->getNavs();
-        $this->languages = $this->getLanguages();
-        $this->appInfo = $this->getAppInfo();
-        $this->contactInfo = $this->getContactInfo();
-        $this->jsLocale = $this->getJsLocale();
-
-        $this->seo->setTitle($this->siteInfo['title']);
-
-        $this->view->setVar('seo', $this->seo);
-        $this->view->setVar('navs', $this->navs);
-        $this->view->setVar('languages', $this->languages);
-        $this->view->setVar('app_info', $this->appInfo);
-        $this->view->setVar('site_info', $this->siteInfo);
-        $this->view->setVar('contact_info', $this->contactInfo);
-        $this->view->setVar('auth_user', $this->authUser);
-        $this->view->setVar('js_locale', $this->jsLocale);
-    }
+    protected UserModel $authUser;
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-        $this->siteInfo = $this->getSiteInfo();
-        $this->authUser = $this->getAuthUser();
+        $commonService = new CommonService();
+
+        $this->siteInfo = $commonService->getSiteInfo();
 
         if ($this->siteInfo['status'] == 'offline') {
             $dispatcher->forward([
@@ -102,6 +53,8 @@ class Controller extends \Phalcon\Mvc\Controller
             return false;
         }
 
+        $this->authUser = $this->getCurrentUser(true);
+
         if ($this->isNotSafeRequest()) {
             $this->checkHttpReferer();
             $this->checkCsrfToken();
@@ -110,55 +63,30 @@ class Controller extends \Phalcon\Mvc\Controller
         return true;
     }
 
-    protected function getNavs(): array
+    public function initialize()
     {
-        $cache = new NavCache();
+        $this->eventsManager->fire('Site:afterView', $this, $this->authUser);
 
-        return $cache->get();
-    }
+        $commonService = new CommonService();
 
-    protected function getSiteInfo(): array
-    {
-        return $this->getSettings('site');
-    }
+        $navs = $commonService->getNavs();
+        $appInfo = $commonService->getAppInfo();
+        $contactInfo = $commonService->getContactInfo();
 
-    protected function getContactInfo(): array
-    {
-        return $this->getSettings('contact');
-    }
+        $languages = $this->getLanguages();
+        $jsLocale = $this->getJsLocale();
 
-    protected function getSettings(string $section): array
-    {
-        $appService = new AppService();
+        $this->seo = $commonService->getSeo();
 
-        return $appService->getSettings($section);
-    }
+        $this->seo->title = $this->siteInfo['title'];
 
-    protected function getAuthUser(bool $cache = true): ?UserModel
-    {
-        /**
-         * @var HomeAuth $auth
-         */
-        $auth = $this->getDI()->get('auth');
-
-        return $auth->getCurrentUser($cache);
-    }
-
-    protected function getSeo(): Seo
-    {
-        return new Seo();
-    }
-
-    protected function getAppInfo(): AppInfo
-    {
-        return new AppInfo();
-    }
-
-    protected function getConfig(): Config
-    {
-        $appService = new AppService();
-
-        return $appService->getConfig();
+        $this->view->setVar('site_info', $this->siteInfo);
+        $this->view->setVar('auth_user', $this->authUser);
+        $this->view->setVar('navs', $navs);
+        $this->view->setVar('languages', $languages);
+        $this->view->setVar('js_locale', $jsLocale);
+        $this->view->setVar('app_info', $appInfo);
+        $this->view->setVar('contact_info', $contactInfo);
     }
 
 }

@@ -18,7 +18,7 @@ class ChapterLike extends Repository
      * @param int $userId
      * @return ChapterLikeModel|Row|null
      */
-    public function findChapterLike($chapterId, $userId)
+    public function findChapterLike(int $chapterId, int $userId)
     {
         return ChapterLikeModel::findFirst([
             'conditions' => 'chapter_id = :chapter_id: AND user_id = :user_id:',

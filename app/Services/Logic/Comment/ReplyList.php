@@ -12,7 +12,7 @@ use App\Models\Comment as CommentModel;
 use App\Repos\Comment as CommentRepo;
 use App\Services\Logic\CommentTrait;
 use App\Services\Logic\Service as LogicService;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class ReplyList extends LogicService
 {
@@ -20,7 +20,7 @@ class ReplyList extends LogicService
     use CommentTrait;
     use ListTrait;
 
-    public function handle(int $id): RepositoryInterface
+    public function handle(int $id): PagerRepoInterface
     {
         $comment = $this->checkComment($id);
 

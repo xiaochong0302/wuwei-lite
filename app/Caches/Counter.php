@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -18,12 +18,17 @@ abstract class Counter extends Injectable
      */
     protected Redis $redis;
 
+    /**
+     * @var int
+     */
+    protected int $lifetime = 86400;
+
     public function __construct()
     {
         $this->redis = $this->getDI()->getShared('redis');
     }
 
-    public function get(string|int $id): mixed
+    public function get($id = null): mixed
     {
         $key = $this->getKey($id);
 
@@ -32,23 +37,22 @@ abstract class Counter extends Injectable
         if (!$this->redis->exists($key)) {
 
             $content = $this->getContent($id);
-            $lifetime = $this->getLifetime();
 
             $this->redis->hMSet($key, $content);
-            $this->redis->expire($key, $lifetime);
+            $this->redis->expire($key, $this->lifetime);
         }
 
         return $content;
     }
 
-    public function delete(string|int $id = null): int
+    public function delete($id = null): int
     {
         $key = $this->getKey($id);
 
         return $this->redis->del($key);
     }
 
-    public function rebuild(string|int $id = null): mixed
+    public function rebuild($id = null): mixed
     {
         $this->delete($id);
 
@@ -96,26 +100,13 @@ abstract class Counter extends Injectable
     }
 
     /**
-     * 获取缓存有效期
-     *
-     * @return int
-     */
-    abstract public function getLifetime(): int;
-
-    /**
      * 获取键值
-     *
-     * @param mixed $id
-     * @return string
      */
-    abstract public function getKey(string|int $id = null): string;
+    abstract public function getKey($id = null): string;
 
     /**
      * 获取原始内容
-     *
-     * @param mixed $id
-     * @return mixed
      */
-    abstract public function getContent(string|int $id = null): mixed;
+    abstract public function getContent($id = null): mixed;
 
 }

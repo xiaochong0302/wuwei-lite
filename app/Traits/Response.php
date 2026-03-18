@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -14,7 +14,7 @@ use App\Library\Http\Response as HttpResponse;
 use App\Plugins\LocaleError as LocaleErrorPlugin;
 use Phalcon\Config\Config;
 use Phalcon\Di\Di;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 trait Response
 {
@@ -108,7 +108,7 @@ trait Response
         return $response;
     }
 
-    protected function jsonPaginate(RepositoryInterface $paginate): HttpResponse
+    protected function jsonPaginate(PagerRepoInterface $paginate): HttpResponse
     {
         $pager = [
             'items' => $paginate->getItems(),

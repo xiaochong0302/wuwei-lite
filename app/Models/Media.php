@@ -13,18 +13,18 @@ class Media extends Model
     /**
      * 转码模式
      */
-    const TRANS_MODE_STANDARD = 'standard'; // 标准转码
-    const TRANS_MODE_ENCRYPT = 'encrypt'; // 加密转码
-    const TRANS_MODE_ORIGIN = 'origin'; // 暂不转码
+    const string TRANS_MODE_STANDARD = 'standard'; // 标准转码
+    const string TRANS_MODE_ENCRYPT = 'encrypt'; // 加密转码
+    const string TRANS_MODE_ORIGIN = 'origin'; // 暂不转码
 
     /**
      * 转码状态
      */
-    const TRANS_STATUS_PENDING = 1; // 待启动
-    const TRANS_STATUS_CREATED = 2; // 已创建
-    const TRANS_STATUS_PROCESSING = 3; // 转码中
-    const TRANS_STATUS_FINISHED = 4; // 已完成
-    const TRANS_STATUS_FAILED = 5; // 已失败
+    const int TRANS_STATUS_PENDING = 1; // 待启动
+    const int TRANS_STATUS_CREATED = 2; // 已创建
+    const int TRANS_STATUS_PROCESSING = 3; // 转码中
+    const int TRANS_STATUS_FINISHED = 4; // 已完成
+    const int TRANS_STATUS_FAILED = 5; // 已失败
 
     /**
      * 主键编号
@@ -45,21 +45,21 @@ class Media extends Model
      *
      * @var array|string
      */
-    public string|array $file_origin = [];
+    public array|string $file_origin = [];
 
     /**
      * 常规转码
      *
      * @var array|string
      */
-    public string|array $file_standard = [];
+    public array|string $file_standard = [];
 
     /**
      * 加密转码
      *
      * @var array|string
      */
-    public string|array $file_encrypt = [];
+    public array|string $file_encrypt = [];
 
     /**
      * 常规转码状态

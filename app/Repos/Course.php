@@ -11,7 +11,6 @@ use App\Library\Paginator\Adapter\QueryBuilder as PagerQueryBuilder;
 use App\Models\Chapter as ChapterModel;
 use App\Models\ChapterUser as ChapterUserModel;
 use App\Models\Course as CourseModel;
-use App\Models\CourseFavorite as CourseFavoriteModel;
 use App\Models\CoursePackage as CoursePackageModel;
 use App\Models\CourseRelated as CourseRelatedModel;
 use App\Models\CourseUser as CourseUserModel;
@@ -21,7 +20,7 @@ use App\Models\Review as ReviewModel;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Course extends Repository
 {
@@ -31,9 +30,9 @@ class Course extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -135,7 +134,7 @@ class Course extends Repository
      * @param string $sort
      * @return ResultsetInterface|Resultset|CourseModel[]
      */
-    public function findAll($where = [], $sort = 'latest')
+    public function findAll(array $where = [], string $sort = 'latest')
     {
         /**
          * 一个偷懒的实现，适用于中小体量数据
@@ -149,7 +148,7 @@ class Course extends Repository
      * @param int $id
      * @return CourseModel|Row|bool
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return CourseModel::findFirst([
             'conditions' => 'id = :id:',
@@ -161,7 +160,7 @@ class Course extends Repository
      * @param string $title
      * @return CourseModel|Row|bool
      */
-    public function findByTitle($title)
+    public function findByTitle(string $title)
     {
         return CourseModel::findFirst([
             'conditions' => 'title = :title:',
@@ -175,7 +174,7 @@ class Course extends Repository
      * @param array|string $columns
      * @return ResultsetInterface|Resultset|CourseModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return CourseModel::query()
             ->columns($columns)
@@ -187,19 +186,7 @@ class Course extends Repository
      * @param int $courseId
      * @return ResultsetInterface|Resultset|ChapterModel[]
      */
-    public function findChapters($courseId)
-    {
-        return ChapterModel::query()
-            ->where('course_id = :course_id:', ['course_id' => $courseId])
-            ->andWhere('deleted = 0')
-            ->execute();
-    }
-
-    /**
-     * @param int $courseId
-     * @return ResultsetInterface|Resultset|ChapterModel[]
-     */
-    public function findLessons($courseId)
+    public function findLessons(int $courseId)
     {
         return ChapterModel::query()
             ->where('course_id = :course_id:', ['course_id' => $courseId])
@@ -212,7 +199,7 @@ class Course extends Repository
      * @param int $courseId
      * @return ResultsetInterface|Resultset|ReviewModel[]
      */
-    public function findReviews($courseId)
+    public function findReviews(int $courseId)
     {
         return ReviewModel::query()
             ->where('course_id = :course_id:', ['course_id' => $courseId])
@@ -224,7 +211,7 @@ class Course extends Repository
      * @param int $courseId
      * @return ResultsetInterface|Resultset|ResourceModel[]
      */
-    public function findResources($courseId)
+    public function findResources(int $courseId)
     {
         return ResourceModel::query()
             ->where('course_id = :course_id:', ['course_id' => $courseId])
@@ -235,7 +222,7 @@ class Course extends Repository
      * @param int $courseId
      * @return ResultsetInterface|Resultset|PackageModel[]
      */
-    public function findPackages($courseId)
+    public function findPackages(int $courseId)
     {
         return $this->modelsManager->createBuilder()
             ->columns('p.*')
@@ -251,7 +238,7 @@ class Course extends Repository
      * @param int $courseId
      * @return ResultsetInterface|Resultset|CourseModel[]
      */
-    public function findRelatedCourses($courseId)
+    public function findRelatedCourses(int $courseId)
     {
         return $this->modelsManager->createBuilder()
             ->columns('c.*')
@@ -268,7 +255,7 @@ class Course extends Repository
      * @param int $userId
      * @return ResultsetInterface|Resultset|ChapterUserModel[]
      */
-    public function findUserLearnings($courseId, $userId)
+    public function findUserLearnings(int $courseId, int $userId)
     {
         return ChapterUserModel::query()
             ->where('course_id = :course_id:', ['course_id' => $courseId])
@@ -282,7 +269,7 @@ class Course extends Repository
      * @param int $userId
      * @return ChapterUserModel|Row|bool
      */
-    public function findLastChapterUser($courseId, $userId)
+    public function findLastChapterUser(int $courseId, int $userId)
     {
         return ChapterUserModel::findFirst([
             'conditions' => 'course_id = ?1 AND user_id = ?2',
@@ -291,7 +278,7 @@ class Course extends Repository
         ]);
     }
 
-    public function countPackages($courseId)
+    public function countPackages(int $courseId): int
     {
         return $this->findPackages($courseId)->count();
     }
@@ -299,7 +286,7 @@ class Course extends Repository
     /**
      * @return int
      */
-    public function countCourses()
+    public function countCourses(): int
     {
         return (int)CourseModel::count([
             'conditions' => 'published = 1 AND deleted = 0',
@@ -310,7 +297,7 @@ class Course extends Repository
      * @param int $courseId
      * @return int
      */
-    public function countLessons($courseId)
+    public function countLessons(int $courseId): int
     {
         return (int)ChapterModel::count([
             'conditions' => 'course_id = :course_id: AND parent_id > 0 AND deleted = 0',
@@ -322,19 +309,7 @@ class Course extends Repository
      * @param int $courseId
      * @return int
      */
-    public function countResources($courseId)
-    {
-        return (int)ResourceModel::count([
-            'conditions' => 'course_id = :course_id:',
-            'bind' => ['course_id' => $courseId],
-        ]);
-    }
-
-    /**
-     * @param int $courseId
-     * @return int
-     */
-    public function countUsers($courseId)
+    public function countUsers(int $courseId): int
     {
         return (int)CourseUserModel::count([
             'conditions' => 'course_id = :course_id: AND deleted = 0',
@@ -346,7 +321,7 @@ class Course extends Repository
      * @param int $courseId
      * @return int
      */
-    public function countReviews($courseId)
+    public function countReviews(int $courseId): int
     {
         return (int)ReviewModel::count([
             'conditions' => 'course_id = ?1 AND published = ?2 AND deleted = 0',
@@ -356,23 +331,11 @@ class Course extends Repository
 
     /**
      * @param int $courseId
-     * @return int
+     * @return float
      */
-    public function countFavorites($courseId)
+    public function averageRating(int $courseId): float
     {
-        return (int)CourseFavoriteModel::count([
-            'conditions' => 'course_id = :course_id: AND deleted = 0',
-            'bind' => ['course_id' => $courseId],
-        ]);
-    }
-
-    /**
-     * @param int $courseId
-     * @return int
-     */
-    public function averageRating($courseId)
-    {
-        return (int)ReviewModel::average([
+        return (float)ReviewModel::average([
             'column' => 'rating',
             'conditions' => 'course_id = ?1 AND published = ?2 AND deleted = 0',
             'bind' => [1 => $courseId, 2 => ReviewModel::PUBLISH_APPROVED],

@@ -14,7 +14,7 @@ use App\Models\Package as PackageModel;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Resultset;
 use Phalcon\Mvc\Model\ResultsetInterface;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Package extends Repository
 {
@@ -24,9 +24,9 @@ class Package extends Repository
      * @param string $sort
      * @param int $page
      * @param int $limit
-     * @return RepositoryInterface
+     * @return PagerRepoInterface;
      */
-    public function paginate($where = [], $sort = 'latest', $page = 1, $limit = 15)
+    public function paginate(array $where = [], string $sort = 'latest', int $page = 1, int $limit = 15): PagerRepoInterface
     {
         $builder = $this->modelsManager->createBuilder();
 
@@ -73,25 +73,10 @@ class Package extends Repository
     }
 
     /**
-     * @param array $where
-     * @param string $sort
-     * @return ResultsetInterface|Resultset|PackageModel[]
-     */
-    public function findAll($where = [], $sort = 'latest')
-    {
-        /**
-         * 一个偷懒的实现，适用于中小体量数据
-         */
-        $paginate = $this->paginate($where, $sort, 1, 10000);
-
-        return $paginate->getItems();
-    }
-
-    /**
      * @param int $id
      * @return PackageModel|Model|bool
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return PackageModel::findFirst([
             'conditions' => 'id = :id:',
@@ -100,23 +85,10 @@ class Package extends Repository
     }
 
     /**
-     * @param array $ids
-     * @param array|string $columns
-     * @return ResultsetInterface|Resultset|PackageModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return PackageModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
-    }
-
-    /**
-     * @param string $packageId
+     * @param int $packageId
      * @return ResultsetInterface|Resultset|CourseModel[]
      */
-    public function findCourses($packageId)
+    public function findCourses(int $packageId)
     {
         return $this->modelsManager->createBuilder()
             ->columns('c.*')
@@ -129,14 +101,14 @@ class Package extends Repository
             ->execute();
     }
 
-    public function countPackages()
+    public function countPackages(): int
     {
         return (int)PackageModel::count([
             'conditions' => 'published = 1 AND deleted = 0',
         ]);
     }
 
-    public function countCourses($packageId)
+    public function countCourses(int $packageId): int
     {
         return (int)CoursePackageModel::count([
             'conditions' => 'package_id = :package_id:',

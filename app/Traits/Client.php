@@ -1,12 +1,13 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
 namespace App\Traits;
 
+use App\Library\GeoIp;
 use App\Library\Language;
 use App\Models\KgClient as KgClientModel;
 use Phalcon\Di\Di;
@@ -18,11 +19,32 @@ use WhichBrowser\Parser as BrowserParser;
 trait Client
 {
 
-    public function getLanguages(): array
+    protected function getLanguages(): array
     {
         $obj = new Language();
 
         return $obj->getLanguages();
+    }
+
+    protected function getJsLocale(): array
+    {
+        /**
+         * @var TranslateAdapter $locale
+         */
+        $locale = Di::getDefault()->get('locale');
+
+        $helper = new HelperFactory();
+
+        $result = [];
+
+        foreach ($locale->toArray() as $key => $value) {
+            if ($helper->startsWith($key, 'js.')) {
+                $index = str_replace('js.', '', $key);
+                $result[$index] = $value;
+            }
+        }
+
+        return $result;
     }
 
     protected function getClientIp(): string
@@ -63,25 +85,21 @@ trait Client
         return $clientType;
     }
 
-    protected function getJsLocale(): array
+    protected function getClientCountryCode(): string
     {
-        /**
-         * @var TranslateAdapter $locale
-         */
-        $locale = Di::getDefault()->get('locale');
+        try {
 
-        $helper = new HelperFactory();
+            $ip = $this->getClientIp();
 
-        $result = [];
+            $geo = new GeoIp($ip);
 
-        foreach ($locale->toArray() as $key => $value) {
-            if ($helper->startsWith($key, 'js.')) {
-                $index = str_replace('js.', '', $key);
-                $result[$index] = $value;
-            }
+            $code = $geo->getCountryCode();
+
+        } catch (\Exception $e) {
+
         }
 
-        return $result;
+        return !empty($code) ? $code : '';
     }
 
     protected function isMobileBrowser(): bool

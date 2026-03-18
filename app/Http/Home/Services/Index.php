@@ -15,7 +15,7 @@ use App\Caches\IndexSlideList;
 class Index extends Service
 {
 
-    public function getSlides()
+    public function getSlides(): array
     {
         $cache = new IndexSlideList();
 
@@ -27,21 +27,21 @@ class Index extends Service
         return $slides;
     }
 
-    public function getPopularCourses()
+    public function getPopularCourses(): array
     {
         $cache = new IndexPopularCourseList();
 
         return $cache->get();
     }
 
-    public function getFeaturedCourses()
+    public function getFeaturedCourses(): array
     {
         $cache = new IndexFeaturedCourseList();
 
         return $cache->get();
     }
 
-    public function getLatestCourses()
+    public function getLatestCourses(): array
     {
         $cache = new IndexLatestCourseList();
 

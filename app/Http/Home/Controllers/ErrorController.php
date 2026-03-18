@@ -1,15 +1,15 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
 namespace App\Http\Home\Controllers;
 
+use App\Http\Home\Services\Common as CommonService;
 use App\Models\User as UserModel;
-use App\Services\Auth\Home as HomeAuth;
-use App\Services\Service as AppService;
+use App\Traits\Auth as AuthTrait;
 use App\Traits\Response as ResponseTrait;
 
 /**
@@ -18,25 +18,28 @@ use App\Traits\Response as ResponseTrait;
 class ErrorController extends \Phalcon\Mvc\Controller
 {
 
+    use ResponseTrait;
+    use AuthTrait;
+
     /**
      * @var array
      */
-    protected array $siteInfo;
+    protected array $siteInfo =  [];
 
     /**
-     * @var UserModel|null
+     * @var UserModel
      */
-    protected ?UserModel $authUser;
-
-    use ResponseTrait;
+    protected UserModel $authUser;
 
     public function initialize()
     {
-        $this->siteInfo = $this->getSiteInfo();
-        $this->authUser = $this->getAuthUser();
+        $commonService = new CommonService();
+
+        $this->siteInfo = $commonService->getSiteInfo();
+
+        $this->authUser = $this->getCurrentUser(true);
 
         $this->view->setVar('site_info', $this->siteInfo);
-        $this->view->setVar('auth_user', $this->authUser);
     }
 
     /**
@@ -105,30 +108,9 @@ class ErrorController extends \Phalcon\Mvc\Controller
      */
     public function maintainAction()
     {
-        $appService = new AppService();
-
-        $siteInfo = $appService->getSettings('site');
-
         $this->response->setStatusCode(503);
 
-        $this->view->setVar('message', $siteInfo['offline_tips']);
-    }
-
-    protected function getSiteInfo(): array
-    {
-        $appService = new AppService();
-
-        return $appService->getSettings('site');
-    }
-
-    protected function getAuthUser(): ?UserModel
-    {
-        /**
-         * @var HomeAuth $auth
-         */
-        $auth = $this->getDI()->get('auth');
-
-        return $auth->getCurrentUser();
+        $this->view->setVar('message', $this->siteInfo['offline_tips']);
     }
 
 }

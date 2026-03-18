@@ -7,9 +7,7 @@
 
 namespace App\Http\Home\Controllers;
 
-use App\Services\Logic\Account\OAuthProvider as OAuthProviderService;
 use App\Services\Logic\User\Console\AccountInfo as AccountInfoService;
-use App\Services\Logic\User\Console\ConnectList as ConnectListService;
 use App\Services\Logic\User\Console\FavoriteList as FavoriteListService;
 use App\Services\Logic\User\Console\Online as OnlineService;
 use App\Services\Logic\User\Console\OrderList as OrderListService;
@@ -45,7 +43,7 @@ class UserConsoleController extends Controller
     {
         parent::initialize();
 
-        $authUser = $this->getAuthUser(false);
+        $authUser = $this->getLoginUser();
 
         $title = $this->locale->query('user_center');
 
@@ -86,14 +84,6 @@ class UserConsoleController extends Controller
 
         $account = $service->handle();
 
-        $service = new OAuthProviderService();
-
-        $oauthProvider = $service->handle();
-
-        $service = new ConnectListService();
-
-        $connects = $service->handle();
-
         if ($type == 'info') {
             $this->view->pick('user/console/account_info');
         } elseif ($type == 'email') {
@@ -102,8 +92,6 @@ class UserConsoleController extends Controller
             $this->view->pick('user/console/account_password');
         }
 
-        $this->view->setVar('oauth_provider', $oauthProvider);
-        $this->view->setVar('connects', $connects);
         $this->view->setVar('account', $account);
     }
 

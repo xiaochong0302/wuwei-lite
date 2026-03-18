@@ -14,7 +14,7 @@ use GuzzleHttp\Client as HttpClient;
 class SyncAppInfoTask extends Task
 {
 
-    const API_BASE_URL = 'https://www.koogua.net/api';
+    const string API_BASE_URL = 'https://www.koogua.net/api';
 
     public function mainAction()
     {

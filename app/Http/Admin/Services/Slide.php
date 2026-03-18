@@ -12,12 +12,12 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Slide as SlideModel;
 use App\Repos\Slide as SlideRepo;
 use App\Validators\Slide as SlideValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Slide extends Service
 {
 
-    public function getSlides(): RepositoryInterface
+    public function getSlides(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

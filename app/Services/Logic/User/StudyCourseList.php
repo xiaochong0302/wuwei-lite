@@ -12,14 +12,14 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Repos\CourseUser as CourseUserRepo;
 use App\Services\Logic\Service as LogicService;
 use App\Services\Logic\UserTrait;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class StudyCourseList extends LogicService
 {
 
     use UserTrait;
 
-    public function handle(int $id): RepositoryInterface
+    public function handle(int $id): PagerRepoInterface
     {
         $user = $this->checkUserCache($id);
 
@@ -41,7 +41,7 @@ class StudyCourseList extends LogicService
         return $this->handlePager($pager);
     }
 
-    protected function handlePager(RepositoryInterface $pager): RepositoryInterface
+    protected function handlePager(PagerRepoInterface $pager): PagerRepoInterface
     {
         if ($pager->getTotalItems() == 0) {
             return $pager;

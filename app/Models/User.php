@@ -18,13 +18,13 @@ class User extends Model
     /**
      * 管理角色
      */
-    const ADMIN_ROLE_ROOT = 1; // 超管
+    const int ADMIN_ROLE_ROOT = 1; // 超管
 
     /**
      * 教学角色
      */
-    const EDU_ROLE_STUDENT = 1; // 学员
-    const EDU_ROLE_TEACHER = 2; // 讲师
+    const int EDU_ROLE_STUDENT = 1; // 学员
+    const int EDU_ROLE_TEACHER = 2; // 讲师
 
     /**
      * 主键编号

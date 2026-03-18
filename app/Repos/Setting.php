@@ -16,28 +16,11 @@ class Setting extends Repository
 {
 
     /**
-     * @param array $where
-     * @return ResultsetInterface|Resultset|SettingModel[]
-     */
-    public function findAll($where = [])
-    {
-        $query = SettingModel::query();
-
-        $query->where('1 = 1');
-
-        if (!empty($where['section'])) {
-            $query->andWhere('section = :section:', ['section' => $where['section']]);
-        }
-
-        return $query->execute();
-    }
-
-    /**
      * @param string $section
      * @param string $itemKey
      * @return SettingModel|Row|null
      */
-    public function findItem($section, $itemKey)
+    public function findItem(string $section, string $itemKey)
     {
         return SettingModel::findFirst([
             'conditions' => 'section = :section: AND item_key = :item_key:',
@@ -49,7 +32,7 @@ class Setting extends Repository
      * @param string $section
      * @return ResultsetInterface|Resultset|SettingModel[]
      */
-    public function findBySection($section)
+    public function findBySection(string $section)
     {
         $query = SettingModel::query();
 

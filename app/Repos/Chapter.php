@@ -9,8 +9,6 @@ namespace App\Repos;
 
 use App\Models\Chapter as ChapterModel;
 use App\Models\ChapterArticle as ChapterArticleModel;
-use App\Models\ChapterLike as ChapterLikeModel;
-use App\Models\ChapterUser as ChapterUserModel;
 use App\Models\ChapterVideo as ChapterVideoModel;
 use App\Models\Comment as CommentModel;
 use Phalcon\Mvc\Model\Resultset;
@@ -24,7 +22,7 @@ class Chapter extends Repository
      * @param array $where
      * @return ResultsetInterface|Resultset|ChapterModel[]
      */
-    public function findAll($where = [])
+    public function findAll(array $where = [])
     {
         $query = ChapterModel::query();
 
@@ -57,7 +55,7 @@ class Chapter extends Repository
      * @param int $id
      * @return ChapterModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return ChapterModel::findFirst([
             'conditions' => 'id = :id:',
@@ -67,10 +65,10 @@ class Chapter extends Repository
 
     /**
      * @param array $ids
-     * @param string|array $columns
+     * @param array|string $columns
      * @return ResultsetInterface|Resultset|ChapterModel[]
      */
-    public function findByIds($ids, $columns = '*')
+    public function findByIds(array $ids, array|string $columns = '*')
     {
         return ChapterModel::query()
             ->columns($columns)
@@ -79,22 +77,10 @@ class Chapter extends Repository
     }
 
     /**
-     * @param int $id
-     * @return ResultsetInterface|Resultset|ChapterModel[]
-     */
-    public function findLessons($id)
-    {
-        return ChapterModel::query()
-            ->where('parent_id = :parent_id:', ['parent_id' => $id])
-            ->andWhere('deleted = 0')
-            ->execute();
-    }
-
-    /**
      * @param int $chapterId
      * @return ChapterVideoModel|Row|null
      */
-    public function findChapterVideo($chapterId)
+    public function findChapterVideo(int $chapterId)
     {
         return ChapterVideoModel::findFirst([
             'conditions' => 'chapter_id = :chapter_id:',
@@ -106,7 +92,7 @@ class Chapter extends Repository
      * @param int $chapterId
      * @return ChapterArticleModel|Row|null
      */
-    public function findChapterArticle($chapterId)
+    public function findChapterArticle(int $chapterId)
     {
         return ChapterArticleModel::findFirst([
             'conditions' => 'chapter_id = :chapter_id:',
@@ -118,7 +104,7 @@ class Chapter extends Repository
      * @param int $courseId
      * @return int
      */
-    public function maxChapterPriority($courseId)
+    public function maxChapterPriority(int $courseId): int
     {
         return (int)ChapterModel::maximum([
             'column' => 'priority',
@@ -131,7 +117,7 @@ class Chapter extends Repository
      * @param int $chapterId
      * @return int
      */
-    public function maxLessonPriority($chapterId)
+    public function maxLessonPriority(int $chapterId): int
     {
         return (int)ChapterModel::maximum([
             'column' => 'priority',
@@ -144,7 +130,7 @@ class Chapter extends Repository
      * @param int $chapterId
      * @return int
      */
-    public function countLessons($chapterId)
+    public function countLessons(int $chapterId): int
     {
         return (int)ChapterModel::count([
             'conditions' => 'parent_id = :chapter_id: AND deleted = 0',
@@ -156,31 +142,7 @@ class Chapter extends Repository
      * @param int $chapterId
      * @return int
      */
-    public function countUsers($chapterId)
-    {
-        return (int)ChapterUserModel::count([
-            'conditions' => 'chapter_id = :chapter_id:',
-            'bind' => ['chapter_id' => $chapterId],
-        ]);
-    }
-
-    /**
-     * @param int $chapterId
-     * @return int
-     */
-    public function countLikes($chapterId)
-    {
-        return (int)ChapterLikeModel::count([
-            'conditions' => 'chapter_id = :chapter_id: AND deleted = 0',
-            'bind' => ['chapter_id' => $chapterId],
-        ]);
-    }
-
-    /**
-     * @param int $chapterId
-     * @return int
-     */
-    public function countComments($chapterId)
+    public function countComments(int $chapterId): int
     {
         return (int)CommentModel::count([
             'conditions' => 'chapter_id = ?1 AND published = ?2 AND deleted = 0',

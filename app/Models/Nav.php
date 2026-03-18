@@ -16,14 +16,14 @@ class Nav extends Model
     /**
      * 位置类型
      */
-    const POS_TOP = 1; // 顶部
-    const POS_BOTTOM = 2; // 底部
+    const int POS_TOP = 1; // 顶部
+    const int POS_BOTTOM = 2; // 底部
 
     /**
      * 打开方式
      */
-    const TARGET_BLANK = '_blank'; // 新建窗口
-    const TARGET_SELF = '_self'; // 当前窗口
+    const string TARGET_BLANK = '_blank'; // 新建窗口
+    const string TARGET_SELF = '_self'; // 当前窗口
 
     /**
      * 主键编号

@@ -29,6 +29,11 @@ class Task extends \Phalcon\Cli\Task
         echo "\033[31m {$text} \033[0m" . PHP_EOL;
     }
 
+    protected function infoPrint(string $text): void
+    {
+        echo "\033[36m {$text} \033[0m" . PHP_EOL;
+    }
+
     protected function getTaskLockKey(string $key = null): string
     {
         $key = $key ? sprintf('cli-%s', $key) : get_called_class();

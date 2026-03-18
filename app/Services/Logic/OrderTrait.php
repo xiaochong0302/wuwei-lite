@@ -7,19 +7,20 @@
 
 namespace App\Services\Logic;
 
+use App\Models\Order as OrderModel;
 use App\Validators\Order as OrderValidator;
 
 trait OrderTrait
 {
 
-    protected function checkOrderById($id)
+    protected function checkOrderById(int $id): OrderModel
     {
         $validator = new OrderValidator();
 
         return $validator->checkOrderById($id);
     }
 
-    protected function checkOrderBySn($sn)
+    protected function checkOrderBySn(string $sn): OrderModel
     {
         $validator = new OrderValidator();
 

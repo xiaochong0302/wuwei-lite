@@ -21,6 +21,8 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
+        $languages = $this->getLanguages();
+
         $indexService = new IndexService();
 
         $topMenus = $indexService->getTopMenus();
@@ -29,6 +31,7 @@ class IndexController extends Controller
 
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 
+        $this->view->setVar('languages', $languages);
         $this->view->setVar('top_menus', $topMenus);
         $this->view->setVar('left_menus', $leftMenus);
         $this->view->setVar('app_info', $appInfo);

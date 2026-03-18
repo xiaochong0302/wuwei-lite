@@ -17,7 +17,7 @@ use App\Repos\Course as CourseRepo;
 use App\Repos\CoursePackage as CoursePackageRepo;
 use App\Repos\Package as PackageRepo;
 use App\Validators\Package as PackageValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Package extends Service
 {
@@ -61,7 +61,7 @@ class Package extends Service
         return $result;
     }
 
-    public function getPackages(): RepositoryInterface
+    public function getPackages(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

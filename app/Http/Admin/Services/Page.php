@@ -11,12 +11,12 @@ use App\Library\Paginator\Query as PagerQuery;
 use App\Models\Page as PageModel;
 use App\Repos\Page as PageRepo;
 use App\Validators\Page as PageValidator;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class Page extends Service
 {
 
-    public function getPages(): RepositoryInterface
+    public function getPages(): PagerRepoInterface
     {
         $pagerQuery = new PagerQuery();
 

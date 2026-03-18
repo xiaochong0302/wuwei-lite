@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -23,7 +23,7 @@ trait Service
      *
      * @return Config
      */
-    public function getConfig(): Config
+    protected function getConfig(): Config
     {
         return Di::getDefault()->getShared('config');
     }
@@ -33,7 +33,7 @@ trait Service
      *
      * @return CacheInterface
      */
-    public function getCache(): CacheInterface
+    protected function getCache(): CacheInterface
     {
         return Di::getDefault()->getShared('cache');
     }
@@ -43,7 +43,7 @@ trait Service
      *
      * @return Redis
      */
-    public function getRedis(): Redis
+    protected function getRedis(): Redis
     {
         return Di::getDefault()->getShared('redis');
     }
@@ -54,7 +54,7 @@ trait Service
      * @param string $channel
      * @return Logger
      */
-    public function getLogger(string $channel = 'common'): Logger
+    protected function getLogger(string $channel = 'common'): Logger
     {
         $logger = new AppLogger();
 
@@ -67,7 +67,7 @@ trait Service
      * @param string $section
      * @return array
      */
-    public function getSettings(string $section): array
+    protected function getSettings(string $section): array
     {
         $cache = new SettingCache();
 

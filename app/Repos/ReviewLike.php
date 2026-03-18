@@ -8,9 +8,8 @@
 namespace App\Repos;
 
 use App\Models\ReviewLike as ReviewLikeModel;
-use Phalcon\Mvc\Model\Row;
 use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
+use Phalcon\Mvc\Model\Row;
 
 class ReviewLike extends Repository
 {
@@ -20,7 +19,7 @@ class ReviewLike extends Repository
      * @param int $userId
      * @return ReviewLikeModel|Row|null
      */
-    public function findReviewLike($reviewId, $userId)
+    public function findReviewLike(int $reviewId, int $userId)
     {
         return ReviewLikeModel::findFirst([
             'conditions' => 'review_id = :review_id: AND user_id = :user_id:',
@@ -32,14 +31,14 @@ class ReviewLike extends Repository
      * @param int $userId
      * @return array
      */
-    public function findUserLikedReviewIds($userId)
+    public function findUserLikedReviewIds(int $userId)
     {
         $result = [];
 
         /**
          * @var Resultset $rows
          */
-        $rows =  ReviewLikeModel::query()
+        $rows = ReviewLikeModel::query()
             ->columns(['review_id'])
             ->where('user_id = :user_id:', ['user_id' => $userId])
             ->andWhere('deleted = 0')

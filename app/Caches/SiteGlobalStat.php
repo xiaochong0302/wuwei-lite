@@ -20,12 +20,7 @@ class SiteGlobalStat extends Cache
     /**
      * @var int
      */
-    protected int $lifetime = 15 * 60;
-
-    public function getLifetime(): int
-    {
-        return $this->lifetime;
-    }
+    protected int $lifetime = 1800;
 
     public function getKey($id = null): string
     {

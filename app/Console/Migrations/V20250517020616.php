@@ -233,272 +233,91 @@ class V20250517020616 extends Migration
     protected function handleSiteSettings(): void
     {
         $settings = [
-            [
-                'section' => 'site',
-                'item_key' => 'title',
-                'item_value' => 'WUWEI LMS',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'url',
-                'item_value' => '',
-            ],
-
-            [
-                'section' => 'site',
-                'item_key' => 'logo',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'favicon',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'language',
-                'item_value' => 'en',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'timezone',
-                'item_value' => 'Asia/Shanghai',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'currency',
-                'item_value' => 'USD',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'keywords',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'description',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'copyright',
-                'item_value' => '2025 WUWEI LMS',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'status',
-                'item_value' => 'online',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'offline_tips',
-                'item_value' => 'Site under maintenance, please try again later.',
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'allow_register',
-                'item_value' => 1,
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'analytics_enabled',
-                'item_value' => 0,
-            ],
-            [
-                'section' => 'site',
-                'item_key' => 'analytics_script',
-                'item_value' => '',
-            ],
+            'title' => 'WUWEI LMS',
+            'url' => '',
+            'logo' => '',
+            'favicon' => '',
+            'language' => 'en',
+            'timezone' => 'Asia/Shanghai',
+            'currency' => 'USD',
+            'keywords' => '',
+            'description' => '',
+            'copyright' => '2025 WUWEI LMS',
+            'status' => 'online',
+            'offline_tips' => 'Site under maintenance, please try again later.',
+            'allow_register' => 1,
+            'analytics_enabled' => 0,
+            'analytics_script' => '',
         ];
 
-        $this->saveSettings($settings);
+        $this->saveSettings('site', $settings);
     }
 
     protected function handleMailSettings(): void
     {
         $settings = [
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_host',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_port',
-                'item_value' => 465,
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_encryption',
-                'item_value' => 'ssl',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_from_email',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_from_name',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_auth_enabled',
-                'item_value' => 1,
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_username',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'smtp_password',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'mail',
-                'item_key' => 'notification',
-                'item_value' => json_encode([
-                    'account_login' => 1,
-                    'order_finish' => 1,
-                    'refund_finish' => 1,
-                    'review_remind' => 1,
-                ]),
+            'smtp_host' => '',
+            'smtp_port' => 465,
+            'smtp_encryption' => 'ssl',
+            'smtp_from_email' => '',
+            'smtp_from_name' => '',
+            'smtp_auth_enabled' => 1,
+            'smtp_username' => '',
+            'smtp_password' => '',
+            'notification' => [
+                'account_login' => 1,
+                'order_finish' => 1,
+                'refund_finish' => 1,
+                'review_remind' => 1,
             ],
         ];
 
-        $this->saveSettings($settings);
+        $this->saveSettings('mail', $settings);
     }
 
     protected function handlePaypalPaymentSettings(): void
     {
         $settings = [
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'enabled',
-                'item_value' => 0,
-            ],
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'client_id',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'client_secret',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'service_rate',
-                'item_value' => 5,
-            ],
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'webhook_id',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'payment.paypal',
-                'item_key' => 'webhook_url',
-                'item_value' => '',
-            ],
+            'enabled' => 0,
+            'client_id' => '',
+            'client_secret' => '',
+            'service_rate' => 5,
+            'webhook_id' => '',
+            'webhook_url' => '',
         ];
 
-        $this->saveSettings($settings);
+        $this->saveSettings('payment.paypal', $settings);
     }
 
     protected function handleStripePaymentSettings(): void
     {
         $settings = [
-            [
-                'section' => 'payment.stripe',
-                'item_key' => 'enabled',
-                'item_value' => 0,
-            ],
-            [
-                'section' => 'payment.stripe',
-                'item_key' => 'api_key',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'payment.stripe',
-                'item_key' => 'service_rate',
-                'item_value' => 5,
-            ],
-            [
-                'section' => 'payment.stripe',
-                'item_key' => 'webhook_secret',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'payment.stripe',
-                'item_key' => 'webhook_url',
-                'item_value' => '',
-            ],
+            'enabled' => 0,
+            'api_key' => '',
+            'service_rate' => 5,
+            'webhook_secret' => '',
+            'webhook_url' => '',
         ];
 
-        $this->saveSettings($settings);
+        $this->saveSettings('payment.stripe', $settings);
     }
 
     protected function handleContactSettings(): void
     {
         $settings = [
-            [
-                'section' => 'contact',
-                'item_key' => 'enabled',
-                'item_value' => 0,
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'email',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'phone',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'address',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'facebook',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'reddit',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'twitter',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'youtube',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'linkedin',
-                'item_value' => '',
-            ],
-            [
-                'section' => 'contact',
-                'item_key' => 'tiktok',
-                'item_value' => '',
-            ],
+            'enabled' => 0,
+            'email' => '',
+            'phone' => '',
+            'address' => '',
+            'facebook' => '',
+            'reddit' => '',
+            'twitter' => '',
+            'youtube' => '',
+            'linkedin' => '',
+            'tiktok' => '',
         ];
 
-        $this->saveSettings($settings);
+        $this->saveSettings('contact', $settings);
     }
 
 }

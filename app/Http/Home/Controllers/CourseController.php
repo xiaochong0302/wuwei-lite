@@ -108,8 +108,8 @@ class CourseController extends Controller
         $title = $this->locale->query('page_course_x', ['x' => $course['title']]);
 
         $this->seo->prependTitle($title);
-        $this->seo->setKeywords($course['keywords']);
-        $this->seo->setDescription($course['summary']);
+        $this->seo->keywords = $course['keywords'];
+        $this->seo->description = $course['summary'];
 
         $this->view->setVar('course', $course);
         $this->view->setVar('chapters', $chapters);
@@ -146,19 +146,6 @@ class CourseController extends Controller
 
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
         $this->view->setVar('pager', $pager);
-    }
-
-    /**
-     * @Get("/{id:[0-9]+}/resources", name="home.course.resources")
-     */
-    public function resourcesAction($id)
-    {
-        $service = new CourseResourceListService();
-
-        $resources = $service->handle($id);
-
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-        $this->view->setVar('resources', $resources);
     }
 
     /**

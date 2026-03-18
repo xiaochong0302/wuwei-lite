@@ -9,8 +9,6 @@ namespace App\Repos;
 
 use App\Models\Media as MediaModel;
 use Phalcon\Mvc\Model\Row;
-use Phalcon\Mvc\Model\Resultset;
-use Phalcon\Mvc\Model\ResultsetInterface;
 
 class Media extends Repository
 {
@@ -19,7 +17,7 @@ class Media extends Repository
      * @param int $id
      * @return MediaModel|Row|null
      */
-    public function findById($id)
+    public function findById(int $id)
     {
         return MediaModel::findFirst([
             'conditions' => 'id = :id:',
@@ -37,19 +35,6 @@ class Media extends Repository
             'conditions' => 'upload_id = :upload_id:',
             'bind' => ['upload_id' => $uploadId],
         ]);
-    }
-
-    /**
-     * @param array $ids
-     * @param string|array $columns
-     * @return ResultsetInterface|Resultset|MediaModel[]
-     */
-    public function findByIds($ids, $columns = '*')
-    {
-        return MediaModel::query()
-            ->columns($columns)
-            ->inWhere('id', $ids)
-            ->execute();
     }
 
 }

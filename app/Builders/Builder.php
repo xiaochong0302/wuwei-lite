@@ -13,7 +13,7 @@ use Phalcon\Di\Injectable;
 class Builder extends Injectable
 {
 
-    public function objects(array $items): mixed
+    public function objects(array $items): array
     {
         return kg_objectify($items);
     }

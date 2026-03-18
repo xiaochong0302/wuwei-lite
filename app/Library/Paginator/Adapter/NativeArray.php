@@ -9,7 +9,7 @@ namespace App\Library\Paginator\Adapter;
 
 use App\Library\Paginator\Query as PaginatorQuery;
 use Phalcon\Paginator\Adapter\NativeArray as PhNativeArray;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 
 class NativeArray extends PhNativeArray
 {
@@ -29,7 +29,7 @@ class NativeArray extends PhNativeArray
      */
     protected array $properties = [];
 
-    public function paginate(): RepositoryInterface
+    public function paginate(): PagerRepoInterface
     {
         $pager = parent::paginate();
 

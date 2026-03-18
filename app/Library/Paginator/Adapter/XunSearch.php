@@ -11,7 +11,7 @@ use App\Library\Paginator\Query as PaginatorQuery;
 use App\Library\Validators\Common as CommonValidator;
 use Phalcon\Paginator\Adapter\AbstractAdapter;
 use Phalcon\Paginator\Exception as PaginatorException;
-use Phalcon\Paginator\RepositoryInterface;
+use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
 use XS;
 
 /**
@@ -75,7 +75,7 @@ class XunSearch extends AbstractAdapter
         $this->params = $query->getParams();
     }
 
-    public function paginate(): RepositoryInterface
+    public function paginate(): PagerRepoInterface
     {
         /**
          * @var XS $xs

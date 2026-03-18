@@ -10,6 +10,7 @@ namespace App\Http\Admin\Controllers;
 use App\Http\Admin\Services\Course as CourseService;
 use App\Http\Admin\Services\CourseLearning as CourseLearningService;
 use App\Http\Admin\Services\CourseUser as CourseUserService;
+use Phalcon\Mvc\View;
 
 /**
  * @RoutePrefix("/admin/course")
@@ -163,6 +164,19 @@ class CourseController extends Controller
 
         $this->view->setVar('course', $course);
         $this->view->setVar('modules', $modules);
+    }
+
+    /**
+     * @Get("/{id:[0-9]+}/resources", name="admin.course.resources")
+     */
+    public function resourcesAction($id)
+    {
+        $courseService = new CourseService();
+
+        $resources = $courseService->getResources($id);
+
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $this->view->setVar('resources', $resources);
     }
 
     /**
