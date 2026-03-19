@@ -17,9 +17,9 @@ class Validator extends Injectable
 
     use ServiceTrait;
 
-    public function checkAuthUser(int $userId): void
+    public function checkAuthInfo(?array $authInfo = null): void
     {
-        if (empty($userId)) {
+        if (empty($authInfo)) {
             throw new UnauthorizedException('sys.unauthorized');
         }
     }

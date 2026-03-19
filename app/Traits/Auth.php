@@ -52,7 +52,7 @@ trait Auth
 
         $validator = new AppValidator();
 
-        $validator->checkAuthUser($authInfo['id']);
+        $validator->checkAuthInfo($authInfo);
 
         if (!$cache) {
             $userRepo = new UserRepo();

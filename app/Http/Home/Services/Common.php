@@ -10,6 +10,7 @@ namespace App\Http\Home\Services;
 use App\Caches\NavTreeList as NavCache;
 use App\Library\AppInfo as AppInfo;
 use App\Library\Seo as Seo;
+use App\Services\Auth\Home as HomeAuth;
 
 class Common extends Service
 {
@@ -29,6 +30,16 @@ class Common extends Service
         $cache = new NavCache();
 
         return $cache->get();
+    }
+
+    public function getAuthInfo(): ?array
+    {
+        /**
+         * @var HomeAuth $auth
+         */
+        $auth = $this->getDI()->get('auth');
+
+        return $auth->getAuthInfo();
     }
 
     public function getSiteInfo(): array

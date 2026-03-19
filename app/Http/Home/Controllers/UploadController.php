@@ -7,6 +7,7 @@
 
 namespace App\Http\Home\Controllers;
 
+use App\Http\Home\Services\Common as CommonService;
 use App\Services\Storage\Image as ImageStorageService;
 use App\Validators\Validator as AppValidator;
 
@@ -18,11 +19,13 @@ class UploadController extends Controller
 
     public function initialize()
     {
-        $authUser = $this->getAuthUser();
+        $commonService = new CommonService();
+
+        $authInfo = $commonService->getAuthInfo();
 
         $validator = new AppValidator();
 
-        $validator->checkAuthUser($authUser->id);
+        $validator->checkAuthInfo($authInfo);
     }
 
     /**

@@ -12,22 +12,12 @@ use App\Services\Storage as StorageService;
 use App\Services\Storage\Image as ImageStorageService;
 use App\Services\Storage\Media as MediaStorageService;
 use App\Services\Storage\Resource as ResourceStorageService;
-use App\Validators\Validator as AppValidator;
 
 /**
  * @RoutePrefix("/admin/upload")
  */
 class UploadController extends Controller
 {
-
-    public function initialize()
-    {
-        $authUser = $this->getLoginUser();
-
-        $validator = new AppValidator();
-
-        $validator->checkAuthUser($authUser->id);
-    }
 
     /**
      * @Post("/avatar/img", name="admin.upload.avatar_img")
