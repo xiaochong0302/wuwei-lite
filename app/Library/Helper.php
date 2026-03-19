@@ -245,7 +245,7 @@ function kg_site_url(): string
  * @param mixed $defaultValue
  * @return mixed
  */
-function kg_setting(string $section, string $key = null, $defaultValue = null): mixed
+function kg_setting(string $section, ?string $key = null, mixed $defaultValue = null): mixed
 {
     $cache = new SettingCache();
 
@@ -263,7 +263,7 @@ function kg_setting(string $section, string $key = null, $defaultValue = null): 
  * @param mixed $defaultValue
  * @return mixed
  */
-function kg_config(string $path, $defaultValue = null): mixed
+function kg_config(string $path, mixed $defaultValue = null): mixed
 {
     /**
      * @var Config $config
