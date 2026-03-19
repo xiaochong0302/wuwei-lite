@@ -40,6 +40,15 @@ layui.use(['jquery', 'helper'], function () {
         $('html').scrollTop($('#comment-anchor').offset().top);
     });
 
+    var $container = $('.sidebar-chapter-list');
+    var chapterId = $('input[name="chapter.id"]').val();
+    var $target = $('li[data-url="/chapter/' + chapterId + '"]');
+
+    if ($container.length > 0 && $target.length > 0) {
+        var scrollTop = $target[0].offsetTop - 100;
+        $container.animate({scrollTop: scrollTop}, 600);
+    }
+
     var $commentList = $('#comment-list');
 
     if ($commentList.length > 0) {
