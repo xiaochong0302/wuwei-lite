@@ -36,6 +36,7 @@ class Database extends Provider
                 'options' => [
                     \PDO::ATTR_EMULATE_PREPARES => false,
                     \PDO::ATTR_STRINGIFY_FETCHES => false,
+                    \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
                 ],
             ];
 
