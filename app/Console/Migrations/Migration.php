@@ -25,7 +25,7 @@ abstract class Migration
     protected function saveSetting(string $section, string $itemKey, array|string $itemValue): void
     {
         if (is_array($itemValue)) {
-            $itemValue = json_encode($itemValue);
+            $itemValue = kg_json_encode($itemValue);
         }
 
         $settingRepo = new SettingRepo();

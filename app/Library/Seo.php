@@ -13,38 +13,17 @@ class Seo
     /**
      * @var string
      */
-    public string $title = '' {
-        get {
-            return $this->title;
-        }
-        set {
-            $this->title = $value;
-        }
-    }
+    public string $title = '';
 
     /**
      * @var string
      */
-    public string $keywords = '' {
-        get {
-            return $this->keywords;
-        }
-        set {
-            $this->keywords = $value;
-        }
-    }
+    public string $keywords = '';
 
     /**
      * @var string
      */
-    public string $description = '' {
-        get {
-            return $this->description;
-        }
-        set {
-            $this->description = $value;
-        }
-    }
+    public string $description = '';
 
     /**
      * @var string
