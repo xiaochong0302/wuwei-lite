@@ -1,15 +1,17 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
-namespace App\Http\Home\Services;
+namespace App\Services;
 
 use App\Models\ThumbLink as ThumbLinkModel;
 use App\Repos\ThumbLink as ThumbLinkRepo;
+use Exception as Exception;
 use Intervention\Image\ImageManager;
+use Phalcon\Logger\Logger;
 
 class Thumb extends Service
 {
@@ -19,9 +21,16 @@ class Thumb extends Service
      */
     protected ImageManager $manager;
 
+    /**
+     * @var Logger
+     */
+    protected Logger $logger;
+
     public function __construct()
     {
         $this->manager = ImageManager::gd();
+
+        $this->logger = $this->getLogger('thumb');
     }
 
     public function handle(string $file, string $style): string
@@ -53,13 +62,26 @@ class Thumb extends Service
 
         if ($thumbFile) return $thumbFile;
 
-        $image = $this->manager->read($filePath);
+        try {
 
-        if ($image->width() > 320) {
-            $image->resize($width, $height)->save($thumbPath);
-            $this->saveThumbLink($thumbPath, $thumbPath);
-        } else {
-            $this->saveThumbLink($thumbPath, $filePath);
+            $image = $this->manager->read($filePath);
+
+            if ($image->width() > 320) {
+                $image->resize($width, $height)->save($thumbPath);
+                if (file_exists($thumbPath)) {
+                    $this->saveThumbLink($thumbPath, $thumbPath);
+                } else {
+                    $thumbPath = $filePath;
+                }
+            } else {
+                $this->saveThumbLink($thumbPath, $filePath);
+                $thumbPath = $filePath;
+            }
+
+        } catch (Exception $e) {
+
+            $this->logger->error($this->formatException('Avatar Thumb Exception', $e));
+
             $thumbPath = $filePath;
         }
 
@@ -76,13 +98,26 @@ class Thumb extends Service
 
         if ($thumbFile) return $thumbFile;
 
-        $image = $this->manager->read($filePath);
+        try {
 
-        if ($image->width() > 540) {
-            $image->resize($width, $height)->save($thumbPath);
-            $this->saveThumbLink($thumbPath, $thumbPath);
-        } else {
-            $this->saveThumbLink($thumbPath, $filePath);
+            $image = $this->manager->read($filePath);
+
+            if ($image->width() > 540) {
+                $image->resize($width, $height)->save($thumbPath);
+                if (file_exists($thumbPath)) {
+                    $this->saveThumbLink($thumbPath, $thumbPath);
+                } else {
+                    $thumbPath = $filePath;
+                }
+            } else {
+                $this->saveThumbLink($thumbPath, $filePath);
+                $thumbPath = $filePath;
+            }
+
+        } catch (Exception $e) {
+
+            $this->logger->error($this->formatException('Cover Thumb Exception', $e));
+
             $thumbPath = $filePath;
         }
 
@@ -99,14 +134,27 @@ class Thumb extends Service
 
         if ($thumbFile) return $thumbFile;
 
-        $image = $this->manager->read($filePath);
+        try {
 
-        if ($image->width() > 1280) {
-            $height = intval($image->height() * $width / $image->width());
-            $image->resize($width, $height)->save($thumbPath);
-            $this->saveThumbLink($thumbPath, $thumbPath);
-        } else {
-            $this->saveThumbLink($thumbPath, $filePath);
+            $image = $this->manager->read($filePath);
+
+            if ($image->width() > 1280) {
+                $height = intval($image->height() * $width / $image->width());
+                $image->resize($width, $height)->save($thumbPath);
+                if (file_exists($thumbPath)) {
+                    $this->saveThumbLink($thumbPath, $thumbPath);
+                } else {
+                    $thumbPath = $filePath;
+                }
+            } else {
+                $this->saveThumbLink($thumbPath, $filePath);
+                $thumbPath = $filePath;
+            }
+
+        } catch (Exception $e) {
+
+            $this->logger->error($this->formatException('Content Thumb Exception', $e));
+
             $thumbPath = $filePath;
         }
 
@@ -123,13 +171,26 @@ class Thumb extends Service
 
         if ($thumbFile) return $thumbFile;
 
-        $image = $this->manager->read($filePath);
+        try {
 
-        if ($image->width() > 1920) {
-            $image->resize($width, $height)->save($thumbPath);
-            $this->saveThumbLink($thumbPath, $thumbPath);
-        } else {
-            $this->saveThumbLink($thumbPath, $filePath);
+            $image = $this->manager->read($filePath);
+
+            if ($image->width() > 1920) {
+                $image->resize($width, $height)->save($thumbPath);
+                if (file_exists($thumbPath)) {
+                    $this->saveThumbLink($thumbPath, $thumbPath);
+                } else {
+                    $thumbPath = $filePath;
+                }
+            } else {
+                $this->saveThumbLink($thumbPath, $filePath);
+                $thumbPath = $filePath;
+            }
+
+        } catch (Exception $e) {
+
+            $this->logger->error($this->formatException('Slide Thumb Exception', $e));
+
             $thumbPath = $filePath;
         }
 
@@ -195,6 +256,16 @@ class Thumb extends Service
         $thumbLink->create();
 
         return $thumbLink;
+    }
+
+    protected function formatException(string $prefix, Exception $e): string
+    {
+        return $prefix . ':' . kg_json_encode([
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'message' => $e->getMessage(),
+                'trace' => $e->getTrace(),
+            ]);
     }
 
 }

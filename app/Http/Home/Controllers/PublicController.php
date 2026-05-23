@@ -7,9 +7,9 @@
 
 namespace App\Http\Home\Controllers;
 
-use App\Http\Home\Services\Thumb as ThumbService;
 use App\Library\CsrfToken as CsrfTokenService;
 use App\Repos\Upload as UploadRepo;
+use App\Services\Thumb as ThumbService;
 use App\Traits\Response as ResponseTrait;
 use App\Traits\Security as SecurityTrait;
 
