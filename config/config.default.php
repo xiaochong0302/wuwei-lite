@@ -105,6 +105,16 @@ $config['redis']['index'] = 0;
 $config['redis']['auth'] = '1qaz2wsx3edc';
 
 /**
+ * redis timeout（seconds）
+ */
+$config['redis']['timeout'] = 5;
+
+/**
+ * redis read_timeout（seconds）
+ */
+$config['redis']['read_timeout'] = 30;
+
+/**
  * Token validity period (seconds)
  */
 $config['token']['lifetime'] = 7 * 86400;

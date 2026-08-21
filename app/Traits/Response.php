@@ -13,8 +13,8 @@ use App\Library\Http\Request as HttpRequest;
 use App\Library\Http\Response as HttpResponse;
 use App\Plugins\LocaleError as LocaleErrorPlugin;
 use Phalcon\Config\Config;
-use Phalcon\Di\Di;
 use Phalcon\Paginator\RepositoryInterface as PagerRepoInterface;
+use Phalcon\Di\Di;
 
 trait Response
 {

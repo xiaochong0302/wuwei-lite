@@ -7,7 +7,6 @@
 
 namespace App\Traits;
 
-use App\Library\GeoIp;
 use App\Library\Language;
 use App\Models\KgClient as KgClientModel;
 use Phalcon\Di\Di;
@@ -85,23 +84,6 @@ trait Client
         return $clientType;
     }
 
-    protected function getClientCountryCode(): string
-    {
-        try {
-
-            $ip = $this->getClientIp();
-
-            $geo = new GeoIp($ip);
-
-            $code = $geo->getCountryCode();
-
-        } catch (\Exception $e) {
-
-        }
-
-        return !empty($code) ? $code : '';
-    }
-
     protected function isMobileBrowser(): bool
     {
         /**
@@ -127,13 +109,7 @@ trait Client
 
         $bots = array('Googlebot', 'Bingbot', 'Slurp', 'DuckDuckBot', 'Baiduspider');
 
-        foreach ($bots as $bot) {
-            if (stripos($userAgent, $bot) !== false) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($bots, fn($bot) => stripos($userAgent, $bot) !== false);
     }
 
     protected function h5Enabled(): bool

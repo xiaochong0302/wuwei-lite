@@ -8,6 +8,7 @@
 namespace App\Console\Tasks;
 
 use App\Traits\Service as ServiceTrait;
+use Phalcon\Events\Manager as PhEventsManager;
 
 class Task extends \Phalcon\Cli\Task
 {
@@ -39,6 +40,14 @@ class Task extends \Phalcon\Cli\Task
         $key = $key ? sprintf('cli-%s', $key) : get_called_class();
 
         return md5($key);
+    }
+
+    /**
+     * Cli中的 getEventsManager()方法获取的对象为 null，需要从容器中获取
+     */
+    protected function getPhEventsManager(): PhEventsManager
+    {
+        return $this->getDI()->getShared('eventsManager');
     }
 
 }

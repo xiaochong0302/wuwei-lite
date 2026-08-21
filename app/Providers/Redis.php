@@ -27,12 +27,16 @@ class Redis extends Provider
 
             $serializerFactory = new SerializerFactory();
 
+            /**
+             * prefix设置为空，否则会自动添加默认前缀 ph-reds-
+             */
             $options = [
                 'defaultSerializer' => 'redis_igbinary',
                 'host' => $config->path('redis.host'),
                 'port' => $config->path('redis.port'),
                 'auth' => $config->path('redis.auth'),
                 'index' => $config->path('redis.index'),
+                'prefix' => '',
             ];
 
             $storage = new RedisAdapter($serializerFactory, $options);

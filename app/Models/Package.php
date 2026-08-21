@@ -17,9 +17,9 @@ class Package extends Model
     /**
      * 主键编号
      *
-     * @var int
+     * @var int|null
      */
-    public int $id = 0;
+    public ?int $id = null;
 
     /**
      * 标题

@@ -12,7 +12,14 @@ class MainTask extends Task
 
     public function mainAction(): void
     {
-        echo "You are now flying with Phalcon CLI!";
+        $version = [
+            'phalcon' => phpversion('phalcon'),
+            'zephir_parser' => phpversion('zephir_parser'),
+        ];
+
+        echo "You are now flying with Phalcon CLI!" . PHP_EOL;
+        echo "Phalcon version: {$version['phalcon']}" . PHP_EOL;
+        echo "Zephir parser version: {$version['zephir_parser']}" . PHP_EOL;
     }
 
 }

@@ -22,7 +22,7 @@
     "robmorgan/phinx": "^0.16"
   },
   "require-dev": {
-    "xiaochong0302/phalcon-ide-stubs": "^5.9",
+    "xiaochong0302/phalcon-ide-stubs": "5.19.0",
     "odan/phinx-migrations-generator": "^6.3"
   },
   "repositories": {

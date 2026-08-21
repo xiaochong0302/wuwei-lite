@@ -308,9 +308,9 @@ img.kg-avatar-sm {
 }
 
 .kg-stat-card .count {
-    font-size: 20px;
-    color: rgb(0, 150, 136);
     margin-bottom: 10px;
+    font-size: 20px;
+    color: #009688;
 }
 
 .kg-search-form {

@@ -9,6 +9,7 @@ namespace App\Traits;
 
 use App\Caches\Setting as SettingCache;
 use App\Library\Logger as AppLogger;
+use App\Repos\Setting as SettingRepo;
 use Phalcon\Cache\CacheInterface;
 use Phalcon\Config\Config;
 use Phalcon\Di\Di;
@@ -65,13 +66,21 @@ trait Service
      * 获取某组配置项
      *
      * @param string $section
+     * @param bool $cache
      * @return array
      */
-    protected function getSettings(string $section): array
+    protected function getSettings(string $section, bool $cache = true): array
     {
-        $cache = new SettingCache();
+        if ($cache) {
+            $cache = new SettingCache();
+            return $cache->get($section);
+        }
 
-        return $cache->get($section);
+        $settingRepo = new SettingRepo();
+
+        $result = $settingRepo->findBySection($section);
+
+        return $result ? $result->toArray() : [];
     }
 
 }
