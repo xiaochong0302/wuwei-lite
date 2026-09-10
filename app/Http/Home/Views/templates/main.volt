@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrfToken.getToken() }}">
     <title>{{ seo.title }}</title>
     {% if site_info.favicon %}
-        {{ icon_link(site_info.favicon,false) }}
+        {{ icon_link(site_info.favicon) }}
     {% else %}
         {{ icon_link('favicon.ico') }}
     {% endif %}

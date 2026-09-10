@@ -9,7 +9,6 @@ use App\Caches\Setting as SettingCache;
 use App\Library\Utils\FileInfo;
 use App\Models\KgSale as KgSaleModel;
 use App\Services\Logic\Url\FullH5Url as FullH5UrlService;
-use App\Services\Storage as StorageService;
 use League\CommonMark\Exception\CommonMarkException;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
 use Phalcon\Config\Config;
@@ -465,9 +464,17 @@ function kg_default_vip_cover_path()
  */
 function kg_cos_url(): string
 {
-    $service = new StorageService();
+    static $url = null;
 
-    return $service->getBaseUrl();
+    if ($url === null) {
+        $baseUri = kg_config('storage_base_uri');
+        if (!str_starts_with($baseUri, 'http')) {
+            $baseUri = kg_setting('site', 'url');
+        }
+        $url = rtrim($baseUri, '/');
+    }
+
+    return $url;
 }
 
 /**

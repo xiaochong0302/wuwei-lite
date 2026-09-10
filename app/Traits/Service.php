@@ -13,11 +13,20 @@ use App\Repos\Setting as SettingRepo;
 use Phalcon\Cache\CacheInterface;
 use Phalcon\Config\Config;
 use Phalcon\Di\Di;
+use Phalcon\Events\Manager as PhEventsManager;
 use Phalcon\Logger\Logger;
 use Redis;
 
 trait Service
 {
+
+    /**
+     * Cli中的 getEventsManager()方法获取的对象为 null，需要从容器中获取
+     */
+    protected function getPhEventsManager(): PhEventsManager
+    {
+        return $this->getDI()->getShared('eventsManager');
+    }
 
     /**
      * 获取Config

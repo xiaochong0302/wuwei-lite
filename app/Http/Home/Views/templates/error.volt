@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Oops - {{ site_info.title }}</title>
     {% if site_info.favicon %}
-        {{ icon_link(site_info.favicon,false) }}
+        {{ icon_link(site_info.favicon) }}
     {% else %}
         {{ icon_link('favicon.ico') }}
     {% endif %}

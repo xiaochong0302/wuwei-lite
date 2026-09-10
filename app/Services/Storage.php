@@ -11,7 +11,6 @@ use App\Library\Utils\FileInfo;
 use App\Models\Upload as UploadModel;
 use App\Repos\Upload as UploadRepo;
 use InvalidArgumentException;
-use Phalcon\Support\HelperFactory;
 use RuntimeException;
 
 class Storage extends Service
@@ -20,9 +19,9 @@ class Storage extends Service
     /**
      * mime类型
      */
-    const MIME_IMAGE = 'image';
-    const MIME_VIDEO = 'video';
-    const MIME_AUDIO = 'audio';
+    const string MIME_IMAGE = 'image';
+    const string MIME_VIDEO = 'video';
+    const string MIME_AUDIO = 'audio';
 
     /**
      * 获取基准URL
@@ -31,15 +30,7 @@ class Storage extends Service
      */
     public function getBaseUrl(): string
     {
-        $baseUri = kg_config('storage_base_uri');
-
-        $helper = new HelperFactory();
-
-        if (!$helper->startsWith($baseUri, 'http')) {
-            $baseUri = kg_setting('site', 'url');
-        }
-
-        return rtrim($baseUri, '/');
+        return kg_cos_url();
     }
 
     /**
@@ -51,9 +42,7 @@ class Storage extends Service
      */
     public function getImageUrl(string $key, ?string $style = null): string
     {
-        $style = $style ?: '';
-
-        return $this->getBaseUrl() . $key . $style;
+        return kg_cos_img_url($key, $style);
     }
 
     /**

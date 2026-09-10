@@ -30,11 +30,10 @@ class V20250517020616 extends Migration
 
     public function initSettings(): void
     {
-        $this->handleSiteSettings();
-        $this->handleMailSettings();
-        $this->handlePaypalPaymentSettings();
-        $this->handleStripePaymentSettings();
-        $this->handleContactSettings();
+        $this->initSiteSettings();
+        $this->initMailSettings();
+        $this->initPaymentSettings();
+        $this->initContactSettings();
     }
 
     protected function initUserData(): void
@@ -230,7 +229,7 @@ class V20250517020616 extends Migration
         }
     }
 
-    protected function handleSiteSettings(): void
+    protected function initSiteSettings(): void
     {
         $settings = [
             'title' => 'WUWEI LMS',
@@ -253,7 +252,7 @@ class V20250517020616 extends Migration
         $this->saveSettings('site', $settings);
     }
 
-    protected function handleMailSettings(): void
+    protected function initMailSettings(): void
     {
         $settings = [
             'smtp_host' => '',
@@ -275,7 +274,7 @@ class V20250517020616 extends Migration
         $this->saveSettings('mail', $settings);
     }
 
-    protected function handlePaypalPaymentSettings(): void
+    protected function initPaymentSettings(): void
     {
         $settings = [
             'enabled' => 0,
@@ -287,10 +286,7 @@ class V20250517020616 extends Migration
         ];
 
         $this->saveSettings('payment.paypal', $settings);
-    }
 
-    protected function handleStripePaymentSettings(): void
-    {
         $settings = [
             'enabled' => 0,
             'api_key' => '',
@@ -302,7 +298,7 @@ class V20250517020616 extends Migration
         $this->saveSettings('payment.stripe', $settings);
     }
 
-    protected function handleContactSettings(): void
+    protected function initContactSettings(): void
     {
         $settings = [
             'enabled' => 0,

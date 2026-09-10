@@ -26,7 +26,7 @@ class Volt
         return kg_config($path, $defaultValue);
     }
 
-    public static function setting(string $section, string $key = null, $defaultValue = null): mixed
+    public static function setting(string $section, ?string $key = null, $defaultValue = null): mixed
     {
         return kg_setting($section, $key, $defaultValue);
     }
@@ -94,38 +94,43 @@ class Volt
         }
     }
 
-    public static function iconLink(string $path, bool $local = true, string $version = null): string
+    public static function iconLink(string $path, ?string $version = null): string
     {
-        $href = self::staticUrl($path, $local, $version);
+        $href = self::staticUrl($path, $version);
 
         return sprintf('<link rel="shortcut icon" href="%s">', $href);
     }
 
-    public static function cssLink(string $path, bool $local = true, string $version = null): string
+    public static function cssLink(string $path, ?string $version = null): string
     {
-        $href = self::staticUrl($path, $local, $version);
+        $href = self::staticUrl($path, $version);
 
         return sprintf('<link rel="stylesheet" type="text/css" href="%s">', $href);
     }
 
-    public static function jsInclude(string $path, bool $local = true, string $version = null): string
+    public static function jsInclude(string $path, ?string $version = null): string
     {
-        $src = self::staticUrl($path, $local, $version);
+        $src = self::staticUrl($path, $version);
 
         return sprintf('<script type="text/javascript" src="%s"></script>', $src);
     }
 
-    public static function staticUrl(string $path, bool $local = true, string $version = null): string
+    public static function staticUrl(string $path, ?string $version = null): string
     {
         /**
          * @var Config $config
          */
         $config = Di::getDefault()->getShared('config');
 
-        $baseUri = rtrim($config->get('static_base_uri'), '/');
-        $path = ltrim($path, '/');
-        $url = $local ? $baseUri . '/' . $path : $path;
         $version = $version ?: $config->get('static_version');
+        $baseUri = rtrim($config->get('static_base_uri'), '/');
+        $local = !str_contains($path, '//');
+
+        if ($local) {
+            $url = $baseUri . '/' . ltrim($path, '/');
+        } else {
+            $url = $path;
+        }
 
         if ($version) {
             $url .= '?v=' . $version;

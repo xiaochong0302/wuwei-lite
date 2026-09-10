@@ -7,7 +7,12 @@
 
 namespace App\Http\Admin\Services;
 
-class Service extends \App\Services\Service
-{
+use App\Traits\Auth as AuthTrait;
+use App\Traits\Service as ServiceTrait;
+use Phalcon\Di\Injectable as Component;
 
+class Service extends Component
+{
+    use AuthTrait;
+    use ServiceTrait;
 }
