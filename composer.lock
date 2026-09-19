@@ -4,8 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb8339195ada82f8e57c124d6f7fc441",
+    "content-hash": "6707bdfa0ebf4b69c913da981688943c",
     "packages": [
+        {
+            "name": "adamz01h/php-cron-scheduler",
+            "version": "3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adamz01h/php-cron-scheduler.git",
+                "reference": "4b3e5bf66cac22791406f22e395d858c34d559e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adamz01h/php-cron-scheduler/zipball/4b3e5bf66cac22791406f22e395d858c34d559e0",
+                "reference": "4b3e5bf66cac22791406f22e395d858c34d559e0",
+                "shasum": ""
+            },
+            "require": {
+                "dragonmantank/cron-expression": "^3.5",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "symfony/mailer": "~5.4 || ^6.0"
+            },
+            "suggest": {
+                "symfony/mailer": "Required to send the output of a job to email address/es"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GO\\": "src/GO/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giuseppe Occhipinti",
+                    "email": "peppeocchi@gmail.com"
+                },
+                {
+                    "name": "Carsten Windler",
+                    "email": "carsten@carstenwindler.de",
+                    "homepage": "http://carstenwindler.de",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "adamz01h",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "PHP Cron Job Scheduler",
+            "keywords": [
+                "cron job",
+                "scheduler",
+                "windows"
+            ],
+            "support": {
+                "source": "https://github.com/adamz01h/php-cron-scheduler/tree/3.1"
+            },
+            "time": "2025-11-30T01:07:00+00:00"
+        },
         {
             "name": "apimatic/core",
             "version": "0.3.18",
@@ -1758,65 +1821,6 @@
                 "source": "https://github.com/paypal/PayPal-PHP-Server-SDK/tree/1.1.0"
             },
             "time": "2025-05-27T17:46:31+00:00"
-        },
-        {
-            "name": "peppeocchi/php-cron-scheduler",
-            "version": "v4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/peppeocchi/php-cron-scheduler.git",
-                "reference": "0acfa032e60f0ea22a27b96a6b15a673a31d3448"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/peppeocchi/php-cron-scheduler/zipball/0acfa032e60f0ea22a27b96a6b15a673a31d3448",
-                "reference": "0acfa032e60f0ea22a27b96a6b15a673a31d3448",
-                "shasum": ""
-            },
-            "require": {
-                "dragonmantank/cron-expression": "^3.0",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.4",
-                "phpunit/phpunit": "~9.5",
-                "swiftmailer/swiftmailer": "~5.4 || ^6.0"
-            },
-            "suggest": {
-                "swiftmailer/swiftmailer": "Required to send the output of a job to email address/es (~5.4 || ^6.0)."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GO\\": "src/GO/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Giuseppe Occhipinti",
-                    "email": "peppeocchi@gmail.com"
-                },
-                {
-                    "name": "Carsten Windler",
-                    "email": "carsten@carstenwindler.de",
-                    "homepage": "http://carstenwindler.de",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "PHP Cron Job Scheduler",
-            "keywords": [
-                "cron job",
-                "scheduler"
-            ],
-            "support": {
-                "issues": "https://github.com/peppeocchi/php-cron-scheduler/issues",
-                "source": "https://github.com/peppeocchi/php-cron-scheduler/tree/v4.0"
-            },
-            "time": "2021-04-22T21:32:03+00:00"
         },
         {
             "name": "php-jsonpointer/php-jsonpointer",

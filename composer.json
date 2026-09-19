@@ -11,7 +11,7 @@
     "ext-fileinfo": "*",
     "ext-zend-opcache": "*",
     "guzzlehttp/guzzle": "^7.9",
-    "peppeocchi/php-cron-scheduler": "^4.0",
+    "adamz01h/php-cron-scheduler": "^3.0",
     "hightman/xunsearch": "^1.4",
     "league/commonmark": "^2.8",
     "intervention/image": "^3.11",
