@@ -73,7 +73,9 @@ class PublicController extends \Phalcon\Mvc\Controller
 
         $location = kg_cos_img_url($thumb);
 
-        return $this->response->redirect($location);
+        $external = str_starts_with($location, 'http');
+
+        return $this->response->redirect($thumb, $external);
     }
 
     /**
