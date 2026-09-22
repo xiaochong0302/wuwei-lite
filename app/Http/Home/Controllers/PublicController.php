@@ -75,7 +75,7 @@ class PublicController extends \Phalcon\Mvc\Controller
 
         $external = str_starts_with($location, 'http');
 
-        return $this->response->redirect($thumb, $external);
+        return $this->response->redirect($location, $external);
     }
 
     /**
