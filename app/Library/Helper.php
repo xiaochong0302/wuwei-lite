@@ -196,34 +196,6 @@ function kg_objectify(mixed $value): mixed
 }
 
 /**
- * 下载文件
- *
- * @param string $filePath
- * @return void
- */
-function kg_download(string $filePath): void
-{
-    $basename = pathinfo($filePath, PATHINFO_BASENAME);
-    $ext = pathinfo($filePath, PATHINFO_EXTENSION);
-    $mimeType = FileInfo::getMimeTypeByExt($ext);
-
-    header('Content-Type: ' . $mimeType);
-    header('Content-Disposition: attachment;filename="' . $basename . '"');
-    header('Content-Length: ' . filesize($filePath));
-    header('Content-Transfer-Encoding: binary');
-    header('Cache-Control: must-revalidate');
-    header('Cache-Control: max-age=0');
-
-    if (ob_get_level()) {
-        ob_end_clean();
-    }
-
-    readfile($filePath);
-
-    flush();
-}
-
-/**
  * 获取站点基准URL
  *
  * @return string
