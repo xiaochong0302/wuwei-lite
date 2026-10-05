@@ -115,19 +115,19 @@ $config['redis']['timeout'] = 5;
 $config['redis']['read_timeout'] = 30;
 
 /**
- * Token validity period (seconds)
+ * cookie会话有效期（秒），当为0时，表示浏览器会话
  */
-$config['token']['lifetime'] = 7 * 86400;
+$config['session']['cookie_lifetime'] = 0;
 
 /**
- * Session validity period (seconds)
+ * session会话有效期（秒），不能比cookie会话有效期小
  */
-$config['session']['lifetime'] = 86400;
+$config['session']['lifetime'] = 24 * 3600;
 
 /**
  * Session prefix
  */
-$config['session']['prefix'] = 'ww-session-';
+$config['session']['prefix'] = 'kg-session-';
 
 /**
  * Metadata validity period (seconds)
@@ -137,7 +137,7 @@ $config['metadata']['lifetime'] = 7 * 86400;
 /**
  * Metadata prefix
  */
-$config['metadata']['prefix'] = 'ww-metadata-';
+$config['metadata']['prefix'] = 'kg-metadata-';
 
 /**
  * Annotation validity period (seconds)
@@ -147,7 +147,17 @@ $config['annotation']['lifetime'] = 7 * 86400;
 /**
  * Annotation prefix
  */
-$config['annotation']['prefix'] = 'ww-annotation-';
+$config['annotation']['prefix'] = 'kg-annotation-';
+
+/**
+ * api令牌有效期（秒）
+ */
+$config['api_token']['lifetime'] = 7 * 86400;
+
+/**
+ * api令牌前缀
+ */
+$config['api_token']['prefix'] = 'kg-api-token-';
 
 /**
  * CsrfToken validity period (seconds)
