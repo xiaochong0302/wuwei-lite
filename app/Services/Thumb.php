@@ -10,6 +10,7 @@ namespace App\Services;
 use App\Models\ThumbLink as ThumbLinkModel;
 use App\Repos\ThumbLink as ThumbLinkRepo;
 use Exception as Exception;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
 use Phalcon\Logger\Logger;
 
@@ -28,7 +29,7 @@ class Thumb extends Service
 
     public function __construct()
     {
-        $this->manager = ImageManager::gd();
+        $this->manager = ImageManager::usingDriver(GdDriver::class);
 
         $this->logger = $this->getLogger('thumb');
     }
@@ -64,7 +65,7 @@ class Thumb extends Service
 
         try {
 
-            $image = $this->manager->read($filePath);
+            $image = $this->manager->decodePath($filePath);
 
             if ($image->width() > 320) {
                 $image->resize($width, $height)->save($thumbPath);
@@ -100,7 +101,7 @@ class Thumb extends Service
 
         try {
 
-            $image = $this->manager->read($filePath);
+            $image = $this->manager->decodePath($filePath);
 
             if ($image->width() > 540) {
                 $image->resize($width, $height)->save($thumbPath);
@@ -136,7 +137,7 @@ class Thumb extends Service
 
         try {
 
-            $image = $this->manager->read($filePath);
+            $image = $this->manager->decodePath($filePath);
 
             if ($image->width() > 1280) {
                 $height = intval($image->height() * $width / $image->width());
@@ -173,7 +174,7 @@ class Thumb extends Service
 
         try {
 
-            $image = $this->manager->read($filePath);
+            $image = $this->manager->decodePath($filePath);
 
             if ($image->width() > 1920) {
                 $image->resize($width, $height)->save($thumbPath);

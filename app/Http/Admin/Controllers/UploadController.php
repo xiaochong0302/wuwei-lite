@@ -11,7 +11,6 @@ use App\Repos\Upload as UploadRepo;
 use App\Services\Storage as StorageService;
 use App\Services\Storage\Image as ImageStorageService;
 use App\Services\Storage\Media as MediaStorageService;
-use App\Services\Storage\Resource as ResourceStorageService;
 
 /**
  * @RoutePrefix("/admin/upload")
@@ -110,11 +109,7 @@ class UploadController extends Controller
 
         $upload = $service->uploadRemoteContentImage($originalUrl);
 
-        $newUrl = $originalUrl;
-
-        if ($upload) {
-            $newUrl = $upload->path;
-        }
+        $newUrl = $upload ? $upload->path : $originalUrl;
 
         $data = [
             'url' => $newUrl,
@@ -162,18 +157,6 @@ class UploadController extends Controller
         $service = new MediaStorageService();
 
         $upload = $service->mergeMediaChunks();
-
-        return $this->jsonSuccess(['upload' => $upload]);
-    }
-
-    /**
-     * @Post("/resource/chunks/merge", name="admin.upload.merge_resource_chunks")
-     */
-    public function mergeResourceChunksAction()
-    {
-        $service = new ResourceStorageService();
-
-        $upload = $service->mergeResourceChunks();
 
         return $this->jsonSuccess(['upload' => $upload]);
     }

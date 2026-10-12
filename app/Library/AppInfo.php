@@ -7,6 +7,12 @@
 
 namespace App\Library;
 
+/**
+ * @property string $name
+ * @property string $alias
+ * @property string $link
+ * @property string $version
+ */
 class AppInfo
 {
 

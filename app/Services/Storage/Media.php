@@ -78,9 +78,9 @@ class Media extends Storage
     /**
      * 合并媒体分片
      *
-     * @return UploadModel|bool
+     * @return UploadModel|false
      */
-    public function mergeMediaChunks(): UploadModel|bool
+    public function mergeMediaChunks(): UploadModel|false
     {
         $prefix = sprintf('/upload/media/%s/%s', date('Y'), date('m'));
 
@@ -90,34 +90,14 @@ class Media extends Storage
     }
 
     /**
-     * 删除加密媒体文件
-     *
-     * @param string $key
-     * @return void
-     */
-    public function removeEncryptMedia(string $key): void
-    {
-        $dirname = pathinfo($key, PATHINFO_DIRNAME);
-        $filename = pathinfo($key, PATHINFO_FILENAME);
-
-        list($quality) = explode('.', $filename);
-
-        $pattern = sprintf('%s/%s*', public_path($dirname), $quality);
-
-        foreach (glob($pattern) as $filename) {
-            unlink($filename);
-        }
-    }
-
-    /**
      * 合并分片
      *
      * @param string $saveDir
      * @param int $uploadType
      * @param bool $rename
-     * @return UploadModel|bool
+     * @return UploadModel|false
      */
-    protected function mergeChunks(string $saveDir, int $uploadType, bool $rename = true): UploadModel|bool
+    protected function mergeChunks(string $saveDir, int $uploadType, bool $rename = true): UploadModel|false
     {
         $post = $this->request->getPost();
 

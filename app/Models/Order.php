@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use App\Library\Utils\ShortIdCodec;
 use Phalcon\Di\Di;
 use Phalcon\Mvc\Model\Behavior\SoftDelete;
 
@@ -207,8 +208,6 @@ class Order extends Model
 
     public function beforeCreate(): void
     {
-        $this->sn = $this->getOrderSn();
-
         $this->create_time = time();
     }
 
@@ -240,6 +239,13 @@ class Order extends Model
             $orderStatus->status = $this->getSnapshotData()['status'];
             $orderStatus->create();
         }
+    }
+
+    public function afterCreate(): void
+    {
+        $this->sn = ShortIdCodec::encode($this->id);
+
+        $this->update();
     }
 
     public function afterFetch(): void
@@ -284,20 +290,6 @@ class Order extends Model
             self::STATUS_CLOSED => $locale->query('status_closed'),
             self::STATUS_REFUNDED => $locale->query('status_refunded'),
         ];
-    }
-
-    protected function getOrderSn(): string
-    {
-        $sn = sprintf('OD-%s-%s', date('YmdHis'), rand(1000, 9999));
-
-        $order = self::findFirst([
-            'conditions' => 'sn = :sn:',
-            'bind' => ['sn' => $sn],
-        ]);
-
-        if (!$order) return $sn;
-
-        return $this->getOrderSn();
     }
 
 }

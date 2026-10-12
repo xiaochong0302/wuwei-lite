@@ -18,9 +18,9 @@ class Image extends Storage
      * 上传远程内容图片
      *
      * @param string $url
-     * @return UploadModel|bool
+     * @return UploadModel|false
      */
-    public function uploadRemoteContentImage(string $url): UploadModel|bool
+    public function uploadRemoteContentImage(string $url): UploadModel|false
     {
         $path = parse_url($url, PHP_URL_PATH);
         $extension = pathinfo($path, PATHINFO_EXTENSION);

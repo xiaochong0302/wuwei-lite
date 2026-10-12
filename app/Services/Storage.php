@@ -34,6 +34,17 @@ class Storage extends Service
     }
 
     /**
+     * 获取文件URL
+     *
+     * @param string $key
+     * @return string
+     */
+    public function getFileUrl(string $key): string
+    {
+        return $this->getBaseUrl() . $key;
+    }
+
+    /**
      *  获取图片URL
      *
      * @param string $key
@@ -48,9 +59,9 @@ class Storage extends Service
     /**
      * 上传临时文件
      *
-     * @return array|bool
+     * @return array|false
      */
-    public function uploadTempFile(): array|bool
+    public function uploadTempFile(): array|false
     {
         if ($this->request->hasFiles()) {
 
@@ -124,9 +135,9 @@ class Storage extends Service
      * @param string $mimeType
      * @param int $uploadType
      * @param string|null $fileName
-     * @return UploadModel|bool
+     * @return UploadModel|false
      */
-    protected function upload(string $prefix, string $mimeType, int $uploadType, string $fileName = null): UploadModel|bool
+    protected function upload(string $prefix, string $mimeType, int $uploadType, ?string $fileName = null): UploadModel|false
     {
         $list = [];
 

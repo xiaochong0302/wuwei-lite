@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use App\Library\Utils\ShortIdCodec;
 use Phalcon\Di\Di;
 use Phalcon\Mvc\Model\Behavior\SoftDelete;
 
@@ -130,8 +131,6 @@ class Refund extends Model
 
     public function beforeCreate(): void
     {
-        $this->sn = $this->getRefundSn();
-
         $this->create_time = time();
     }
 
@@ -150,6 +149,13 @@ class Refund extends Model
         }
     }
 
+    public function afterCreate(): void
+    {
+        $this->sn = ShortIdCodec::encode($this->id);
+
+        $this->update();
+    }
+
     public static function statusTypes(): array
     {
         $locale = Di::getDefault()->getShared('locale');
@@ -162,20 +168,6 @@ class Refund extends Model
             self::STATUS_FINISHED => $locale->query('status_finished'),
             self::STATUS_FAILED => $locale->query('status_failed'),
         ];
-    }
-
-    protected function getRefundSn(): string
-    {
-        $sn = sprintf('RD-%s-%s', date('YmdHis'), rand(1000, 9999));
-
-        $order = self::findFirst([
-            'conditions' => 'sn = :sn:',
-            'bind' => ['sn' => $sn],
-        ]);
-
-        if (!$order) return $sn;
-
-        return $this->getRefundSn();
     }
 
 }
