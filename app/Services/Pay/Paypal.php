@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -39,23 +39,23 @@ class Paypal extends AppService
     /**
      * @var PaypalServerSdkClient
      */
-    protected PaypalServerSdkClient $client;
+    protected PaypalServerSdkClient $paypalClient;
 
     /**
      * @var Logger
      */
-    protected Logger $logger;
+    protected Logger $paypalLogger;
 
     public function __construct()
     {
-        $this->client = $this->getClient();
+        $this->paypalClient = $this->getPaypalClient();
 
-        $this->logger = $this->getLogger('paypal');
+        $this->paypalLogger = $this->getLogger('paypal');
     }
 
     public function purchase(OrderModel $order): array
     {
-        $this->logger->debug('------ Purchase ------');
+        $this->paypalLogger->debug('------ Purchase ------');
 
         $result = [
             'status' => 'redirect',
@@ -107,16 +107,16 @@ class Paypal extends AppService
 
             $collect = ['body' => $body];
 
-            $this->logger->debug('Create Order Params: ' . kg_json_encode($collect));
+            $this->paypalLogger->debug('Create Order Params: ' . kg_json_encode($collect));
 
-            $response = $this->client->getOrdersController()->createOrder($collect);
+            $response = $this->paypalClient->getOrdersController()->createOrder($collect);
 
             /**
              * @var $paypalOrder Order
              */
             $paypalOrder = $response->getResult();
 
-            $this->logger->debug('Create Order Response: ' . kg_json_encode($paypalOrder));
+            $this->paypalLogger->debug('Create Order Response: ' . kg_json_encode($paypalOrder));
 
             if ($paypalOrder->getStatus() == OrderStatus::CREATED) {
 
@@ -141,7 +141,7 @@ class Paypal extends AppService
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Create Order Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Create Order Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage()
                 ]));
@@ -155,9 +155,9 @@ class Paypal extends AppService
 
     public function completePurchase(string $token, string $sn): array
     {
-        $this->logger->debug('------ Complete Purchase ------');
+        $this->paypalLogger->debug('------ Complete Purchase ------');
 
-        $this->logger->debug("token:{$token}, sn:{$sn}");
+        $this->paypalLogger->debug("token:{$token}, sn:{$sn}");
 
         $orderRepo = new OrderRepo();
 
@@ -187,16 +187,16 @@ class Paypal extends AppService
 
             $collect = ['id' => $token];
 
-            $this->logger->debug('Capture Order Params: ' . kg_json_encode($collect));
+            $this->paypalLogger->debug('Capture Order Params: ' . kg_json_encode($collect));
 
-            $response = $this->client->getOrdersController()->captureOrder($collect);
+            $response = $this->paypalClient->getOrdersController()->captureOrder($collect);
 
             /**
              * @var $paypalOrder Order
              */
             $paypalOrder = $response->getResult();
 
-            $this->logger->debug('Capture Order Response: ' . kg_json_encode($paypalOrder));
+            $this->paypalLogger->debug('Capture Order Response: ' . kg_json_encode($paypalOrder));
 
             $captureId = $paypalOrder->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getId();
             $captureStatus = $paypalOrder->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getStatus();
@@ -214,7 +214,7 @@ class Paypal extends AppService
                 $order->status = OrderModel::STATUS_PAID;
                 $order->update();
 
-                $this->logger->debug('trigger Order:afterPay event');
+                $this->paypalLogger->debug('trigger Order:afterPay event');
 
                 $this->eventsManager->fire('Order:afterPay', $this, $order);
 
@@ -228,7 +228,7 @@ class Paypal extends AppService
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Capture Order Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Capture Order Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage()
                 ]));
@@ -242,14 +242,14 @@ class Paypal extends AppService
 
     public function cancelPurchase(string $token, string $sn): void
     {
-        $this->logger->debug('------ Cancel Purchase ------');
+        $this->paypalLogger->debug('------ Cancel Purchase ------');
 
-        $this->logger->debug("token:{$token}, sn:{$sn}");
+        $this->paypalLogger->debug("token:{$token}, sn:{$sn}");
     }
 
     public function refund(RefundModel $refund): array
     {
-        $this->logger->debug('------ Refund ------');
+        $this->paypalLogger->debug('------ Refund ------');
 
         $orderRepo = new OrderRepo();
 
@@ -276,16 +276,16 @@ class Paypal extends AppService
                 'body' => $body,
             ];
 
-            $this->logger->debug('Refund Params: ' . kg_json_encode($collect));
+            $this->paypalLogger->debug('Refund Params: ' . kg_json_encode($collect));
 
-            $response = $this->client->getPaymentsController()->refundCapturedPayment($collect);
+            $response = $this->paypalClient->getPaymentsController()->refundCapturedPayment($collect);
 
             /**
              * @var $paypalRefund Refund
              */
             $paypalRefund = $response->getResult();
 
-            $this->logger->debug('Refund Response: ' . kg_json_encode($paypalRefund));
+            $this->paypalLogger->debug('Refund Response: ' . kg_json_encode($paypalRefund));
 
             $result = [
                 'status' => 'pending',
@@ -309,7 +309,7 @@ class Paypal extends AppService
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Refund Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Refund Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -323,26 +323,26 @@ class Paypal extends AppService
 
     public function getCapturedPayment(string $id): ?CapturedPayment
     {
-        $this->logger->debug('------ step: Get Captured Payment ------');
+        $this->paypalLogger->debug('------ step: Get Captured Payment ------');
 
         try {
 
             $collect = ['captureId' => $id];
 
-            $response = $this->client->getPaymentsController()->getCapturedPayment($collect);
+            $response = $this->paypalClient->getPaymentsController()->getCapturedPayment($collect);
 
             /**
              * @var $payment CapturedPayment
              */
             $payment = $response->getResult();
 
-            $this->logger->debug('Get Payment Response: ' . kg_json_encode($payment));
+            $this->paypalLogger->debug('Get Payment Response: ' . kg_json_encode($payment));
 
             return $payment;
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Get Payment Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Get Payment Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -353,26 +353,26 @@ class Paypal extends AppService
 
     public function getOrder(string $id): ?Order
     {
-        $this->logger->debug('------ Get Order ------');
+        $this->paypalLogger->debug('------ Get Order ------');
 
         try {
 
             $collect = ['id' => $id];
 
-            $response = $this->client->getOrdersController()->getOrder($collect);
+            $response = $this->paypalClient->getOrdersController()->getOrder($collect);
 
             /**
              * @var $order Order
              */
             $order = $response->getResult();
 
-            $this->logger->debug('Get Order Response: ' . kg_json_encode($order));
+            $this->paypalLogger->debug('Get Order Response: ' . kg_json_encode($order));
 
             return $order;
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Get Order Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Get Order Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -383,26 +383,26 @@ class Paypal extends AppService
 
     public function getRefund(string $id): ?Refund
     {
-        $this->logger->debug('------ Get Refund ------');
+        $this->paypalLogger->debug('------ Get Refund ------');
 
         try {
 
             $collect = ['refundId' => $id];
 
-            $response = $this->client->getPaymentsController()->getRefund($collect);
+            $response = $this->paypalClient->getPaymentsController()->getRefund($collect);
 
             /**
              * @var $refund Refund
              */
             $refund = $response->getResult();
 
-            $this->logger->debug('Get Refund Response: ' . kg_json_encode($refund));
+            $this->paypalLogger->debug('Get Refund Response: ' . kg_json_encode($refund));
 
             return $refund;
 
         } catch (ApiException $e) {
 
-            $this->logger->error('Get Refund Exception: ' . kg_json_encode([
+            $this->paypalLogger->error('Get Refund Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -424,7 +424,7 @@ class Paypal extends AppService
         return $settings;
     }
 
-    protected function getClient(): PaypalServerSdkClient
+    protected function getPaypalClient(): PaypalServerSdkClient
     {
         $payEnv = Environment::PRODUCTION;
 

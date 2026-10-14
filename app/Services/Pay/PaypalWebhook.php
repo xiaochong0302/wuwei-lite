@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -22,33 +22,37 @@ class PaypalWebhook extends AppService
     /**
      * @var array
      */
-    protected array $settings = [];
+    protected array $paypalSettings;
 
     /**
      * @var Logger
      */
-    protected Logger $logger;
+    protected Logger $paypalLogger;
 
     public function __construct()
     {
-        $this->initPaypalSettings();
+        $this->paypalSettings = $this->getPaypalSettings();
+
+        if ($this->paypalSettings['env'] == 'sandbox') {
+            $this->env = 'sandbox';
+        }
+
+        $this->paypalLogger = $this->getLogger('paypal');
     }
 
     public function handle(): bool
     {
-        $this->logger = $this->getLogger('paypal');
-
-        $this->logger->debug('------ Webhook ------');
+        $this->paypalLogger->debug('------ Webhook ------');
 
         $headers = $this->request->getHeaders();
 
-        $this->logger->debug('Headers: ' . kg_json_encode($headers));
+        $this->paypalLogger->debug('Headers: ' . kg_json_encode($headers));
 
         $payload = $this->request->getRawBody();
 
-        $this->logger->debug('Payload: ' . $payload);
+        $this->paypalLogger->debug('Payload: ' . $payload);
 
-        $webhookId = $this->settings['webhook_id'];
+        $webhookId = $this->paypalSettings['webhook_id'];
 
         $isValidSignature = $this->isValidSignature($headers, $payload, $webhookId);
 
@@ -63,7 +67,7 @@ class PaypalWebhook extends AppService
 
         $eventType = $payload['event_type'] ?? '';
 
-        $this->logger->debug('Event Type: ' . $eventType);
+        $this->paypalLogger->debug('Event Type: ' . $eventType);
 
         $result = false;
 
@@ -72,7 +76,7 @@ class PaypalWebhook extends AppService
             $paypalOrderId = $payload['resource']['id'] ?? '';
             $localTradeSn = $payload['resource']['purchase_units'][0]['custom_id'] ?? '';
 
-            $this->logger->debug("paypalOrderId: {$paypalOrderId}, localTradeSn: {$localTradeSn}");
+            $this->paypalLogger->debug("paypalOrderId: {$paypalOrderId}, localTradeSn: {$localTradeSn}");
 
             $service = new PaypalPayService();
 
@@ -81,7 +85,7 @@ class PaypalWebhook extends AppService
             $result = $response['status'] != 'error';
         }
 
-        $this->logger->debug('Event Result: ' . ($result ? 'success' : 'failed'));
+        $this->paypalLogger->debug('Event Result: ' . ($result ? 'success' : 'failed'));
 
         return $result;
     }
@@ -95,7 +99,7 @@ class PaypalWebhook extends AppService
 
         $sigInput = $transmissionId . '|' . $transmissionTime . '|' . $webhookId . '|' . crc32($payload);
 
-        $this->logger->debug('sign input: ' . $sigInput);
+        $this->paypalLogger->debug('sign input: ' . $sigInput);
 
         $cert = $this->getCert($certUrl);
 
@@ -104,7 +108,7 @@ class PaypalWebhook extends AppService
         $result = openssl_verify($sigInput, $transmissionSig, $publicKey, OPENSSL_ALGO_SHA256) == 1;
 
         if (!$result) {
-            $this->logger->debug('sign verify failed');
+            $this->paypalLogger->debug('sign verify failed');
         }
 
         return $result;
@@ -127,17 +131,11 @@ class PaypalWebhook extends AppService
         return $content;
     }
 
-    protected function initPaypalSettings(): void
+    protected function getPaypalSettings(): array
     {
         $service = new PaypalPayService();
 
-        $settings = $service->getPaypalSettings();
-
-        if ($settings['env'] == 'sandbox') {
-            $this->env = 'sandbox';
-        }
-
-        $this->settings = $settings;
+        return $service->getPaypalSettings();
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -26,39 +26,43 @@ class StripeWebhook extends AppService
     /**
      * @var array
      */
-    protected array $settings = [];
+    protected array $stripeSettings;
 
     /**
      * @var Logger
      */
-    protected Logger $logger;
+    protected Logger $stripeLogger;
 
     public function __construct()
     {
-        $this->initStripeSettings();
+        $this->stripeSettings = $this->getStripeSettings();
+
+        if ($this->stripeSettings['env'] == 'sandbox') {
+            $this->env = 'sandbox';
+        }
+
+        $this->stripeLogger = $this->getLogger('stripe');
     }
 
     public function handle(): bool
     {
-        $this->logger = $this->getLogger('stripe');
-
-        $this->logger->debug('------ Webhook ------');
+        $this->stripeLogger->debug('------ Webhook ------');
 
         $signature = $this->request->getHeader('Stripe-Signature');
 
-        $this->logger->debug("Signature: {$signature}");
+        $this->stripeLogger->debug("Signature: {$signature}");
 
         $payload = $this->request->getRawBody();
 
-        $this->logger->debug("Payload: {$payload}");
+        $this->stripeLogger->debug("Payload: {$payload}");
 
-        $endpointSecret = $this->settings['webhook_secret'];
+        $endpointSecret = $this->stripeSettings['webhook_secret'];
 
         try {
 
             $event = Webhook::constructEvent($payload, $signature, $endpointSecret);
 
-            $this->logger->debug("Event Type: {$event->type}");
+            $this->stripeLogger->debug("Event Type: {$event->type}");
 
             $result = false;
 
@@ -66,13 +70,13 @@ class StripeWebhook extends AppService
                 $result = $this->handleCheckoutSessionCompletedEvent($event);
             }
 
-            $this->logger->debug('Event Result: ' . ($result ? 'success' : 'failed'));
+            $this->stripeLogger->debug('Event Result: ' . ($result ? 'success' : 'failed'));
 
             return $result;
 
         } catch (SignatureVerificationException $e) {
 
-            $this->logger->error('Signature Verification Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Signature Verification Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage()
                 ]));
@@ -95,17 +99,11 @@ class StripeWebhook extends AppService
         return $result['status'] != 'error';
     }
 
-    protected function initStripeSettings(): void
+    protected function getStripeSettings(): array
     {
         $service = new StripePayService();
 
-        $settings = $service->getStripeSettings();
-
-        if ($settings['env'] == 'sandbox') {
-            $this->env = 'sandbox';
-        }
-
-        $this->settings = $settings;
+        return $service->getStripeSettings();
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 深圳市酷瓜软件有限公司
- * @license https://www.koogua.net/wuwei/lite-license
+ * @license https://www.koogua.net/wuwei/pro-license
  * @link https://www.koogua.net
  */
 
@@ -25,23 +25,23 @@ class Stripe extends AppService
     /**
      * @var StripeClient
      */
-    protected StripeClient $client;
+    protected StripeClient $stripeClient;
 
     /**
      * @var Logger
      */
-    protected Logger $logger;
+    protected Logger $stripeLogger;
 
     public function __construct()
     {
-        $this->client = $this->getClient();
+        $this->stripeClient = $this->getStripeClient();
 
-        $this->logger = $this->getLogger('stripe');
+        $this->stripeLogger = $this->getLogger('stripe');
     }
 
     public function purchase(OrderModel $order): array
     {
-        $this->logger->debug('------ Purchase ------');
+        $this->stripeLogger->debug('------ Purchase ------');
 
         $successUrl = kg_full_url(
                 ['for' => 'home.payment.stripe_success'],
@@ -88,11 +88,11 @@ class Stripe extends AppService
                 ],
             ];
 
-            $this->logger->debug('Create Session Params: ' . kg_json_encode($params));
+            $this->stripeLogger->debug('Create Session Params: ' . kg_json_encode($params));
 
-            $session = $this->client->checkout->sessions->create($params);
+            $session = $this->stripeClient->checkout->sessions->create($params);
 
-            $this->logger->debug('Create Session Response: ' . kg_json_encode($session));
+            $this->stripeLogger->debug('Create Session Response: ' . kg_json_encode($session));
 
             $result = [
                 'status' => 'redirect',
@@ -119,7 +119,7 @@ class Stripe extends AppService
 
         } catch (ApiErrorException $e) {
 
-            $this->logger->error('Create Session Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Create Session Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage()
                 ]));
@@ -133,7 +133,7 @@ class Stripe extends AppService
 
     public function completePurchase(string $sessionId, string $sn): array
     {
-        $this->logger->debug('------ Complete Purchase ------');
+        $this->stripeLogger->debug('------ Complete Purchase ------');
 
         $orderRepo = new orderRepo();
 
@@ -174,7 +174,7 @@ class Stripe extends AppService
             $order->status = OrderModel::STATUS_PAID;
             $order->update();
 
-            $this->logger->debug('trigger Order:afterPay event');
+            $this->stripeLogger->debug('trigger Order:afterPay event');
 
             $this->eventsManager->fire('Order:afterPay', $this, $order);
 
@@ -189,14 +189,14 @@ class Stripe extends AppService
 
     public function cancelPurchase(string $sn): void
     {
-        $this->logger->debug('------ Cancel Purchase ------');
+        $this->stripeLogger->debug('------ Cancel Purchase ------');
 
-        $this->logger->debug("sn:{$sn}");
+        $this->stripeLogger->debug("sn:{$sn}");
     }
 
     public function refund(RefundModel $refund): array
     {
-        $this->logger->debug('------ Create Refund ------');
+        $this->stripeLogger->debug('------ Create Refund ------');
 
         $orderRepo = new OrderRepo();
 
@@ -220,11 +220,11 @@ class Stripe extends AppService
                 'metadata' => ['sn' => $refund->sn],
             ];
 
-            $this->logger->debug('Refund Params: ' . kg_json_encode($params));
+            $this->stripeLogger->debug('Refund Params: ' . kg_json_encode($params));
 
-            $stripeRefund = $this->client->refunds->create($params);
+            $stripeRefund = $this->stripeClient->refunds->create($params);
 
-            $this->logger->debug('Refund Response: ' . kg_json_encode($stripeRefund));
+            $this->stripeLogger->debug('Refund Response: ' . kg_json_encode($stripeRefund));
 
             $result = [
                 'status' => 'pending',
@@ -248,7 +248,7 @@ class Stripe extends AppService
 
         } catch (ApiErrorException$e) {
 
-            $this->logger->error('Refund Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Refund Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -264,11 +264,11 @@ class Stripe extends AppService
     {
         try {
 
-            return $this->client->checkout->sessions->retrieve($id);
+            return $this->stripeClient->checkout->sessions->retrieve($id);
 
         } catch (ApiErrorException $e) {
 
-            $this->logger->error('Retrieve Checkout Session Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Retrieve Checkout Session Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage()
                 ]));
@@ -279,15 +279,15 @@ class Stripe extends AppService
 
     public function retrievePaymentIndent(string $id): ?PaymentIntent
     {
-        $this->logger->debug('------ Retrieve Payment Indent ------');
+        $this->stripeLogger->debug('------ Retrieve Payment Indent ------');
 
         try {
 
-            return $this->client->paymentIntents->retrieve($id);
+            return $this->stripeClient->paymentIntents->retrieve($id);
 
         } catch (ApiErrorException $e) {
 
-            $this->logger->error('Retrieve Payment Indent Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Retrieve Payment Indent Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -298,15 +298,15 @@ class Stripe extends AppService
 
     public function retrieveRefund(string $id): ?Refund
     {
-        $this->logger->debug('------ Retrieve Refund ------');
+        $this->stripeLogger->debug('------ Retrieve Refund ------');
 
         try {
 
-            return $this->client->refunds->retrieve($id);
+            return $this->stripeClient->refunds->retrieve($id);
 
         } catch (ApiErrorException $e) {
 
-            $this->logger->error('Retrieve Refund Exception: ' . kg_json_encode([
+            $this->stripeLogger->error('Retrieve Refund Exception: ' . kg_json_encode([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ]));
@@ -337,7 +337,7 @@ class Stripe extends AppService
         return intval($amount * $unit);
     }
 
-    protected function getClient(): StripeClient
+    protected function getStripeClient(): StripeClient
     {
         $settings = $this->getStripeSettings();
 
