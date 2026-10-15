@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7d9638f9f375625d3923da44cc67537",
+    "content-hash": "af02d137b19e764442e60643a491b52f",
     "packages": [
         {
             "name": "adamz01h/php-cron-scheduler",
@@ -3914,16 +3914,16 @@
         },
         {
             "name": "xiaochong0302/phalcon-ide-stubs",
-            "version": "v5.19.0",
+            "version": "v5.20.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xiaochong0302/phalcon-ide-stubs",
-                "reference": "27e511ffdc61f0e9f21e92b1c6fd726d62457a91"
+                "reference": "20db3011ddbb8e3ad061ef18e74168c27777766e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xiaochong0302/phalcon-ide-stubs/zipball/27e511ffdc61f0e9f21e92b1c6fd726d62457a91",
-                "reference": "27e511ffdc61f0e9f21e92b1c6fd726d62457a91",
+                "url": "https://api.github.com/repos/xiaochong0302/phalcon-ide-stubs/zipball/20db3011ddbb8e3ad061ef18e74168c27777766e",
+                "reference": "20db3011ddbb8e3ad061ef18e74168c27777766e",
                 "shasum": ""
             },
             "require": {
@@ -3969,7 +3969,7 @@
                 "issues": "https://github.com/phalcon/ide-stubs/issues",
                 "source": "https://github.com/phalcon/ide-stubs"
             },
-            "time": "2026-08-20T01:24:47+00:00"
+            "time": "2026-09-12T02:38:45+00:00"
         }
     ],
     "aliases": [],
