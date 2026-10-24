@@ -127,6 +127,10 @@ body {
     text-align: center;
 }
 
+.pager a {
+    margin-right: 15px;
+}
+
 .layer .kg-tab-title {
     margin-top: -20px;
 }
