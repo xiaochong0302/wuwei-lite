@@ -7,7 +7,7 @@
 
 namespace App\Services;
 
-use App\Library\Utils\FileInfo;
+use App\Library\Utils\FileInfo as FileInfo;
 use App\Models\Upload as UploadModel;
 use App\Repos\Upload as UploadRepo;
 use InvalidArgumentException;
@@ -156,7 +156,7 @@ class Storage extends Service
                     throw new InvalidArgumentException($message);
                 }
 
-                $md5 = md5_file($file->getTempName());
+                $md5 = FileInfo::getFileMd5($file->getTempName());
 
                 $upload = $uploadRepo->findByMd5($md5);
 
@@ -172,20 +172,16 @@ class Storage extends Service
 
                     $destination = $saveDir . '/' . $keyName;
 
-                    $data = [
-                        'name' => $file->getName(),
-                        'mime' => $file->getRealType(),
-                        'size' => $file->getSize(),
-                        'path' => $this->getRelativeFilePath($destination),
-                        'type' => $uploadType,
-                        'md5' => $md5,
-                    ];
-
                     $file->moveTo($destination);
 
                     $upload = new UploadModel();
-                    $upload->assign($data);
-                    $upload->create();
+
+                    $upload->name = $file->getName();
+                    $upload->mime = $file->getRealType();
+                    $upload->size = $file->getSize();
+                    $upload->path = $this->getRelativeFilePath($destination);
+                    $upload->type = $uploadType;
+                    $upload->md5 = $md5;
                 }
 
                 $list[] = $upload;
@@ -238,6 +234,20 @@ class Storage extends Service
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
         return strtolower($extension);
+    }
+
+    /**
+     * 获取图片扩展名
+     * 例如：https://abc.com/123.jpg!large，这类不规范地址，需要特殊处理
+     *
+     * @param string $filename
+     * @return string
+     */
+    protected function getImageExtension(string $filename): string
+    {
+        preg_match('/(\S+)\.(png|gif|jpg|jpeg|webp)/i', $filename, $matches);
+
+        return $matches[2] ? strtolower($matches[2]) : 'jpg';
     }
 
     /**

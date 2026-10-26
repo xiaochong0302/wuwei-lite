@@ -17,12 +17,16 @@ class Common
         return filter_var($str, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    public static function url(mixed $str): bool
+    public static function url(string $str): bool
     {
-        $helper = new HelperFactory();
-
-        if ($helper->startsWith($str, '//')) {
+        if (str_starts_with($str, '//')) {
             $str = 'http:' . $str;
+        }
+
+        $scheme = parse_url($str, PHP_URL_SCHEME);
+
+        if (!in_array(strtolower($scheme), ['http', 'https'])) {
+            return false;
         }
 
         return filter_var($str, FILTER_VALIDATE_URL) !== false;
