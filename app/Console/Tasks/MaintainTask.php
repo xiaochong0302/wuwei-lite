@@ -131,7 +131,7 @@ class MaintainTask extends Task
     {
         $service = new SettingService();
 
-        $service->updateSettings('site', ['status' => 'offline']);
+        $service->updateMySettings('site', ['status' => 'offline']);
 
         $this->successPrint('disable site ok');
     }
@@ -145,7 +145,7 @@ class MaintainTask extends Task
     {
         $service = new SettingService();
 
-        $service->updateSettings('site', ['status' => 'online']);
+        $service->updateMySettings('site', ['status' => 'online']);
 
         $this->successPrint('enable site ok');
     }

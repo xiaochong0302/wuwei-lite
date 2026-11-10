@@ -28,7 +28,7 @@ class SettingController extends Controller
 
             $data = $this->request->getPost();
 
-            $settingService->updateSettings($section, $data);
+            $settingService->updateMySettings($section, $data);
 
             $content = [
                 'msg' => $this->locale->query('updated_ok'),
@@ -38,7 +38,7 @@ class SettingController extends Controller
 
         } else {
 
-            $site = $settingService->getSettings($section);
+            $site = $settingService->getMySettings($section);
             $timezones = $settingService->getTimezones();
             $languages = $settingService->getLanguages();
             $currencies = $settingService->getCurrencies();
@@ -65,7 +65,7 @@ class SettingController extends Controller
 
             $data = $this->request->getPost();
 
-            $settingService->updateSettings($section, $data);
+            $settingService->updateMySettings($section, $data);
 
             $content = [
                 'msg' => $this->locale->query('updated_ok'),
@@ -75,7 +75,7 @@ class SettingController extends Controller
 
         } else {
 
-            $mail = $settingService->getSettings($section);
+            $mail = $settingService->getMySettings($section);
 
             $this->view->setVar('mail', $mail);
         }
@@ -94,7 +94,7 @@ class SettingController extends Controller
 
             $data = $this->request->getPost();
 
-            $settingService->updateSettings($section, $data);
+            $settingService->updateMySettings($section, $data);
 
             $content = [
                 'msg' => $this->locale->query('updated_ok'),
@@ -104,8 +104,8 @@ class SettingController extends Controller
 
         } else {
 
-            $paypal = $settingService->getSettings('payment.paypal');
-            $stripe = $settingService->getSettings('payment.stripe');
+            $paypal = $settingService->getMySettings('payment.paypal');
+            $stripe = $settingService->getMySettings('payment.stripe');
 
             $this->view->setVar('paypal', $paypal);
             $this->view->setVar('stripe', $stripe);
@@ -125,7 +125,7 @@ class SettingController extends Controller
 
             $data = $this->request->getPost();
 
-            $settingService->updateSettings($section, $data);
+            $settingService->updateMySettings($section, $data);
 
             $content = [
                 'msg' => $this->locale->query('updated_ok'),
@@ -135,7 +135,7 @@ class SettingController extends Controller
 
         } else {
 
-            $contact = $settingService->getSettings($section);
+            $contact = $settingService->getMySettings($section);
 
             $this->view->setVar('contact', $contact);
         }

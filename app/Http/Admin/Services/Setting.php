@@ -45,7 +45,7 @@ class Setting extends Service
         return KgSaleModel::currencies();
     }
 
-    public function getSettings(string $section): array
+    public function getMySettings(string $section): array
     {
         $settingsRepo = new SettingRepo();
 
@@ -62,7 +62,7 @@ class Setting extends Service
         return $result;
     }
 
-    public function updateSettings(string $section, array $settings): void
+    public function updateMySettings(string $section, array $settings): void
     {
         $settingsRepo = new SettingRepo();
 
