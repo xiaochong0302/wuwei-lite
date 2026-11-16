@@ -117,6 +117,8 @@ trait Response
          */
         $response = Di::getDefault()->getShared('response');
 
+        $response->setStatusCode(200);
+
         $response->setJsonContent($content);
 
         return $response;
@@ -124,9 +126,14 @@ trait Response
 
     protected function jsonPaginate(PagerRepoInterface $paginate): HttpResponse
     {
+        $limit = $paginate->getLimit();
+        $totalItems = $paginate->getTotalItems();
+        $totalPages = (int)ceil($totalItems / $limit);
+
         $pager = [
             'items' => $paginate->getItems(),
-            'total_items' => $paginate->getTotalItems(),
+            'total_items' => $totalItems,
+            'total_pages' => $totalPages,
         ];
 
         return $this->jsonSuccess(['pager' => $pager]);

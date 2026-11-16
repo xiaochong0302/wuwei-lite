@@ -34,7 +34,7 @@ class AppInfo
     /**
      * @var string
      */
-    protected string $version = '1.0.0';
+    protected string $version = '1.0.1';
 
     public function __get($name): ?string
     {
