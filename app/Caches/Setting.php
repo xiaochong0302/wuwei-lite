@@ -26,18 +26,16 @@ class Setting extends Cache
 
     public function get($id = null): mixed
     {
-        $key = $this->getKey($id);
-
-        if (!array_key_exists($key, self::$memo)) {
-            self::$memo[$key] = parent::get($id) ?? [];
+        if (!array_key_exists($id, self::$memo)) {
+            self::$memo[$id] = parent::get($id) ?? [];
         }
 
-        return self::$memo[$key];
+        return self::$memo[$id];
     }
 
     public function delete($id = null): bool
     {
-        unset(self::$memo[$this->getKey($id)]);
+        unset(self::$memo[$id]);
 
         return parent::delete($id);
     }
