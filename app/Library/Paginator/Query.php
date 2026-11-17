@@ -46,7 +46,7 @@ class Query
 
     public function getSort(): string
     {
-        return $this->request->getQuery('sort', ['trim', 'string'], 'latest');
+        return $this->request->getQuery('sort', ['trim', 'string'], '');
     }
 
     public function getBaseUrl(): string
